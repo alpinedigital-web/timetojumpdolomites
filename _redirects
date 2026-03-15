@@ -1,0 +1,8 @@
+# Block internal/admin files from public access
+# Files remain in the repository but are not accessible on the live site
+
+/admin.html      /  404
+/js/admin.js     /  404
+/css/admin.css   /  404
+/pitch_deck.html /  404
+/statusbericht.html / 404

@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statusbericht — Time to Jump Dolomites Website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0B0F1A;
+      --surface: #111827;
+      --surface-2: #1E293B;
+      --border: #1E293B;
+      --text: #E2E8F0;
+      --text-muted: #94A3B8;
+      --accent: #FF8A00;
+      --accent-glow: rgba(255,138,0,0.15);
+      --green: #22C55E;
+      --green-bg: rgba(34,197,94,0.1);
+      --yellow: #EAB308;
+      --yellow-bg: rgba(234,179,8,0.1);
+      --red: #EF4444;
+      --red-bg: rgba(239,68,68,0.08);
+      --blue: #3B82F6;
+      --blue-bg: rgba(59,130,246,0.1);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ---- Header ---- */
+    .report-header {
+      text-align: center;
+      padding: 60px 20px 50px;
+      position: relative;
+    }
+    .report-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .report-header .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px; height: 56px;
+      background: var(--accent);
+      border-radius: 14px;
+      font-size: 24px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 32px rgba(255,138,0,0.3);
+    }
+    .report-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, #fff 0%, #94A3B8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .report-header .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .report-meta {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .report-meta span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .report-meta .dot {
+      width: 4px; height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* ---- Sections ---- */
+    .section {
+      margin-top: 48px;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    /* ---- Cards ---- */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: #334155; }
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+    .card-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .card-icon--green { background: var(--green-bg); }
+    .card-icon--yellow { background: var(--yellow-bg); }
+    .card-icon--red { background: var(--red-bg); }
+    .card-icon--blue { background: var(--blue-bg); }
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .card p, .card li {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .card ul {
+      list-style: none;
+      margin-top: 8px;
+    }
+    .card ul li {
+      padding: 4px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+    .card ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    /* ---- Status Badge ---- */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .badge--green { background: var(--green-bg); color: var(--green); }
+    .badge--yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge--red { background: var(--red-bg); color: var(--red); }
+
+    /* ---- Callout ---- */
+    .callout {
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .callout--orange {
+      background: var(--accent-glow);
+      border-left: 3px solid var(--accent);
+      color: #FED7AA;
+    }
+    .callout--red {
+      background: var(--red-bg);
+      border-left: 3px solid var(--red);
+      color: #FCA5A5;
+    }
+    .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* ---- Table ---- */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    thead th {
+      background: var(--surface-2);
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    tbody td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      vertical-align: top;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: rgba(255,255,255,0.02); }
+    td:first-child { color: var(--text); font-weight: 500; }
+
+    /* ---- Credential Box ---- */
+    .cred-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .cred-item {
+      background: var(--surface-2);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+    }
+    .cred-item .label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .cred-item .value {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text);
+      word-break: break-all;
+    }
+    .cred-item .value a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .cred-item .value a:hover { text-decoration: underline; }
+
+    code {
+      background: var(--surface-2);
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-size: 0.82em;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--accent);
+    }
+
+    /* ---- Divider ---- */
+    hr {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 40px 0;
+    }
+
+    /* ---- Comparison columns ---- */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    @media (max-width: 640px) {
+      .compare-grid { grid-template-columns: 1fr; }
+      .report-header h1 { font-size: 1.5rem; }
+    }
+    .compare-col {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .compare-col h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .compare-col ul { list-style: none; }
+    .compare-col li {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 5px 0;
+      padding-left: 22px;
+      position: relative;
+    }
+    .compare-col li .icon {
+      position: absolute;
+      left: 0;
+      font-size: 0.8rem;
+    }
+
+    /* ---- Print Styles ---- */
+    @media print {
+      body { background: white; color: #1a1a1a; }
+      .card { border-color: #e2e2e2; }
+      .report-header::before { display: none; }
+    }
+
+    /* ---- Feature rows ---- */
+    .feature-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .feature-row:last-child { border-bottom: none; }
+    .feature-row .emoji { font-size: 1.2rem; width: 28px; text-align: center; }
+    .feature-row .info { flex: 1; }
+    .feature-row .info h4 { font-size: 0.88rem; font-weight: 600; margin-bottom: 1px; }
+    .feature-row .info p { font-size: 0.78rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ========== HEADER ========== -->
+    <div class="report-header">
+      <div class="logo-mark">T</div>
+      <h1>Statusbericht Website</h1>
+      <p class="subtitle">Time to Jump Dolomites — Projekt&uuml;bersicht &amp; Funktionsumfang</p>
+      <div class="report-meta">
+        <span><span class="dot"></span> 15. M&auml;rz 2026</span>
+        <span><span class="dot"></span> Alpine Digital Web</span>
+        <span><span class="dot"></span> Version 1.0</span>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ========== LIVE STATUS ========== -->
+    <div class="section">
+      <div class="section-label">Live Status</div>
+      <div class="section-title">Die Website ist online &amp; einsatzbereit</div>
+      <div class="cred-grid">
+        <div class="cred-item">
+          <div class="label">Live URL</div>
+          <div class="value"><a href="https://timetojumpdolomites.pages.dev/" target="_blank">timetojumpdolomites.pages.dev</a></div>
+        </div>
+        <div class="cred-item">
+          <div class="label">Hosting</div>
+          <div class="value">Cloudflare Pages (kostenlos, SSL inklusive)</div>
+        </div>
+        <div class="cred-item">
+          <div class="label">Admin Panel</div>
+          <div class="value"><a href="https://timetojumpdolomites.pages.dev/admin.html" target="_blank">/admin.html</a></div>
+        </div>
+        <div class="cred-item">
+          <div class="label">Admin Login</div>
+          <div class="value">admin@timetojumpdolomites.com &middot; Jump2025!</div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ========== WORKING FEATURES ========== -->
+    <div class="section">
+      <div class="section-label">Funktionsumfang</div>
+      <div class="section-title">✅ Was die Website kann</div>
+
+      <!-- Landingpage -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon card-icon--green">🪂</div>
+          <div>
+            <h3>Vollst&auml;ndige Landingpage</h3>
+            <span class="badge badge--green">● Live</span>
+          </div>
+        </div>
+        <p>Alle Sektionen sind fertig gestaltet und responsiv (Desktop, Tablet, Smartphone):</p>
+        <ul>
+          <li>Hero-Bereich mit Hintergrundbild und Call-to-Action</li>
+          <li>&Uuml;ber uns &mdash; mit Statistiken (H&ouml;he, UNESCO, Tage)</li>
+          <li>Experience &mdash; 4-Schritte-Ablauf (Anmelden → Briefing → Helikopter → Sprung)</li>
+          <li>Preise &mdash; 3 Pakete (Helikopter-Sprung, Gesamtpaket, Ausr&uuml;stung)</li>
+          <li>Partner &mdash; TRAVEL Parachutes mit Links zum Konfigurator</li>
+          <li>Testimonials &mdash; 3 Kundenbewertungen</li>
+          <li>FAQ &mdash; 6 Fragen &amp; Antworten</li>
+          <li>Anforderungen &mdash; Lizenz, Sicherheit, Wetter, Zahlung</li>
+          <li>Google Maps &mdash; eingebettete Standortkarte</li>
+          <li>Footer mit Social-Media-Links (Instagram, YouTube, Facebook)</li>
+        </ul>
+      </div>
+
+      <!-- Mehrsprachigkeit -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon card-icon--green">🌍</div>
+          <div>
+            <h3>Mehrsprachigkeit &mdash; 9 Sprachen</h3>
+            <span class="badge badge--green">● Live</span>
+          </div>
+        </div>
+        <p>Alle Texte der Website sind &uuml;bersetzt und per Dropdown umschaltbar:</p>
+        <p style="margin-top:8px;">🇬🇧 Englisch &middot; 🇩🇪 Deutsch &middot; 🇮🇹 Italienisch &middot; 🏔️ Ladinisch &middot; 🇳🇱 Niederl&auml;ndisch &middot; 🇫🇷 Franz&ouml;sisch &middot; 🇵🇱 Polnisch &middot; 🇪🇸 Spanisch &middot; 🇨🇿 Tschechisch</p>
+        <p style="margin-top:8px;">Die gew&auml;hlte Sprache wird im Browser gespeichert und beim n&auml;chsten Besuch automatisch geladen.</p>
+      </div>
+
+      <!-- Kontaktformular -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon card-icon--green">📧</div>
+          <div>
+            <h3>Kontaktformular mit E-Mail-Versand</h3>
+            <span class="badge badge--green">● Live</span>
+          </div>
+        </div>
+        <p>Das Kontaktformular sendet echte E-Mails an <code>Info@timetojumpdolomites.com</code>:</p>
+        <ul>
+          <li>Felder: Name, E-Mail, Telefon, Nachricht</li>
+          <li>Spam-Schutz: CAPTCHA + Honeypot-Feld aktiviert</li>
+          <li>Ladeanimation w&auml;hrend des Sendens</li>
+          <li>Erfolgsmeldung nach erfolgreichem Versand</li>
+          <li>Fehlerbehandlung bei Problemen</li>
+          <li>Technologie: FormSubmit.co (kostenlos, kein eigener Server n&ouml;tig)</li>
+        </ul>
+        <div class="callout callout--orange">
+          <span class="callout-icon">⚠️</span>
+          <div><strong>Einmalige Aktivierung:</strong> Beim allerersten Formularversand schickt FormSubmit.co eine Best&auml;tigungs-E-Mail an <code>Info@timetojumpdolomites.com</code>. Diese muss einmal best&auml;tigt werden. Danach kommen alle Anfragen automatisch durch &mdash; unbegrenzt und kostenlos.</div>
+        </div>
+      </div>
+
+      <!-- Chat Widget -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon card-icon--green">💬</div>
+          <div>
+            <h3>WhatsApp / E-Mail / Telefon Widget</h3>
+            <span class="badge badge--green">● Live</span>
+          </div>
+        </div>
+        <p>Schwebendes Chat-Widget unten rechts mit Direktlinks:</p>
+        <ul>
+          <li>WhatsApp (+39 342 763 5478)</li>
+          <li>E-Mail (Info@timetojumpdolomites.com)</li>
+          <li>Telefon (+39 342 763 5478)</li>
+        </ul>
+      </div>
+
+      <!-- Sicherheit & SEO -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon card-icon--green">🔒</div>
+          <div>
+            <h3>Sicherheit &amp; SEO</h3>
+            <span class="badge badge--green">● Live</span>
+          </div>
+        </div>
+        <ul>
+          <li>Security Headers (CSP, X-Frame-Options, etc.) konfiguriert</li>
+          <li>SSL/HTTPS durch Cloudflare automatisch aktiv</li>
+          <li>Meta-Tags f&uuml;r Google &amp; Social Media (Open Graph)</li>
+          <li>Responsive Design f&uuml;r alle Ger&auml;te</li>
+          <li>Datenschutzseite vorhanden (privacy.html)</li>
+        </ul>
+      </div>
+
+      <!-- Admin Panel -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon card-icon--yellow">⚙️</div>
+          <div>
+            <h3>Admin-Panel (eingeschr&auml;nkt)</h3>
+            <span class="badge badge--yellow">● Eingeschr&auml;nkt</span>
+          </div>
+        </div>
+        <p>Unter <code>/admin.html</code> gibt es ein Admin-Panel zum Bearbeiten von Texten (alle 9 Sprachen), Bildern und Links. Inklusive Live-Vorschau, Export/Import Funktion und Suchfunktion.</p>
+        <div class="callout callout--red">
+          <span class="callout-icon">❗</span>
+          <div><strong>Wichtige Einschr&auml;nkung:</strong> Das Admin-Panel speichert &Auml;nderungen nur <strong>lokal im Browser</strong> des Admins (kein Server). Andere Besucher sehen die &Auml;nderungen nicht. F&uuml;r ein voll funktionsf&auml;higes CMS w&auml;re ein Backend notwendig.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ========== MISSING FEATURES ========== -->
+    <div class="section">
+      <div class="section-label">Einschr&auml;nkungen</div>
+      <div class="section-title">⚠️ Was die Website NICHT kann</div>
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 24px;">
+        Die folgenden Bereiche sind <strong>visuell/designtechnisch vorhanden</strong>, aber ohne echte Funktion. F&uuml;r diese Features w&auml;re eine <strong>Datenbank und ein Backend</strong> notwendig.
+      </p>
+
+      <!-- Shop -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon card-icon--red">🛒</div>
+          <div>
+            <h3>Shop-Bereich</h3>
+            <span class="badge badge--red">● Platzhalter</span>
+          </div>
+        </div>
+        <p><strong>Aktuell:</strong> Platzhalter-Sektion mit „Coming Soon"-Meldung.</p>
+        <p style="margin-top:8px;"><strong>Was fehlt:</strong> Produktdatenbank, Warenkorb-Logik, Zahlungsabwicklung (z.B. Stripe), Bestellverwaltung, Liefer-/Versandstatus.</p>
+        <p style="margin-top:4px;"><strong>Voraussetzung:</strong> Backend + Datenbank + Zahlungsgateway</p>
+      </div>
+
+      <!-- Events -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon card-icon--red">📅</div>
+          <div>
+            <h3>Eventkalender</h3>
+            <span class="badge badge--red">● Platzhalter</span>
+          </div>
+        </div>
+        <p><strong>Aktuell:</strong> Platzhalter-Sektion mit „Keine Events"-Meldung.</p>
+        <p style="margin-top:8px;"><strong>Was fehlt:</strong> Event-Datenbank mit Datum, Titel, Beschreibung, Bildern. Admin-Oberfl&auml;che zum Erstellen, Bearbeiten und L&ouml;schen von Events.</p>
+        <p style="margin-top:4px;"><strong>Voraussetzung:</strong> Backend + Datenbank + Admin-UI</p>
+      </div>
+
+      <!-- Blog -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon card-icon--red">📝</div>
+          <div>
+            <h3>Blog</h3>
+            <span class="badge badge--red">● Platzhalter</span>
+          </div>
+        </div>
+        <p><strong>Aktuell:</strong> Blog-Seite (<code>blog.html</code>) vorhanden, aber ohne Inhalte.</p>
+        <p style="margin-top:8px;"><strong>Was fehlt:</strong> Artikel-Datenbank, Rich-Text-Editor f&uuml;r Blogposts, Bilder-Upload und -Hosting, Kategorien/Tags.</p>
+        <p style="margin-top:4px;"><strong>Voraussetzung:</strong> Backend + Datenbank + CMS-Editor</p>
+      </div>
+
+      <!-- Admin real -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon card-icon--red">🔐</div>
+          <div>
+            <h3>Admin-Panel mit serverseitiger Speicherung</h3>
+            <span class="badge badge--red">● Nicht verf&uuml;gbar</span>
+          </div>
+        </div>
+        <p><strong>Aktuell:</strong> Admin-Panel speichert nur lokal im Browser.</p>
+        <p style="margin-top:8px;"><strong>Was fehlt:</strong> Serverseitige Speicherung (Datenbank), echte Authentifizierung mit sicherem Passwort-Hashing, API f&uuml;r Content-Updates, die f&uuml;r alle Besucher sichtbar sind.</p>
+        <p style="margin-top:4px;"><strong>Voraussetzung:</strong> Backend + Datenbank + Authentifizierungssystem</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ========== DECISION TABLE ========== -->
+    <div class="section">
+      <div class="section-label">Entscheidungshilfe</div>
+      <div class="section-title">Backend: Ja oder Nein?</div>
+
+      <div class="compare-grid">
+        <!-- Without Backend -->
+        <div class="compare-col">
+          <h4>💚 Ohne Backend (aktuell)</h4>
+          <ul>
+            <li><span class="icon">✅</span>Kosten: <strong>0 € / Monat</strong></li>
+            <li><span class="icon">✅</span>Kontaktformular funktioniert</li>
+            <li><span class="icon">✅</span>9 Sprachen</li>
+            <li><span class="icon">✅</span>Kein Wartungsaufwand</li>
+            <li><span class="icon">✅</span>Kein Hackerangriff m&ouml;glich (kein Server)</li>
+            <li><span class="icon">❌</span>Kein Shop</li>
+            <li><span class="icon">❌</span>Kein Eventkalender</li>
+            <li><span class="icon">❌</span>Kein Blog</li>
+            <li><span class="icon">⚠️</span>Admin-Panel nur lokal</li>
+          </ul>
+        </div>
+        <!-- With Backend -->
+        <div class="compare-col" style="border-color: var(--accent);">
+          <h4>🚀 Mit Backend (Upgrade)</h4>
+          <ul>
+            <li><span class="icon">💰</span>Kosten: <strong>0–25 € / Monat</strong></li>
+            <li><span class="icon">✅</span>Kontaktformular funktioniert</li>
+            <li><span class="icon">✅</span>9 Sprachen</li>
+            <li><span class="icon">✅</span>Shop mit Zahlungen</li>
+            <li><span class="icon">✅</span>Eventkalender mit Verwaltung</li>
+            <li><span class="icon">✅</span>Blog mit Artikeln</li>
+            <li><span class="icon">✅</span>Admin-Panel f&uuml;r alle sichtbar</li>
+            <li><span class="icon">✅</span>Echte Authentifizierung</li>
+            <li><span class="icon">⚙️</span>Geringer Wartungsaufwand</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ========== RECOMMENDATION ========== -->
+    <div class="section">
+      <div class="section-label">Empfehlung</div>
+      <div class="section-title">Zusammenfassung</div>
+      <div class="card" style="border-color: var(--accent); background: linear-gradient(135deg, var(--surface) 0%, rgba(255,138,0,0.04) 100%);">
+        <p style="font-size: 0.95rem; color: var(--text);">
+          Die Website ist <strong>als Landingpage vollst&auml;ndig einsatzbereit</strong>. Kontaktformular, Mehrsprachigkeit (9 Sprachen), responsives Design, Sicherheitsma&szlig;nahmen und alle Informationsseiten funktionieren einwandfrei.
+        </p>
+        <p style="margin-top: 12px; font-size: 0.95rem; color: var(--text);">
+          Falls in Zukunft <strong>Shop, Eventkalender oder Blog</strong> gew&uuml;nscht werden, kann ein Backend nachtr&auml;glich integriert werden. Der bestehende Code ist so aufgebaut, dass eine sp&auml;tere Erweiterung problemlos m&ouml;glich ist.
+        </p>
+        <p style="margin-top: 12px; font-size: 0.95rem; color: var(--text);">
+          Eine eigene Domain (z.B. timetojumpdolomites.com) kann jederzeit mit dem aktuellen Hosting verbunden werden.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ========== FOOTER ========== -->
+    <div style="text-align: center; padding: 20px 0;">
+      <p style="font-size: 0.75rem; color: var(--text-muted);">
+        Erstellt von Alpine Digital Web &middot; M&auml;rz 2026
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>

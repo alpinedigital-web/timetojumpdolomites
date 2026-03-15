@@ -82,15 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<span>Sending...</span>';
 
-      // Send via AJAX to FormSubmit.co
+      // Send via AJAX to FormSubmit.co (include anti-spam fields)
+      const formData = new FormData(contactForm);
       fetch(contactForm.action, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          name, email, telephone, message,
-          _subject: 'Neue Website-Anfrage — Time to Jump Dolomites',
-          _template: 'table'
-        })
+        headers: { 'Accept': 'application/json' },
+        body: formData
       })
       .then(res => {
         if (res.ok) {
@@ -266,11 +263,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function applyTranslations(lang) {
     if (typeof TRANSLATIONS === 'undefined') return;
 
-    // Text content
+    // Text content — use textContent by default for XSS safety;
+    // only use innerHTML for keys explicitly known to contain safe markup (e.g. <br>)
+    const SAFE_HTML_KEYS = new Set(['hero.title','hero.subtitle']);
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.dataset.i18n;
       if (TRANSLATIONS[key] && TRANSLATIONS[key][lang]) {
-        el.innerHTML = TRANSLATIONS[key][lang];
+        if (SAFE_HTML_KEYS.has(key)) {
+          el.innerHTML = TRANSLATIONS[key][lang];
+        } else {
+          el.textContent = TRANSLATIONS[key][lang];
+        }
       }
     });
 
@@ -305,81 +308,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
-
-  // ============================================================
-  //  ADMIN OVERRIDE INTEGRATION
-  //  Reads overrides saved by the /admin panel from localStorage
-  // ============================================================
-
-  function applyAdminOverrides() {
-    // 1. Translation overrides — merge into TRANSLATIONS before applying
-    try {
-      const translationData = localStorage.getItem('ttjd_admin_translations');
-      if (translationData) {
-        const overrides = JSON.parse(translationData);
-        Object.keys(overrides).forEach(key => {
-          if (typeof TRANSLATIONS !== 'undefined') {
-            if (!TRANSLATIONS[key]) TRANSLATIONS[key] = {};
-            Object.keys(overrides[key]).forEach(lang => {
-              TRANSLATIONS[key][lang] = overrides[key][lang];
-            });
-          }
-        });
-      }
-    } catch(e) { /* ignore parse errors */ }
-
-    // 2. Image overrides
-    try {
-      const imageData = localStorage.getItem('ttjd_admin_images');
-      if (imageData) {
-        const imgOverrides = JSON.parse(imageData);
-        const imageMap = {
-          'logo': 'img/logo.png',
-          'hero': 'img/hero.jpg',
-          'about': 'img/about.png'
-        };
-        Object.keys(imgOverrides).forEach(id => {
-          const originalSrc = imageMap[id];
-          if (originalSrc) {
-            document.querySelectorAll(`img[src="${originalSrc}"]`).forEach(img => {
-              img.src = imgOverrides[id];
-            });
-          }
-        });
-      }
-    } catch(e) { /* ignore */ }
-
-    // 3. Link overrides
-    try {
-      const linkData = localStorage.getItem('ttjd_admin_links');
-      if (linkData) {
-        const linkOverrides = JSON.parse(linkData);
-        const linkMap = {
-          'instagram': 'https://www.instagram.com/time_to_jump_dolomites/',
-          'youtube': 'https://www.youtube.com/@timetojumpdolomites',
-          'facebook': 'https://www.facebook.com/p/Time-to-Jump-Dolomites-100077926092104/',
-          'elikos': 'https://www.elikos.com/helicopter/index.php',
-          'whatsapp': 'https://wa.me/393427635478',
-          'email_link': 'mailto:Info@timetojumpdolomites.com',
-          'phone': 'tel:+393427635478',
-          'travel_website': 'http://www.travelparachutesystems.com',
-          'travel_customize': 'http://www.travelparachutesystems.com/customize/sport-container/',
-          'travel_measure': 'http://www.travelparachutesystems.com/how-to-measure/'
-        };
-        Object.keys(linkOverrides).forEach(id => {
-          const originalUrl = linkMap[id];
-          if (originalUrl) {
-            document.querySelectorAll(`a[href="${originalUrl}"]`).forEach(a => {
-              a.href = linkOverrides[id];
-            });
-          }
-        });
-      }
-    } catch(e) { /* ignore */ }
-  }
-
-  // Apply admin overrides BEFORE i18n, so merged translations are used
-  applyAdminOverrides();
 
   // Initialize i18n
   buildLanguageDropdown();
