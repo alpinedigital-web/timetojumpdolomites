@@ -270,7 +270,7 @@
               <span class="text-[11px] font-medium text-slate-200 truncate">${friendlyName || key}</span>
               ${hasOverride ? '<span class="w-1.5 h-1.5 rounded-full bg-brand-orange shrink-0" title="Modified"></span>' : ''}
             </div>
-            <div class="text-[10px] text-slate-500 truncate mt-0.5">${preview}${preview.length >= 60 ? '…' : ''}</div>
+            <div class="text-[10px] text-slate-500 truncate mt-0.5">${preview}${preview.length >= 60 ? '\u2026' : ''}</div>
           </div>
           <span class="text-[9px] text-slate-600 font-mono shrink-0">${key}</span>
           <svg class="chevron-icon w-3.5 h-3.5 text-slate-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" stroke-width="2"/></svg>
