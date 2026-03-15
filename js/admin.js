@@ -1,5 +1,5 @@
 /* ============================================================
-   ADMIN PANEL — JavaScript Logic
+   ADMIN PANEL — JavaScript Logic (Tailwind UI)
    CMS for Time to Jump Dolomites
    ============================================================ */
 
@@ -19,7 +19,6 @@
     links: 'ttjd_admin_links'
   };
 
-  // Editable links definition (label → CSS selector on index.html)
   const EDITABLE_LINKS = [
     { id: 'instagram', label: 'Instagram', icon: '📸', defaultUrl: 'https://www.instagram.com/time_to_jump_dolomites/' },
     { id: 'youtube', label: 'YouTube', icon: '🎥', defaultUrl: 'https://www.youtube.com/@timetojumpdolomites' },
@@ -28,64 +27,74 @@
     { id: 'whatsapp', label: 'WhatsApp', icon: '💬', defaultUrl: 'https://wa.me/393427635478' },
     { id: 'email_link', label: 'Email Address', icon: '📧', defaultUrl: 'mailto:Info@timetojumpdolomites.com' },
     { id: 'phone', label: 'Phone Number', icon: '📞', defaultUrl: 'tel:+393427635478' },
-    { id: 'travel_website', label: 'TRAVEL Parachutes Website', icon: '🌐', defaultUrl: 'http://www.travelparachutesystems.com' },
-    { id: 'travel_customize', label: 'TRAVEL Rig Configurator', icon: '⚙️', defaultUrl: 'http://www.travelparachutesystems.com/customize/sport-container/' },
+    { id: 'travel_website', label: 'TRAVEL Parachutes', icon: '🌐', defaultUrl: 'http://www.travelparachutesystems.com' },
+    { id: 'travel_customize', label: 'TRAVEL Configurator', icon: '⚙️', defaultUrl: 'http://www.travelparachutesystems.com/customize/sport-container/' },
     { id: 'travel_measure', label: 'TRAVEL Measurements', icon: '📐', defaultUrl: 'http://www.travelparachutesystems.com/how-to-measure/' }
   ];
 
-  // Editable images definition
   const EDITABLE_IMAGES = [
     { id: 'logo', label: 'Logo', src: 'img/logo.png' },
     { id: 'hero', label: 'Hero Background', src: 'img/hero.jpg' },
     { id: 'about', label: 'About Section Image', src: 'img/about.png' }
   ];
 
-  // Organize translation keys into sections for navigation
-  const SECTIONS = {
-    'navigation': { label: 'Navigation', icon: '☰', keys: ['nav.about','nav.prices','nav.events','nav.blog','nav.privacy','nav.book'] },
-    'hero': { label: 'Hero', icon: '🏔️', keys: ['hero.badge','hero.title','hero.subtitle','hero.cta.prices','hero.cta.contact','hero.cta.book','hero.cta.helicopter','hero.scroll','hero.trust.heli','hero.trust.unesco','hero.trust.days'] },
-    'about': { label: 'About', icon: '📖', keys: ['about.label','about.title','about.text','about.stat.altitude','about.stat.heritage','about.stat.days','about.badge'] },
-    'experience': { label: 'Experience', icon: '🎯', keys: ['experience.label','experience.title','experience.subtitle','experience.step1.title','experience.step1.text','experience.step2.title','experience.step2.text','experience.step3.title','experience.step3.text','experience.step4.title','experience.step4.text'] },
-    'pricing': { label: 'Pricing', icon: '💰', keys: ['pricing.label','pricing.title','pricing.subtitle','pricing.helicopter.title','pricing.helicopter.desc','pricing.helicopter.note','pricing.pack.title','pricing.pack.desc','pricing.pack.note','pricing.rent.title','pricing.rent.desc','pricing.onrequest','pricing.popular','pricing.cta','pricing.cta.contact'] },
-    'partners': { label: 'Partners', icon: '🤝', keys: ['partners.label','partners.desc','partners.visit','partners.design','partners.measurements'] },
-    'testimonials': { label: 'Testimonials', icon: '⭐', keys: ['testimonials.label','testimonials.title','testimonials.t1.text','testimonials.t1.info','testimonials.t2.text','testimonials.t2.info','testimonials.t3.text','testimonials.t3.info'] },
-    'events': { label: 'Events', icon: '📅', keys: ['events.label','events.title','events.subtitle','events.empty.title','events.empty.text'] },
-    'shop': { label: 'Shop', icon: '🛒', keys: ['shop.label','shop.title','shop.subtitle','shop.empty.title','shop.empty.text'] },
-    'faq': { label: 'FAQ', icon: '❓', keys: ['faq.label','faq.title','faq.q1','faq.a1','faq.q2','faq.a2','faq.q3','faq.a3','faq.q4','faq.a4','faq.q5','faq.a5','faq.q6','faq.a6'] },
-    'contact': { label: 'Contact', icon: '📬', keys: ['contact.label','contact.title','contact.subtitle','contact.reach','contact.location','contact.email','contact.hotline','contact.timezone','contact.form.title','contact.form.name','contact.form.email','contact.form.phone','contact.form.message','contact.form.send','contact.form.success.title','contact.form.success.text'] },
-    'requirements': { label: 'Requirements', icon: '✅', keys: ['req.license.title','req.license.text','req.safety.title','req.safety.text','req.weather.title','req.weather.text','req.payment.title','req.payment.text'] },
-    'map': { label: 'Map', icon: '📍', keys: ['map.label','map.title','map.subtitle'] },
-    'footer': { label: 'Footer & Chat', icon: '💬', keys: ['footer.backtop','chat.title','chat.subtitle','chat.whatsapp','chat.email','chat.call'] },
-    'placeholders': { label: 'Form Placeholders', icon: '✏️', keys: ['placeholder.name','placeholder.email','placeholder.phone','placeholder.message'] },
-    'images': { label: 'Images', icon: '🖼️', keys: [] },
-    'links': { label: 'Links', icon: '🔗', keys: [] }
+  // SVG icons for sidebar
+  const NAV_ICONS = {
+    navigation: '<path d="M4 6h16M4 12h16M4 18h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    hero: '<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    about: '<path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    experience: '<path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    pricing: '<path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    partners: '<path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    testimonials: '<path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    events: '<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    shop: '<circle cx="9" cy="21" r="1" stroke-width="2"/><circle cx="20" cy="21" r="1" stroke-width="2"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    faq: '<path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    contact: '<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    requirements: '<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    map: '<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    footer: '<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    placeholders: '<path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    images: '<path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    links: '<path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>'
   };
 
-  // Map admin sections to anchors on index.html
-  const SECTION_ANCHORS = {
-    'navigation': null,
-    'hero': 'body',
-    'about': '#about',
-    'experience': '#experience',
-    'pricing': '#pricing',
-    'partners': '#partners',
-    'testimonials': '#testimonials',
-    'events': '#events',
-    'shop': '#shop',
-    'faq': '#faq',
-    'contact': '#contact',
-    'requirements': '#requirements',
-    'map': '#map',
-    'footer': '#footer',
-    'placeholders': '#contact',
-    'images': null,
-    'links': null
+  const SECTIONS = {
+    'navigation': { label: 'Navigation', keys: ['nav.about','nav.prices','nav.events','nav.blog','nav.privacy','nav.book'] },
+    'hero': { label: 'Hero Section', keys: ['hero.badge','hero.title','hero.subtitle','hero.cta.prices','hero.cta.contact','hero.cta.book','hero.cta.helicopter','hero.scroll','hero.trust.heli','hero.trust.unesco','hero.trust.days'] },
+    'about': { label: 'About', keys: ['about.label','about.title','about.text','about.stat.altitude','about.stat.heritage','about.stat.days','about.badge'] },
+    'experience': { label: 'Experience', keys: ['experience.label','experience.title','experience.subtitle','experience.step1.title','experience.step1.text','experience.step2.title','experience.step2.text','experience.step3.title','experience.step3.text','experience.step4.title','experience.step4.text'] },
+    'pricing': { label: 'Pricing', keys: ['pricing.label','pricing.title','pricing.subtitle','pricing.helicopter.title','pricing.helicopter.desc','pricing.helicopter.note','pricing.pack.title','pricing.pack.desc','pricing.pack.note','pricing.rent.title','pricing.rent.desc','pricing.onrequest','pricing.popular','pricing.cta','pricing.cta.contact'] },
+    'partners': { label: 'Partners', keys: ['partners.label','partners.desc','partners.visit','partners.design','partners.measurements'] },
+    'testimonials': { label: 'Testimonials', keys: ['testimonials.label','testimonials.title','testimonials.t1.text','testimonials.t1.info','testimonials.t2.text','testimonials.t2.info','testimonials.t3.text','testimonials.t3.info'] },
+    'events': { label: 'Events', keys: ['events.label','events.title','events.subtitle','events.empty.title','events.empty.text'] },
+    'shop': { label: 'Shop', keys: ['shop.label','shop.title','shop.subtitle','shop.empty.title','shop.empty.text'] },
+    'faq': { label: 'FAQ', keys: ['faq.label','faq.title','faq.q1','faq.a1','faq.q2','faq.a2','faq.q3','faq.a3','faq.q4','faq.a4','faq.q5','faq.a5','faq.q6','faq.a6'] },
+    'contact': { label: 'Contact', keys: ['contact.label','contact.title','contact.subtitle','contact.reach','contact.location','contact.email','contact.hotline','contact.timezone','contact.form.title','contact.form.name','contact.form.email','contact.form.phone','contact.form.message','contact.form.send','contact.form.success.title','contact.form.success.text'] },
+    'requirements': { label: 'Requirements', keys: ['req.license.title','req.license.text','req.safety.title','req.safety.text','req.weather.title','req.weather.text','req.payment.title','req.payment.text'] },
+    'map': { label: 'Map', keys: ['map.label','map.title','map.subtitle'] },
+    'footer': { label: 'Footer & Chat', keys: ['footer.backtop','chat.title','chat.subtitle','chat.whatsapp','chat.email','chat.call'] },
+    'placeholders': { label: 'Form Placeholders', keys: ['placeholder.name','placeholder.email','placeholder.phone','placeholder.message'] },
+    'images': { label: 'Images', keys: [] },
+    'links': { label: 'Links', keys: [] }
   };
+
+  const SECTION_ANCHORS = {
+    'navigation': null, 'hero': 'body', 'about': '#about', 'experience': '#experience',
+    'pricing': '#pricing', 'partners': '#partners', 'testimonials': '#testimonials',
+    'events': '#events', 'shop': '#shop', 'faq': '#faq', 'contact': '#contact',
+    'requirements': '#requirements', 'map': '#map', 'footer': '#footer',
+    'placeholders': '#contact', 'images': null, 'links': null
+  };
+
+  const SIDEBAR_GROUPS = [
+    { label: 'Site Content', ids: ['navigation','hero','about','experience','pricing','partners','testimonials'] },
+    { label: 'Pages', ids: ['events','shop','faq','contact','requirements','map','footer','placeholders'] },
+    { label: 'Assets', ids: ['images','links'] }
+  ];
 
   let previewVisible = true;
   let previewIframe = null;
-
-  // ---- State ----
   let translationOverrides = {};
   let imageOverrides = {};
   let linkOverrides = {};
@@ -93,31 +102,23 @@
   // ---- Init ----
   document.addEventListener('DOMContentLoaded', () => {
     loadOverrides();
-
-    // Check if already logged in
-    if (sessionStorage.getItem(STORAGE_KEYS.session) === 'true') {
-      showDashboard();
-    }
-
-    // Login form handler
+    if (sessionStorage.getItem(STORAGE_KEYS.session) === 'true') showDashboard();
     const loginForm = document.getElementById('adminLoginForm');
-    if (loginForm) {
-      loginForm.addEventListener('submit', handleLogin);
-    }
+    if (loginForm) loginForm.addEventListener('submit', handleLogin);
   });
 
-  // ---- Authentication ----
+  // ---- Auth ----
   function handleLogin(e) {
     e.preventDefault();
     const email = document.getElementById('adminEmail').value.trim();
     const password = document.getElementById('adminPassword').value;
     const errorEl = document.getElementById('loginError');
-
     if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
       sessionStorage.setItem(STORAGE_KEYS.session, 'true');
       showDashboard();
     } else {
-      errorEl.textContent = 'Invalid email or password. Please try again.';
+      errorEl.textContent = 'Invalid email or password.';
+      errorEl.classList.remove('hidden');
       errorEl.classList.add('visible');
       document.getElementById('adminPassword').value = '';
     }
@@ -132,14 +133,15 @@
   function showDashboard() {
     const loginEl = document.getElementById('adminLogin');
     const dashEl = document.getElementById('adminDashboard');
-
     if (loginEl) loginEl.style.display = 'none';
     if (dashEl) {
-      dashEl.classList.add('active');
+      dashEl.classList.remove('hidden');
+      dashEl.classList.add('flex');
       buildSidebar();
       buildAllSections();
       initPreview();
-      navigateTo('navigation');
+      initTopBar();
+      navigateTo('hero');
     }
   }
 
@@ -147,89 +149,74 @@
   function buildSidebar() {
     const nav = document.getElementById('sidebarNav');
     if (!nav) return;
-
     nav.innerHTML = '';
-    Object.keys(SECTIONS).forEach(sectionId => {
-      const section = SECTIONS[sectionId];
-      const btn = document.createElement('button');
-      btn.className = 'admin-sidebar__link';
-      btn.dataset.section = sectionId;
-      btn.innerHTML = `<span style="font-size:1.1rem;">${section.icon}</span> ${section.label}`;
-      btn.addEventListener('click', () => navigateTo(sectionId));
-      nav.appendChild(btn);
+
+    SIDEBAR_GROUPS.forEach(group => {
+      const label = document.createElement('div');
+      label.className = 'text-[10px] font-semibold text-slate-500 uppercase tracking-widest mb-1.5 mt-4 first:mt-0 px-2';
+      label.textContent = group.label;
+      nav.appendChild(label);
+
+      group.ids.forEach(sectionId => {
+        const section = SECTIONS[sectionId];
+        if (!section) return;
+        const btn = document.createElement('button');
+        btn.className = 'sidebar-link w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition-colors';
+        btn.dataset.section = sectionId;
+        const iconSvg = NAV_ICONS[sectionId] || '';
+        btn.innerHTML = `<svg class="w-[18px] h-[18px] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">${iconSvg}</svg><span class="truncate">${section.label}</span>`;
+        btn.addEventListener('click', () => navigateTo(sectionId));
+        nav.appendChild(btn);
+      });
     });
 
-    // Logout button
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-      logoutBtn.addEventListener('click', handleLogout);
-    }
-
-    // Export button
-    const exportBtn = document.getElementById('exportBtn');
-    if (exportBtn) {
-      exportBtn.addEventListener('click', exportData);
-    }
-
-    // Import button
-    const importBtn = document.getElementById('importBtn');
-    if (importBtn) {
-      importBtn.addEventListener('click', () => {
-        document.getElementById('importFileInput').click();
-      });
-    }
-
-    const importInput = document.getElementById('importFileInput');
-    if (importInput) {
-      importInput.addEventListener('change', importData);
-    }
-
-    // Mobile toggle
-    const mobileToggle = document.getElementById('adminMobileToggle');
-    if (mobileToggle) {
-      mobileToggle.addEventListener('click', () => {
-        document.getElementById('adminSidebar').classList.toggle('open');
-      });
-    }
+    document.getElementById('logoutBtn')?.addEventListener('click', handleLogout);
+    document.getElementById('exportBtn')?.addEventListener('click', exportData);
+    document.getElementById('importBtn')?.addEventListener('click', () => document.getElementById('importFileInput').click());
+    document.getElementById('importFileInput')?.addEventListener('change', importData);
+    document.getElementById('adminMobileToggle')?.addEventListener('click', () => {
+      document.getElementById('adminSidebar').classList.toggle('open');
+    });
   }
 
   function navigateTo(sectionId) {
-    // Update sidebar active state
-    document.querySelectorAll('.admin-sidebar__link').forEach(link => {
-      link.classList.toggle('active', link.dataset.section === sectionId);
-    });
-
-    // Show the correct section
-    document.querySelectorAll('.admin-section').forEach(sec => {
-      sec.classList.toggle('active', sec.id === 'section-' + sectionId);
-    });
-
-    // Update header title
-    const titleEl = document.getElementById('adminSectionTitle');
-    if (titleEl && SECTIONS[sectionId]) {
-      titleEl.textContent = SECTIONS[sectionId].label;
-    }
-
-    // Close mobile sidebar
-    const sidebar = document.getElementById('adminSidebar');
-    if (sidebar) sidebar.classList.remove('open');
-
-    // Show/hide preview based on section type
-    const previewEl = document.getElementById('adminPreview');
-    const mainEl = document.querySelector('.admin-main');
-    const anchor = SECTION_ANCHORS[sectionId];
-
-    if (anchor && previewEl) {
-      previewEl.style.display = 'block';
-      if (mainEl) mainEl.classList.add('has-preview');
-      if (previewVisible) {
-        previewEl.classList.remove('collapsed');
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      if (link.dataset.section === sectionId) {
+        link.className = 'sidebar-link w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm bg-brand-orange text-white transition-colors';
+      } else {
+        link.className = 'sidebar-link w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition-colors';
       }
-      scrollPreviewTo(anchor);
-    } else if (previewEl) {
-      previewEl.style.display = 'none';
-      if (mainEl) mainEl.classList.remove('has-preview');
-    }
+    });
+
+    document.querySelectorAll('.admin-section').forEach(sec => {
+      sec.classList.toggle('hidden', sec.id !== 'section-' + sectionId);
+    });
+
+    const titleEl = document.getElementById('adminSectionTitle');
+    if (titleEl && SECTIONS[sectionId]) titleEl.textContent = SECTIONS[sectionId].label;
+
+    document.getElementById('adminSidebar')?.classList.remove('open');
+
+    const anchor = SECTION_ANCHORS[sectionId];
+    if (anchor) scrollPreviewTo(anchor);
+  }
+
+  // ---- Top Bar ----
+  function initTopBar() {
+    document.getElementById('savePublishBtn')?.addEventListener('click', () => {
+      saveOverrides();
+      updateLastSaved();
+      showToast('All changes saved!', 'success');
+    });
+    document.getElementById('discardBtn')?.addEventListener('click', () => {
+      if (confirm('Discard all unsaved changes and reload?')) location.reload();
+    });
+    updateLastSaved();
+  }
+
+  function updateLastSaved() {
+    const el = document.getElementById('adminLastSaved');
+    if (el) el.textContent = 'Last saved: ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
 
   // ---- Build Sections ----
@@ -241,296 +228,212 @@
     Object.keys(SECTIONS).forEach(sectionId => {
       const section = SECTIONS[sectionId];
       const sectionEl = document.createElement('div');
-      sectionEl.className = 'admin-section';
+      sectionEl.className = 'admin-section hidden';
       sectionEl.id = 'section-' + sectionId;
 
-      if (sectionId === 'images') {
-        sectionEl.innerHTML = buildImageSection();
-      } else if (sectionId === 'links') {
-        sectionEl.innerHTML = buildLinksSection();
-      } else {
-        sectionEl.innerHTML = buildTextSection(sectionId, section);
-      }
+      if (sectionId === 'images') sectionEl.innerHTML = buildImageSection();
+      else if (sectionId === 'links') sectionEl.innerHTML = buildLinksSection();
+      else sectionEl.innerHTML = buildTextSection(sectionId, section);
 
       container.appendChild(sectionEl);
     });
 
-    // Attach event listeners
     attachTextEditorListeners();
     attachImageListeners();
     attachLinkListeners();
   }
 
-  // ---- Text Section Builder ----
+  // ---- Text Section ----
   function buildTextSection(sectionId, section) {
-    if (!section.keys.length) return '<p style="color:var(--admin-text-muted);">No editable text in this section.</p>';
+    if (!section.keys.length) return '<p class="text-slate-500 text-sm">No editable text in this section.</p>';
 
-    let html = `<div class="admin-search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" placeholder="Search translations..." data-search-section="${sectionId}">
+    let html = `<div class="relative mb-4">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke-width="2"/></svg>
+      <input type="text" placeholder="Search translations..." data-search-section="${sectionId}"
+        class="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-sm focus:ring-brand-orange focus:border-brand-orange placeholder-slate-500">
     </div>`;
 
     section.keys.forEach(key => {
       if (typeof TRANSLATIONS === 'undefined' || !TRANSLATIONS[key]) return;
+      const enVal = getTranslationValue(key, 'en');
+      const preview = enVal.replace(/<[^>]*>/g, '').substring(0, 55);
+      const isLong = enVal.length > 80;
 
-      const enPreview = getTranslationValue(key, 'en');
-      const shortPreview = enPreview.replace(/<[^>]*>/g,'').substring(0, 60);
-
-      html += `<div class="admin-editor-card" data-key="${key}">
-        <div class="admin-editor-card__header">
-          <div>
-            <div class="admin-editor-card__key">${key}</div>
-            <div class="admin-editor-card__preview">${shortPreview}${shortPreview.length >= 60 ? '…' : ''}</div>
+      html += `<div class="editor-card mb-2 bg-slate-900/50 border border-slate-800 rounded-lg overflow-hidden" data-key="${key}">
+        <div class="editor-card-header flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-slate-800/50 transition-colors">
+          <div class="min-w-0">
+            <div class="text-xs font-mono text-brand-orange truncate">${key}</div>
+            <div class="text-xs text-slate-500 truncate mt-0.5">${preview}${preview.length >= 55 ? '\u2026' : ''}</div>
           </div>
-          <svg class="admin-editor-card__toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="chevron-icon w-4 h-4 text-slate-500 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" stroke-width="2"/></svg>
         </div>
-        <div class="admin-editor-card__body">
-          <div class="admin-lang-tabs">
-            ${LANGUAGES.map((lang, i) => `<button class="admin-lang-tab${i === 0 ? ' active' : ''}" data-lang="${lang.code}" data-key="${key}">${lang.flag} ${lang.code.toUpperCase()}</button>`).join('')}
+        <div class="editor-card-body px-4 pb-4">
+          <div class="flex flex-wrap gap-1 mb-3">
+            ${LANGUAGES.map((lang, i) => `<button class="lang-tab px-2 py-1 text-[10px] font-semibold rounded ${i === 0 ? 'bg-brand-orange text-white' : 'bg-slate-800 text-slate-400 hover:text-white'} transition-colors" data-lang="${lang.code}" data-key="${key}">${lang.flag} ${lang.code.toUpperCase()}</button>`).join('')}
           </div>
           ${LANGUAGES.map((lang, i) => {
             const value = getTranslationValue(key, lang.code);
-            return `<div class="admin-lang-panel${i === 0 ? ' active' : ''}" data-lang="${lang.code}" data-key="${key}">
-              <textarea rows="3" data-key="${key}" data-lang="${lang.code}">${escapeHtml(value)}</textarea>
+            return `<div class="lang-panel ${i === 0 ? '' : 'hidden'}" data-lang="${lang.code}" data-key="${key}">
+              <textarea rows="${isLong ? 4 : 2}" data-key="${key}" data-lang="${lang.code}"
+                class="w-full bg-slate-900 border border-slate-700 text-slate-200 rounded-md text-sm focus:ring-brand-orange focus:border-brand-orange">${escapeHtml(value)}</textarea>
             </div>`;
           }).join('')}
-          <div class="admin-editor-card__actions">
-            <button class="admin-btn admin-btn--outline admin-btn--sm" data-action="reset" data-key="${key}">Reset</button>
-            <button class="admin-btn admin-btn--primary admin-btn--sm" data-action="save-text" data-key="${key}">Save</button>
+          <div class="flex justify-end gap-2 mt-3">
+            <button class="px-3 py-1.5 text-xs text-slate-400 hover:text-white border border-slate-700 rounded-md transition-colors" data-action="reset" data-key="${key}">Reset</button>
+            <button class="px-3 py-1.5 text-xs bg-brand-orange hover:bg-orange-600 text-white rounded-md font-medium transition-colors" data-action="save-text" data-key="${key}">Save</button>
           </div>
         </div>
       </div>`;
     });
-
     return html;
   }
 
-  // ---- Image Section Builder ----
+  // ---- Image Section ----
   function buildImageSection() {
-    let html = '<div class="admin-section-label">Manage Website Images</div><div class="admin-images-grid">';
-
+    let html = '<h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest border-b border-slate-700 pb-2 mb-4">Manage Images</h3>';
     EDITABLE_IMAGES.forEach(img => {
       const currentSrc = imageOverrides[img.id] || img.src;
-      html += `<div class="admin-image-card" data-image-id="${img.id}">
-        <img class="admin-image-card__preview" src="${currentSrc}" alt="${img.label}" id="preview-${img.id}">
-        <div class="admin-image-card__info">
-          <div class="admin-image-card__name">${img.label}</div>
-          <div class="admin-image-card__path">${img.src}</div>
-          <div class="admin-image-dropzone" data-image-id="${img.id}">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            Drop image here or click to upload
-            <input type="file" accept="image/*" data-image-id="${img.id}">
-          </div>
-          <div style="display:flex;gap:8px;margin-top:12px;">
-            <button class="admin-btn admin-btn--danger admin-btn--sm" data-action="reset-image" data-image-id="${img.id}" style="${imageOverrides[img.id] ? '' : 'display:none;'}">Reset</button>
+      html += `<div class="mb-4 bg-slate-900/50 border border-slate-800 rounded-lg p-4" data-image-id="${img.id}">
+        <div class="flex items-start gap-4">
+          <img class="w-20 h-20 object-cover rounded-lg border border-slate-700" src="${currentSrc}" alt="${img.label}" id="preview-${img.id}">
+          <div class="flex-1">
+            <div class="text-sm font-medium text-slate-200">${img.label}</div>
+            <div class="text-[10px] text-slate-500 mt-0.5">${img.src}</div>
+            <div class="admin-dropzone mt-3 border-2 border-dashed border-slate-700 rounded-lg p-4 text-center hover:border-brand-orange transition-colors cursor-pointer" data-image-id="${img.id}">
+              <p class="text-xs text-slate-400">Click or drop image here</p>
+              <input type="file" accept="image/*" data-image-id="${img.id}" class="hidden">
+            </div>
+            <div class="flex gap-2 mt-2">
+              <button class="px-3 py-1 text-xs text-red-400 hover:text-red-300 border border-red-900/30 rounded-md transition-colors" data-action="reset-image" data-image-id="${img.id}" style="${imageOverrides[img.id] ? '' : 'display:none;'}">Reset</button>
+            </div>
           </div>
         </div>
       </div>`;
     });
-
-    html += '</div>';
     return html;
   }
 
-  // ---- Links Section Builder ----
+  // ---- Links Section ----
   function buildLinksSection() {
-    let html = '<div class="admin-section-label">Manage Website Links</div>';
-
+    let html = '<h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest border-b border-slate-700 pb-2 mb-4">Manage Links</h3>';
     EDITABLE_LINKS.forEach(link => {
       const currentUrl = linkOverrides[link.id] || link.defaultUrl;
-      html += `<div class="admin-link-card" data-link-id="${link.id}">
-        <div class="admin-link-card__label">${link.icon} ${link.label}</div>
-        <input type="url" value="${escapeHtml(currentUrl)}" data-link-id="${link.id}" placeholder="Enter URL...">
-        <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end;">
-          <button class="admin-btn admin-btn--outline admin-btn--sm" data-action="reset-link" data-link-id="${link.id}" style="${linkOverrides[link.id] ? '' : 'display:none;'}">Reset</button>
-          <button class="admin-btn admin-btn--primary admin-btn--sm" data-action="save-link" data-link-id="${link.id}">Save</button>
+      html += `<div class="mb-3 bg-slate-900/50 border border-slate-800 rounded-lg p-4" data-link-id="${link.id}">
+        <div class="text-sm font-medium text-slate-300 mb-2">${link.icon} ${link.label}</div>
+        <input type="url" value="${escapeHtml(currentUrl)}" data-link-id="${link.id}" placeholder="Enter URL..."
+          class="w-full bg-slate-900 border border-slate-700 text-slate-200 rounded-md text-sm focus:ring-brand-orange focus:border-brand-orange">
+        <div class="flex justify-end gap-2 mt-2">
+          <button class="px-3 py-1 text-xs text-slate-400 hover:text-white border border-slate-700 rounded-md transition-colors" data-action="reset-link" data-link-id="${link.id}" style="${linkOverrides[link.id] ? '' : 'display:none;'}">Reset</button>
+          <button class="px-3 py-1 text-xs bg-brand-orange hover:bg-orange-600 text-white rounded-md font-medium transition-colors" data-action="save-link" data-link-id="${link.id}">Save</button>
         </div>
       </div>`;
     });
-
     return html;
   }
 
   // ---- Event Listeners ----
   function attachTextEditorListeners() {
-    // Toggle cards open/close
-    document.querySelectorAll('.admin-editor-card__header').forEach(header => {
-      header.addEventListener('click', () => {
-        header.closest('.admin-editor-card').classList.toggle('open');
-      });
+    document.querySelectorAll('.editor-card-header').forEach(header => {
+      header.addEventListener('click', () => header.closest('.editor-card').classList.toggle('open'));
     });
 
-    // Language tab switching
-    document.querySelectorAll('.admin-lang-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
+    document.querySelectorAll('.lang-tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.stopPropagation();
         const key = tab.dataset.key;
         const lang = tab.dataset.lang;
-        const card = tab.closest('.admin-editor-card');
-
-        card.querySelectorAll('.admin-lang-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        card.querySelectorAll('.admin-lang-panel').forEach(p => {
-          p.classList.toggle('active', p.dataset.lang === lang);
+        const card = tab.closest('.editor-card');
+        card.querySelectorAll('.lang-tab').forEach(t => {
+          t.className = t.dataset.lang === lang
+            ? 'lang-tab px-2 py-1 text-[10px] font-semibold rounded bg-brand-orange text-white transition-colors'
+            : 'lang-tab px-2 py-1 text-[10px] font-semibold rounded bg-slate-800 text-slate-400 hover:text-white transition-colors';
         });
+        card.querySelectorAll('.lang-panel').forEach(p => p.classList.toggle('hidden', p.dataset.lang !== lang));
       });
     });
 
-    // Save text
     document.querySelectorAll('[data-action="save-text"]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const key = btn.dataset.key;
-        saveTranslationKey(key);
-        showToast('Translation saved!', 'success');
-      });
+      btn.addEventListener('click', () => { saveTranslationKey(btn.dataset.key); showToast('Saved!', 'success'); });
     });
 
-    // Reset text
     document.querySelectorAll('[data-action="reset"]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const key = btn.dataset.key;
-        resetTranslationKey(key);
-        showToast('Translation reset to default.', 'info');
-      });
+      btn.addEventListener('click', () => { resetTranslationKey(btn.dataset.key); showToast('Reset to default.', 'info'); });
     });
 
-    // Search
-    // Real-time preview on textarea input
-    document.querySelectorAll('.admin-editor-card textarea').forEach(textarea => {
-      textarea.addEventListener('input', () => {
-        const key = textarea.dataset.key;
-        const lang = textarea.dataset.lang;
-        updatePreviewText(key, lang, textarea.value);
-      });
+    document.querySelectorAll('.editor-card textarea').forEach(textarea => {
+      textarea.addEventListener('input', () => updatePreviewText(textarea.dataset.key, textarea.dataset.lang, textarea.value));
     });
 
-    // Search
     document.querySelectorAll('[data-search-section]').forEach(input => {
       input.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        const sectionEl = input.closest('.admin-section');
-        sectionEl.querySelectorAll('.admin-editor-card').forEach(card => {
+        const q = e.target.value.toLowerCase();
+        const sec = input.closest('.admin-section');
+        sec.querySelectorAll('.editor-card').forEach(card => {
           const key = card.dataset.key;
-          const preview = card.querySelector('.admin-editor-card__preview')?.textContent || '';
-          const visible = key.toLowerCase().includes(query) || preview.toLowerCase().includes(query);
-          card.style.display = visible ? '' : 'none';
+          const preview = card.querySelector('.text-slate-500')?.textContent || '';
+          card.style.display = (key.toLowerCase().includes(q) || preview.toLowerCase().includes(q)) ? '' : 'none';
         });
       });
     });
   }
 
   function attachImageListeners() {
-    // Dropzone click → open file picker
-    document.querySelectorAll('.admin-image-dropzone').forEach(zone => {
-      zone.addEventListener('click', () => {
-        zone.querySelector('input[type="file"]').click();
-      });
-
-      // Drag & drop
-      zone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        zone.classList.add('dragover');
-      });
-      zone.addEventListener('dragleave', () => {
-        zone.classList.remove('dragover');
-      });
+    document.querySelectorAll('.admin-dropzone').forEach(zone => {
+      zone.addEventListener('click', () => zone.querySelector('input[type="file"]').click());
+      zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('dragover'); });
+      zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
       zone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        zone.classList.remove('dragover');
+        e.preventDefault(); zone.classList.remove('dragover');
         const file = e.dataTransfer.files[0];
-        if (file && file.type.startsWith('image/')) {
-          handleImageUpload(zone.dataset.imageId, file);
-        }
+        if (file && file.type.startsWith('image/')) handleImageUpload(zone.dataset.imageId, file);
       });
-
-      // File input change
-      const fileInput = zone.querySelector('input[type="file"]');
-      if (fileInput) {
-        fileInput.addEventListener('change', (e) => {
-          const file = e.target.files[0];
-          if (file) {
-            handleImageUpload(zone.dataset.imageId, file);
-          }
-        });
-      }
+      const fi = zone.querySelector('input[type="file"]');
+      if (fi) fi.addEventListener('change', (e) => { if (e.target.files[0]) handleImageUpload(zone.dataset.imageId, e.target.files[0]); });
     });
 
-    // Reset image
     document.querySelectorAll('[data-action="reset-image"]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const imageId = btn.dataset.imageId;
-        resetImage(imageId);
-        showToast('Image reset to default.', 'info');
-      });
+      btn.addEventListener('click', () => { resetImage(btn.dataset.imageId); showToast('Image reset.', 'info'); });
     });
   }
 
   function attachLinkListeners() {
-    // Save link
     document.querySelectorAll('[data-action="save-link"]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const linkId = btn.dataset.linkId;
-        const input = document.querySelector(`input[data-link-id="${linkId}"]`);
-        if (input) {
-          saveLinkOverride(linkId, input.value);
-          showToast('Link saved!', 'success');
-        }
+        const input = document.querySelector(`input[data-link-id="${btn.dataset.linkId}"]`);
+        if (input) { saveLinkOverride(btn.dataset.linkId, input.value); showToast('Link saved!', 'success'); }
       });
     });
-
-    // Reset link
     document.querySelectorAll('[data-action="reset-link"]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const linkId = btn.dataset.linkId;
-        resetLink(linkId);
-        showToast('Link reset to default.', 'info');
-      });
+      btn.addEventListener('click', () => { resetLink(btn.dataset.linkId); showToast('Link reset.', 'info'); });
     });
   }
 
   // ---- Translation Management ----
   function getTranslationValue(key, lang) {
-    // Check overrides first
-    if (translationOverrides[key] && translationOverrides[key][lang] !== undefined) {
-      return translationOverrides[key][lang];
-    }
-    // Fall back to original
-    if (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[key] && TRANSLATIONS[key][lang]) {
-      return TRANSLATIONS[key][lang];
-    }
+    if (translationOverrides[key] && translationOverrides[key][lang] !== undefined) return translationOverrides[key][lang];
+    if (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[key] && TRANSLATIONS[key][lang]) return TRANSLATIONS[key][lang];
     return '';
   }
 
   function saveTranslationKey(key) {
-    const card = document.querySelector(`.admin-editor-card[data-key="${key}"]`);
+    const card = document.querySelector(`.editor-card[data-key="${key}"]`);
     if (!card) return;
-
-    if (!translationOverrides[key]) {
-      translationOverrides[key] = {};
-    }
-
+    if (!translationOverrides[key]) translationOverrides[key] = {};
     LANGUAGES.forEach(lang => {
-      const textarea = card.querySelector(`textarea[data-key="${key}"][data-lang="${lang.code}"]`);
-      if (textarea) {
-        translationOverrides[key][lang.code] = textarea.value;
-      }
+      const ta = card.querySelector(`textarea[data-key="${key}"][data-lang="${lang.code}"]`);
+      if (ta) translationOverrides[key][lang.code] = ta.value;
     });
-
     saveOverrides();
   }
 
   function resetTranslationKey(key) {
     delete translationOverrides[key];
     saveOverrides();
-
-    // Reset textareas to original values
-    const card = document.querySelector(`.admin-editor-card[data-key="${key}"]`);
+    const card = document.querySelector(`.editor-card[data-key="${key}"]`);
     if (card) {
       LANGUAGES.forEach(lang => {
-        const textarea = card.querySelector(`textarea[data-key="${key}"][data-lang="${lang.code}"]`);
-        if (textarea && TRANSLATIONS[key] && TRANSLATIONS[key][lang.code]) {
-          textarea.value = TRANSLATIONS[key][lang.code];
-        }
+        const ta = card.querySelector(`textarea[data-key="${key}"][data-lang="${lang.code}"]`);
+        if (ta && TRANSLATIONS[key] && TRANSLATIONS[key][lang.code]) ta.value = TRANSLATIONS[key][lang.code];
       });
     }
   }
@@ -539,18 +442,12 @@
   function handleImageUpload(imageId, file) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      const dataUrl = e.target.result;
-      imageOverrides[imageId] = dataUrl;
+      imageOverrides[imageId] = e.target.result;
       saveOverrides();
-
-      // Update preview
       const preview = document.getElementById('preview-' + imageId);
-      if (preview) preview.src = dataUrl;
-
-      // Show reset button
+      if (preview) preview.src = e.target.result;
       const resetBtn = document.querySelector(`[data-action="reset-image"][data-image-id="${imageId}"]`);
       if (resetBtn) resetBtn.style.display = '';
-
       showToast('Image uploaded!', 'success');
     };
     reader.readAsDataURL(file);
@@ -559,56 +456,34 @@
   function resetImage(imageId) {
     delete imageOverrides[imageId];
     saveOverrides();
-
     const imgDef = EDITABLE_IMAGES.find(i => i.id === imageId);
-    if (imgDef) {
-      const preview = document.getElementById('preview-' + imageId);
-      if (preview) preview.src = imgDef.src;
-    }
-
-    const resetBtn = document.querySelector(`[data-action="reset-image"][data-image-id="${imageId}"]`);
-    if (resetBtn) resetBtn.style.display = 'none';
+    if (imgDef) { const p = document.getElementById('preview-' + imageId); if (p) p.src = imgDef.src; }
+    const rb = document.querySelector(`[data-action="reset-image"][data-image-id="${imageId}"]`);
+    if (rb) rb.style.display = 'none';
   }
 
   // ---- Link Management ----
   function saveLinkOverride(linkId, url) {
     linkOverrides[linkId] = url;
     saveOverrides();
-
-    const resetBtn = document.querySelector(`[data-action="reset-link"][data-link-id="${linkId}"]`);
-    if (resetBtn) resetBtn.style.display = '';
+    const rb = document.querySelector(`[data-action="reset-link"][data-link-id="${linkId}"]`);
+    if (rb) rb.style.display = '';
   }
 
   function resetLink(linkId) {
     delete linkOverrides[linkId];
     saveOverrides();
-
-    const linkDef = EDITABLE_LINKS.find(l => l.id === linkId);
-    if (linkDef) {
-      const input = document.querySelector(`input[data-link-id="${linkId}"]`);
-      if (input) input.value = linkDef.defaultUrl;
-    }
-
-    const resetBtn = document.querySelector(`[data-action="reset-link"][data-link-id="${linkId}"]`);
-    if (resetBtn) resetBtn.style.display = 'none';
+    const def = EDITABLE_LINKS.find(l => l.id === linkId);
+    if (def) { const input = document.querySelector(`input[data-link-id="${linkId}"]`); if (input) input.value = def.defaultUrl; }
+    const rb = document.querySelector(`[data-action="reset-link"][data-link-id="${linkId}"]`);
+    if (rb) rb.style.display = 'none';
   }
 
   // ---- Persistence ----
   function loadOverrides() {
-    try {
-      const t = localStorage.getItem(STORAGE_KEYS.translations);
-      if (t) translationOverrides = JSON.parse(t);
-    } catch(e) {}
-
-    try {
-      const i = localStorage.getItem(STORAGE_KEYS.images);
-      if (i) imageOverrides = JSON.parse(i);
-    } catch(e) {}
-
-    try {
-      const l = localStorage.getItem(STORAGE_KEYS.links);
-      if (l) linkOverrides = JSON.parse(l);
-    } catch(e) {}
+    try { const t = localStorage.getItem(STORAGE_KEYS.translations); if (t) translationOverrides = JSON.parse(t); } catch(e) {}
+    try { const i = localStorage.getItem(STORAGE_KEYS.images); if (i) imageOverrides = JSON.parse(i); } catch(e) {}
+    try { const l = localStorage.getItem(STORAGE_KEYS.links); if (l) linkOverrides = JSON.parse(l); } catch(e) {}
   }
 
   function saveOverrides() {
@@ -619,29 +494,16 @@
 
   // ---- Export / Import ----
   function exportData() {
-    const data = {
-      version: '1.0',
-      exportedAt: new Date().toISOString(),
-      translations: translationOverrides,
-      images: imageOverrides,
-      links: linkOverrides
-    };
-
+    const data = { version: '1.0', exportedAt: new Date().toISOString(), translations: translationOverrides, images: imageOverrides, links: linkOverrides };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `ttjd-admin-export-${new Date().toISOString().split('T')[0]}.json`;
-    a.click();
+    const a = document.createElement('a'); a.href = url; a.download = `ttjd-export-${new Date().toISOString().split('T')[0]}.json`; a.click();
     URL.revokeObjectURL(url);
-
-    showToast('Data exported successfully!', 'success');
+    showToast('Exported!', 'success');
   }
 
   function importData(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-
+    const file = e.target.files[0]; if (!file) return;
     const reader = new FileReader();
     reader.onload = (ev) => {
       try {
@@ -650,11 +512,9 @@
         if (data.images) imageOverrides = data.images;
         if (data.links) linkOverrides = data.links;
         saveOverrides();
-        showToast('Data imported! Refreshing…', 'success');
+        showToast('Imported! Refreshing…', 'success');
         setTimeout(() => location.reload(), 1000);
-      } catch(err) {
-        showToast('Invalid JSON file.', 'error');
-      }
+      } catch(err) { showToast('Invalid JSON.', 'error'); }
     };
     reader.readAsText(file);
   }
@@ -662,126 +522,64 @@
   // ---- Toast ----
   function showToast(message, type) {
     let toast = document.getElementById('adminToast');
-    if (!toast) {
-      toast = document.createElement('div');
-      toast.id = 'adminToast';
-      toast.className = 'admin-toast';
-      document.body.appendChild(toast);
-    }
-
+    if (!toast) { toast = document.createElement('div'); toast.id = 'adminToast'; toast.className = 'admin-toast'; document.body.appendChild(toast); }
     toast.className = `admin-toast admin-toast--${type}`;
     toast.textContent = message;
-
     requestAnimationFrame(() => {
       toast.classList.add('visible');
-      setTimeout(() => {
-        toast.classList.remove('visible');
-      }, 2500);
+      setTimeout(() => toast.classList.remove('visible'), 2500);
     });
   }
 
-  // ---- Helpers ----
-  function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
+  function escapeHtml(str) { const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
 
   // ---- Live Preview ----
   function initPreview() {
     previewIframe = document.getElementById('previewFrame');
 
-    // Toggle button
-    const toggleBtn = document.getElementById('previewToggleBtn');
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', () => {
-        const previewEl = document.getElementById('adminPreview');
-        const mainEl = document.querySelector('.admin-main');
-        previewVisible = !previewVisible;
+    document.getElementById('previewToggleBtn')?.addEventListener('click', () => {
+      const pane = document.getElementById('adminPreviewPane');
+      previewVisible = !previewVisible;
+      if (pane) pane.style.display = previewVisible ? '' : 'none';
+    });
 
-        if (previewVisible) {
-          previewEl.classList.remove('collapsed');
-          if (mainEl) mainEl.classList.add('has-preview');
-          toggleBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Hide';
-        } else {
-          previewEl.classList.add('collapsed');
-          if (mainEl) mainEl.classList.remove('has-preview');
-          toggleBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg> Show';
-        }
-      });
-    }
+    document.getElementById('previewDesktop')?.addEventListener('click', () => {
+      if (previewIframe) previewIframe.classList.remove('mobile-preview');
+    });
+
+    document.getElementById('previewMobile')?.addEventListener('click', () => {
+      if (previewIframe) previewIframe.classList.add('mobile-preview');
+    });
   }
 
   function scrollPreviewTo(anchor) {
     if (!previewIframe || !previewIframe.contentWindow) return;
-
     try {
-      const iframeDoc = previewIframe.contentDocument || previewIframe.contentWindow.document;
-      if (!iframeDoc) return;
-
-      // Wait for iframe to be ready
-      if (iframeDoc.readyState !== 'complete') {
-        previewIframe.addEventListener('load', () => scrollPreviewTo(anchor), { once: true });
-        return;
-      }
-
-      if (anchor === 'body') {
-        previewIframe.contentWindow.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        const el = iframeDoc.querySelector(anchor);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
-    } catch(e) {
-      // Cross-origin — can't access iframe
-    }
+      const doc = previewIframe.contentDocument || previewIframe.contentWindow.document;
+      if (!doc) return;
+      if (doc.readyState !== 'complete') { previewIframe.addEventListener('load', () => scrollPreviewTo(anchor), { once: true }); return; }
+      if (anchor === 'body') previewIframe.contentWindow.scrollTo({ top: 0, behavior: 'smooth' });
+      else { const el = doc.querySelector(anchor); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    } catch(e) {}
   }
 
   function updatePreviewText(key, lang, newValue) {
     if (!previewIframe || !previewIframe.contentWindow) return;
-
     try {
-      const iframeDoc = previewIframe.contentDocument || previewIframe.contentWindow.document;
-      if (!iframeDoc || iframeDoc.readyState !== 'complete') return;
-
-      // Get the currently active language in the iframe
-      const iframeLang = iframeDoc.documentElement.lang || 'en';
-      // Determine which language is active — check localStorage of the iframe
+      const doc = previewIframe.contentDocument || previewIframe.contentWindow.document;
+      if (!doc || doc.readyState !== 'complete') return;
       let activeLang = 'en';
-      try {
-        activeLang = previewIframe.contentWindow.localStorage.getItem('ttjd_lang') || 'en';
-      } catch(e) {}
-
-      // Only update the preview if we're editing the active display language
+      try { activeLang = previewIframe.contentWindow.localStorage.getItem('ttjd_lang') || 'en'; } catch(e) {}
       if (lang !== activeLang) return;
-
-      // Find elements with matching data-i18n key
-      const elements = iframeDoc.querySelectorAll(`[data-i18n="${key}"]`);
-      elements.forEach(el => {
+      doc.querySelectorAll(`[data-i18n="${key}"]`).forEach(el => {
         el.innerHTML = newValue;
-        // Add a subtle highlight effect
-        el.style.outline = '2px solid rgba(245,166,35,0.5)';
+        el.style.outline = '2px solid rgba(255,138,0,0.5)';
         el.style.outlineOffset = '4px';
         el.style.transition = 'outline-color 1s ease';
-        setTimeout(() => {
-          el.style.outlineColor = 'transparent';
-        }, 1500);
+        setTimeout(() => { el.style.outlineColor = 'transparent'; }, 1500);
       });
-
-      // Also handle placeholder updates
-      const placeholders = iframeDoc.querySelectorAll(`[data-i18n-placeholder="${key}"]`);
-      placeholders.forEach(el => {
-        el.placeholder = newValue;
-        el.style.outline = '2px solid rgba(245,166,35,0.5)';
-        el.style.outlineOffset = '4px';
-        setTimeout(() => {
-          el.style.outlineColor = 'transparent';
-        }, 1500);
-      });
-    } catch(e) {
-      // Cross-origin — can't access iframe
-    }
+      doc.querySelectorAll(`[data-i18n-placeholder="${key}"]`).forEach(el => { el.placeholder = newValue; });
+    } catch(e) {}
   }
 
 })();
