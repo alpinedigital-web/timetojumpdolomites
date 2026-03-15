@@ -358,8 +358,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize i18n
   buildLanguageDropdown();
   const savedLang = localStorage.getItem('ttjd_lang') || 'en';
-  if (savedLang !== 'en') {
-    applyTranslations(savedLang);
-  }
+  applyTranslations(savedLang);
 
 });
