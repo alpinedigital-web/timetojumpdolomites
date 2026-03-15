@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitch Deck — Time to Jump Dolomites</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #b8860b;
+            --gold-dark: #96700a;
+            --gold-bg: #fdf8ef;
+            --bg: #ffffff;
+            --bg-subtle: #f8f9fa;
+            --text: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --border-light: #f0f0f0;
+            --green: #16a34a;
+            --green-bg: #f0fdf4;
+            --green-border: #bbf7d0;
+            --red: #dc2626;
+            --red-bg: #fef2f2;
+            --red-border: #fecaca;
+            --card-bg: #f9fafb;
+        }
+
+        @page {
+            margin: 0;
+            size: A4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 11pt;
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        /* Page breaks for PDF */
+        .slide {
+            page-break-after: always;
+            padding: 50px 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide:last-child {
+            page-break-after: avoid;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 32pt;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 20pt;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 24px;
+        }
+
+        h3 {
+            font-size: 13pt;
+            font-weight: 700;
+            color: var(--gold-dark);
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        .subtitle {
+            font-size: 13pt;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 36px;
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        strong {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 4px 0 4px 20px;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 10pt;
+        }
+
+        ul li::before {
+            content: "•";
+            position: absolute;
+            left: 4px;
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 14pt;
+            line-height: 1.2;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 10pt;
+        }
+
+        th {
+            background: var(--gold);
+            color: #fff;
+            font-weight: 700;
+            text-align: left;
+            padding: 12px 14px;
+            font-size: 10pt;
+        }
+
+        th:first-child {
+            border-radius: 6px 0 0 0;
+        }
+
+        th:last-child {
+            border-radius: 0 6px 0 0;
+        }
+
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+            color: var(--text-secondary);
+        }
+
+        td strong {
+            color: var(--text);
+        }
+
+        tr:nth-child(even) td {
+            background: var(--bg-subtle);
+        }
+
+        /* Badges */
+        .badge-green {
+            display: inline-block;
+            background: var(--green-bg);
+            color: var(--green);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 8pt;
+            font-weight: 700;
+            border: 1px solid var(--green-border);
+        }
+
+        .badge-red {
+            display: inline-block;
+            background: var(--red-bg);
+            color: var(--red);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 8pt;
+            font-weight: 700;
+            border: 1px solid var(--red-border);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0;
+        }
+
+        .card-highlight {
+            border-color: var(--gold);
+            border-width: 2px;
+            background: var(--gold-bg);
+        }
+
+        /* Callout boxes */
+        .callout {
+            border-left: 4px solid var(--gold);
+            padding: 14px 18px;
+            margin: 16px 0;
+            background: var(--gold-bg);
+            border-radius: 0 8px 8px 0;
+            font-size: 10pt;
+            color: var(--text-secondary);
+        }
+
+        .callout-tip {
+            border-left-color: var(--green);
+            background: var(--green-bg);
+        }
+
+        .callout-warn {
+            border-left-color: var(--red);
+            background: var(--red-bg);
+        }
+
+        .callout strong {
+            color: var(--gold-dark);
+        }
+
+        .callout-tip strong {
+            color: var(--green);
+        }
+
+        .callout-warn strong {
+            color: var(--red);
+        }
+
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 16px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        /* Stat counters */
+        .stat {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-value {
+            font-size: 34pt;
+            font-weight: 900;
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 10pt;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Images */
+        .screenshot-container {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 12px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .screenshot-container img {
+            width: 100%;
+            display: block;
+        }
+
+        .screenshot-label {
+            text-align: center;
+            font-size: 9pt;
+            color: var(--text-muted);
+            padding: 8px;
+            background: var(--bg-subtle);
+        }
+
+        /* Divider */
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 28px 0;
+        }
+
+        /* Logo header bar */
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .header-bar .logo {
+            font-size: 11pt;
+            font-weight: 800;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-bar .date {
+            font-size: 10pt;
+            color: var(--text-muted);
+        }
+
+        /* Comparison indicator */
+        .vs {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .vs-box {
+            flex: 1;
+            padding: 16px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .vs-old {
+            background: var(--red-bg);
+            border: 1px solid var(--red-border);
+        }
+
+        .vs-new {
+            background: var(--green-bg);
+            border: 1px solid var(--green-border);
+        }
+
+        .vs-arrow {
+            font-size: 20pt;
+            color: var(--gold);
+            font-weight: 800;
+        }
+
+        /* Footer */
+        .slide-footer {
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            font-size: 8pt;
+            color: var(--text-muted);
+        }
+
+        /* Sections list */
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin: 12px 0;
+        }
+
+        .section-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: var(--bg-subtle);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 9pt;
+            color: var(--text-secondary);
+        }
+
+        .section-num {
+            background: var(--gold);
+            color: #fff;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 8pt;
+            flex-shrink: 0;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .slide {
+                padding: 36px 44px;
+                min-height: auto;
+                height: 100vh;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* Print button */
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: var(--gold);
+            color: #fff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 13pt;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(184, 134, 11, 0.3);
+            font-family: 'Inter', sans-serif;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(184, 134, 11, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: Title -->
+    <div class="slide" style="justify-content: center; align-items: center; text-align: center;">
+        <div style="margin-bottom: 40px;">
+            <div style="font-size: 10pt; letter-spacing: 4px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 24px;">Website Redesign · Pitch Deck</div>
+            <h1 style="font-size: 44pt; margin-bottom: 16px;">Time to Jump<br>Dolomites</h1>
+            <div style="width: 80px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-dark)); margin: 28px auto;"></div>
+            <p style="font-size: 14pt; color: var(--text-secondary); max-width: 500px; margin: 0 auto;">Von Wix-Baukasten zu Premium Custom Design — warum sich der Wechsel lohnt.</p>
+        </div>
+        <div class="slide-footer" style="position: absolute; bottom: 40px; left: 60px; right: 60px;">
+            <span>MM-Production</span>
+            <span>März 2026</span>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: Quick Overview -->
+    <div class="slide">
+        <div class="header-bar">
+            <span class="logo">MM-Production</span>
+            <span class="date">Pitch Deck · März 2026</span>
+        </div>
+        <h1>🎯 Auf einen Blick</h1>
+        <div class="subtitle">Die wichtigsten Unterschiede auf einen Blick</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Aktuelle Website (Wix) <span class="badge-red">ALT</span></th>
+                    <th>Neues Design (Custom) <span class="badge-green">NEU</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Plattform</strong></td>
+                    <td>Wix-Baukasten</td>
+                    <td><strong>Eigener Code (HTML/CSS/JS)</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Ladezeit</strong></td>
+                    <td>~4–6 Sek. (Wix-Overhead)</td>
+                    <td><strong>&lt; 1 Sek.</strong> (keine Frameworks)</td>
+                </tr>
+                <tr>
+                    <td><strong>Monatliche Kosten</strong></td>
+                    <td>~17–32 €/Monat (Wix Premium)</td>
+                    <td><strong>0 €</strong> (Static Hosting)</td>
+                </tr>
+                <tr>
+                    <td><strong>Sprachen</strong></td>
+                    <td>6 (als Textblock übereinander)</td>
+                    <td><strong>9</strong> (echtes Dropdown mit Flaggen)</td>
+                </tr>
+                <tr>
+                    <td><strong>Call-to-Actions</strong></td>
+                    <td>0 direkte Buchungs-CTAs</td>
+                    <td><strong>7+ strategische CTAs</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Mobil-optimiert</strong></td>
+                    <td>Wix Auto-Mobile (eingeschränkt)</td>
+                    <td><strong>Vollständig responsive</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>SEO Score</strong></td>
+                    <td>Schwach (Wix-Limitierungen)</td>
+                    <td><strong>Stark</strong> (eigener Meta-Stack)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="grid-3">
+            <div class="card card-highlight stat">
+                <div class="stat-value">7+</div>
+                <div class="stat-label">Neue CTAs (vorher: 0)</div>
+            </div>
+            <div class="card card-highlight stat">
+                <div class="stat-value">&lt;1s</div>
+                <div class="stat-label">Ladezeit (vorher: 4-6s)</div>
+            </div>
+            <div class="card card-highlight stat">
+                <div class="stat-value">0€</div>
+                <div class="stat-label">Monatlich (vorher: 17-32€)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: Problem -->
+    <div class="slide">
+        <div class="header-bar">
+            <span class="logo">MM-Production</span>
+            <span class="date">Pitch Deck · März 2026</span>
+        </div>
+        <h1>Das Problem</h1>
+        <div class="subtitle">Die 5 größten Schwächen der aktuellen Website</div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>1. 🚫 Keine Buchungs-CTAs</h3>
+                <ul>
+                    <li>Es gibt <strong>keinen einzigen „Jetzt buchen!" Button</strong> auf der gesamten Seite</li>
+                    <li>Besucher wissen nicht, wie sie einen Jump buchen sollen</li>
+                    <li><strong>Ergebnis: Verlorene Kunden</strong></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>2. 📝 Textwand statt Struktur</h3>
+                <ul>
+                    <li>About-Sektion zeigt denselben Text in <strong>6 Sprachen übereinander</strong></li>
+                    <li>Kein Besucher scrollt durch diese Textwand</li>
+                    <li><strong>Wirkt unprofessionell und überfordernd</strong></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>3. 🔍 Keine Vertrauenssignale</h3>
+                <ul>
+                    <li>Keine Testimonials / Kundenbewertungen</li>
+                    <li>Kein FAQ-Bereich für häufige Fragen</li>
+                    <li><strong>Besucher können Vertrauen nicht einschätzen</strong></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>4. 📱 Schwache Mobile-Darstellung</h3>
+                <ul>
+                    <li>Wix generiert automatisch eine Mobile-Version — ohne Kontrolle</li>
+                    <li><strong>60-70% aller Besucher kommen über Handy</strong></li>
+                    <li>Die Mobile-Erfahrung muss perfekt sein</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card card-highlight" style="text-align: center;">
+            <h3>5. 💰 Laufende Wix-Kosten</h3>
+            <p>Wix Premium kostet <strong>17–32 €/Monat</strong> (204–384 €/Jahr). <strong>Mit der neuen Seite fallen diese Kosten komplett weg.</strong></p>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: Visual Comparison -->
+    <div class="slide">
+        <div class="header-bar">
+            <span class="logo">MM-Production</span>
+            <span class="date">Pitch Deck · März 2026</span>
+        </div>
+        <h1>Visueller Vergleich</h1>
+        <div class="subtitle">Alte Website vs. neues Premium-Design</div>
+
+        <div class="vs">
+            <div class="vs-box vs-old">
+                <div style="font-size: 10pt; font-weight: 700; color: var(--red); margin-bottom: 8px;">❌ AKTUELL (Wix)</div>
+                <div style="font-size: 9pt; color: var(--text-secondary);">
+                    Einfacher Baukasten-Look, keine CTAs, Textwand in 6 Sprachen, langsame Ladezeit
+                </div>
+            </div>
+            <div class="vs-arrow">→</div>
+            <div class="vs-box vs-new">
+                <div style="font-size: 10pt; font-weight: 700; color: var(--green); margin-bottom: 8px;">✅ NEU (Custom)</div>
+                <div style="font-size: 9pt; color: var(--text-secondary);">
+                    Premium Glassmorphism-Design, 7+ CTAs, 9 Sprachen per Dropdown, &lt;1s Ladezeit
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <div class="screenshot-container">
+                    <img src="" onerror="this.parentElement.style.display='none'" id="old-site-img">
+                    <div class="screenshot-label">Aktuelle Live-Website — timetojumpdolomites.com</div>
+                </div>
+            </div>
+            <div>
+                <div class="screenshot-container">
+                    <img src="" onerror="this.parentElement.style.display='none'" id="new-site-img">
+                    <div class="screenshot-label">Neues Premium-Design — Hero-Bereich</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout">
+            <strong>💡 Der erste Eindruck entscheidet:</strong> Besucher urteilen in <strong>0.05 Sekunden</strong> ob eine Website vertrauenswürdig wirkt. Das neue Design kommuniziert sofort: „Hier sind Profis am Werk."
+        </div>
+    </div>
+
+    <!-- SLIDE 5: Conversion Optimization -->
+    <div class="slide">
+        <div class="header-bar">
+            <span class="logo">MM-Production</span>
+            <span class="date">Pitch Deck · März 2026</span>
+        </div>
+        <h1>📈 Conversion-Optimierung</h1>
+        <div class="subtitle">Das ist der wichtigste Unterschied — mehr Buchungen generieren</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Element</th>
+                    <th>Aktuell <span class="badge-red">ALT</span></th>
+                    <th>Neu <span class="badge-green">NEU</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Navbar CTA</strong></td>
+                    <td>❌ Fehlt</td>
+                    <td>✅ „Book Now" immer sichtbar</td>
+                </tr>
+                <tr>
+                    <td><strong>Hero-Sektion CTA</strong></td>
+                    <td>❌ Fehlt</td>
+                    <td>✅ „View Prices" + „Book Your Jump ↗"</td>
+                </tr>
+                <tr>
+                    <td><strong>Preiskarten CTAs</strong></td>
+                    <td>❌ Fehlt</td>
+                    <td>✅ „Book via Elikos" + „Request Info"</td>
+                </tr>
+                <tr>
+                    <td><strong>Trust-Cues im Hero</strong></td>
+                    <td>❌ Fehlt</td>
+                    <td>✅ Preis-Anker (775€), UNESCO, Öffnungszeiten</td>
+                </tr>
+                <tr>
+                    <td><strong>„Most Popular" Badge</strong></td>
+                    <td>❌ Fehlt</td>
+                    <td>✅ ⭐ Badge auf Helicopter Jumps</td>
+                </tr>
+                <tr>
+                    <td><strong>„What to Expect" Steps</strong></td>
+                    <td>❌ Fehlt</td>
+                    <td>✅ 4-Schritte-Guide (Contact → Freefall)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-tip">
+            <strong>💡 Tipp:</strong> Jeder einzelne CTA-Button ist ein potenzieller Buchungskanal. <strong>Die alte Website hat 0 davon. Die neue hat 7+.</strong>
+        </div>
+
+        <hr>
+
+        <h2>🛡️ Vertrauen aufbauen</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Element</th>
+                    <th>Aktuell <span class="badge-red">ALT</span></th>
+                    <th>Neu <span class="badge-green">NEU</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Testimonials</strong></td>
+                    <td>❌ Keine</td>
+                    <td>✅ 3 verifizierte Reviews mit ★★★★★</td>
+                </tr>
+                <tr>
+                    <td><strong>FAQ-Bereich</strong></td>
+                    <td>❌ Keiner</td>
+                    <td>✅ 6 Fragen mit Akkordeon-Animationen</td>
+                </tr>
+                <tr>
+                    <td><strong>Anforderungen</strong></td>
+                    <td>❌ Unklar</td>
+                    <td>✅ Klar: Lizenz, Safety, Wetter, Buchung</td>
+                </tr>
+                <tr>
+                    <td><strong>Preis-Transparenz</strong></td>
+                    <td>Nur Textblock</td>
+                    <td>✅ Klare Preis-Karten mit CTAs</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- SLIDE 6: Technical Details -->
+    <div class="slide">
+        <div class="header-bar">
+            <span class="logo">MM-Production</span>
+            <span class="date">Pitch Deck · März 2026</span>
+        </div>
+        <h1>Technische Vorteile</h1>
+        <div class="subtitle">Sprachen, Performance, SEO &amp; Mobile</div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>🌍 Mehrsprachigkeit</h3>
+                <table>
+                    <tr><th>Aktuell</th><th>Neu</th></tr>
+                    <tr>
+                        <td>Alle 6 Sprachversionen <strong>übereinander als Text</strong></td>
+                        <td><strong>Sprachauswahl per Dropdown</strong> — gesamte Seite wechselt</td>
+                    </tr>
+                    <tr>
+                        <td>6 Sprachen (IT, DE, LAD, EN, FR, ES)</td>
+                        <td><strong>9 Sprachen</strong> (+ NL, PL, CZ)</td>
+                    </tr>
+                    <tr>
+                        <td>Textwand wirkt chaotisch</td>
+                        <td>Saubere, professionelle Darstellung</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card">
+                <h3>📱 Mobile Optimierung</h3>
+                <table>
+                    <tr><th>Aktuell</th><th>Neu</th></tr>
+                    <tr>
+                        <td>Wix-generierte Mobile-Ansicht</td>
+                        <td><strong>Handcodierte Responsive-Breakpoints</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Keine Kontrolle über Layout</td>
+                        <td>Perfekte Grids für jede Bildschirmgröße</td>
+                    </tr>
+                    <tr>
+                        <td>Fehlende Mobile-Navigation</td>
+                        <td><strong>Hamburger-Menü</strong> + CTA im Mobile-Menü</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>⚡ Performance &amp; Ladezeit</h3>
+                <table>
+                    <tr><th>Aktuell</th><th>Neu</th></tr>
+                    <tr>
+                        <td>Wix-Overhead: jQuery, React, etc.</td>
+                        <td><strong>Reines HTML/CSS/JS</strong></td>
+                    </tr>
+                    <tr>
+                        <td>~4-6 Sek. Ladezeit</td>
+                        <td><strong>&lt; 1 Sekunde</strong></td>
+                    </tr>
+                    <tr>
+                        <td>~3-5 MB Pageload</td>
+                        <td><strong>&lt; 500 KB</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Wix-Branding/Werbung</td>
+                        <td><strong>Keine Fremde Werbung</strong></td>
+                    </tr>
+                </table>
+                <div class="callout callout-warn" style="margin-top: 10px; font-size: 9pt;">
+                    <strong>Google-Studie:</strong> 53% der Mobile-Besucher verlassen eine Seite, wenn sie länger als 3 Sekunden lädt.
+                </div>
+            </div>
+            <div class="card">
+                <h3>🔍 SEO (Google-Optimierung)</h3>
+                <table>
+                    <tr><th>Aktuell</th><th>Neu</th></tr>
+                    <tr>
+                        <td>Wix-SEO (eingeschränkt)</td>
+                        <td><strong>Volle Kontrolle über alle Meta-Tags</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Generische OG-Description</td>
+                        <td><strong>Optimierte Meta-Descriptions</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Keine semantische HTML-Struktur</td>
+                        <td><strong>Semantisches HTML5</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Langsame Ladezeit schadet SEO</td>
+                        <td><strong>Blitzschnelle Ladezeit = SEO-Boost</strong></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: Cost Comparison -->
+    <div class="slide">
+        <div class="header-bar">
+            <span class="logo">MM-Production</span>
+            <span class="date">Pitch Deck · März 2026</span>
+        </div>
+        <h1>💶 Kostenvergleich</h1>
+        <div class="subtitle">Langfristig sparen — mit sofortigem Effekt</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Aktuell (Wix) <span class="badge-red">ALT</span></th>
+                    <th>Neu (Custom) <span class="badge-green">NEU</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Monatliche Kosten</strong></td>
+                    <td>17–32 €/Monat</td>
+                    <td><strong>0 €</strong> (GitHub Pages / Cloudflare)</td>
+                </tr>
+                <tr>
+                    <td><strong>Jährliche Kosten</strong></td>
+                    <td>204–384 €/Jahr</td>
+                    <td><strong>0 €</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>3-Jahres-Kosten</strong></td>
+                    <td>612–1.152 €</td>
+                    <td><strong>0 €</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Eigentum</strong></td>
+                    <td>Wix besitzt die Plattform</td>
+                    <td><strong>100% Eigentum am Code</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Abhängigkeit</strong></td>
+                    <td>An Wix-Plattform gebunden</td>
+                    <td><strong>Keine Anbieter-Abhängigkeit</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-warn">
+            <strong>⚠️ Achtung:</strong> Mit Wix bist du vom Anbieter abhängig. Wenn Wix die Preise erhöht oder Features ändert, hast du keine Kontrolle. <strong>Die neue Website gehört dir zu 100%.</strong>
+        </div>
+
+        <hr>
+
+        <h2>🗂️ Was steckt in der neuen Website?</h2>
+
+        <div class="section-grid">
+            <div class="section-item"><span class="section-num">1</span> <strong>Sticky Navbar</strong> — Logo + Links + Social + Sprach-Dropdown + CTA</div>
+            <div class="section-item"><span class="section-num">2</span> <strong>Hero</strong> — Vollbild + Headline + Trust-Cues + 3 CTAs</div>
+            <div class="section-item"><span class="section-num">3</span> <strong>About</strong> — Bild + Text + 3 Statistiken</div>
+            <div class="section-item"><span class="section-num">4</span> <strong>What to Expect</strong> — 4-Schritte-Guide</div>
+            <div class="section-item"><span class="section-num">5</span> <strong>Pricing</strong> — 3 Preis-Karten + CTAs + Requirements</div>
+            <div class="section-item"><span class="section-num">6</span> <strong>Partner</strong> — Partner-Showcase mit Buttons</div>
+            <div class="section-item"><span class="section-num">7</span> <strong>Testimonials</strong> — 3 Bewertungen mit ★★★★★</div>
+            <div class="section-item"><span class="section-num">8</span> <strong>Events</strong> — Eventkalender (erweiterbar)</div>
+            <div class="section-item"><span class="section-num">9</span> <strong>Shop</strong> — Shop-Platzhalter (erweiterbar)</div>
+            <div class="section-item"><span class="section-num">10</span> <strong>FAQ</strong> — 6 Fragen mit Akkordeon</div>
+            <div class="section-item"><span class="section-num">11</span> <strong>Contact</strong> — Formular + Details + Social</div>
+            <div class="section-item"><span class="section-num">12</span> <strong>Map + Chat + Footer</strong></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: Summary -->
+    <div class="slide" style="justify-content: center;">
+        <div class="header-bar">
+            <span class="logo">MM-Production</span>
+            <span class="date">Pitch Deck · März 2026</span>
+        </div>
+        <h1>📊 Zusammenfassung</h1>
+        <div class="subtitle">Warum sich der Wechsel lohnt</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Vorteil</th>
+                    <th>Wirkung</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>+7 CTAs</strong> statt 0</td>
+                    <td>📈 <strong>Mehr Buchungen</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>&lt; 1 Sek.</strong> statt 4-6 Sek. Ladezeit</td>
+                    <td>🚀 <strong>Weniger Absprünge</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>9 Sprachen</strong> statt Textwand</td>
+                    <td>🌍 <strong>Internationale Kunden erreichen</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Testimonials + FAQ</strong></td>
+                    <td>🛡️ <strong>Vertrauen aufbauen</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>0 € monatlich</strong> statt 17-32 €</td>
+                    <td>💶 <strong>Geld sparen</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>100% Eigentum</strong></td>
+                    <td>🔓 <strong>Keine Abhängigkeit</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>SEO-optimiert</strong></td>
+                    <td>🔍 <strong>Besser bei Google gefunden</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Premium-Design</strong></td>
+                    <td>✨ <strong>Professioneller Eindruck = mehr Vertrauen</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="card card-highlight" style="text-align: center; margin-top: 28px; padding: 28px;">
+            <p style="font-size: 14pt; margin-bottom: 0;">
+                <strong>Die neue Website ist nicht nur schöner — sie ist ein Verkaufs-Tool.</strong><br>
+                <span style="color: var(--text-secondary);">Jedes Element wurde strategisch platziert, um Besucher vom Interesse zur Buchung zu führen.</span>
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 36px;">
+            <div style="width: 80px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-dark)); margin: 0 auto 14px;"></div>
+            <p style="color: var(--text-muted); font-size: 10pt;">Pitch Deck erstellt von <strong style="color: var(--gold);">MM-Production</strong> · März 2026</p>
+        </div>
+    </div>
+
+    <!-- Print button (hidden in print) -->
+    <button class="print-btn no-print" onclick="window.print()">📄 Als PDF speichern</button>
+
+</body>
+</html>
