@@ -5,30 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel | Time to Jump Dolomites</title>
   <meta name="robots" content="noindex, nofollow">
-  <link rel="stylesheet" href="css/admin.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { orange: '#FF8A00', dark: '#0F172A', navy: '#1E293B', border: '#334155' }
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/admin.css">
 </head>
-<body class="admin-body">
+<body class="bg-brand-dark text-slate-200 font-sans h-screen overflow-hidden">
 
   <!-- ========== LOGIN SCREEN ========== -->
-  <div class="admin-login" id="adminLogin">
-    <div class="admin-login__card">
-      <img src="img/logo.png" alt="Logo" class="admin-login__logo">
-      <h1 class="admin-login__title">Admin Panel</h1>
-      <p class="admin-login__subtitle">Time to Jump Dolomites — Content Management</p>
-
-      <form class="admin-login__form" id="adminLoginForm">
-        <div class="admin-input-group">
-          <label for="adminEmail">Email Address</label>
-          <input type="email" id="adminEmail" placeholder="admin@example.com" required autocomplete="email">
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-brand-dark" id="adminLogin">
+    <div class="w-full max-w-sm mx-auto p-8 bg-brand-navy border border-brand-border rounded-2xl shadow-2xl">
+      <div class="flex flex-col items-center mb-6">
+        <div class="w-14 h-14 bg-brand-orange rounded-xl flex items-center justify-center text-2xl font-black text-white mb-4">T</div>
+        <h1 class="text-xl font-bold">Admin Panel</h1>
+        <p class="text-sm text-slate-500 mt-1">Time to Jump Dolomites — CMS</p>
+      </div>
+      <form id="adminLoginForm" class="space-y-4">
+        <div>
+          <label for="adminEmail" class="block text-xs font-medium text-slate-400 mb-1">Email</label>
+          <input type="email" id="adminEmail" required autocomplete="email" placeholder="admin@example.com"
+            class="w-full bg-slate-900 border-slate-700 text-slate-100 rounded-md focus:ring-brand-orange focus:border-brand-orange text-sm">
         </div>
-        <div class="admin-input-group">
-          <label for="adminPassword">Password</label>
-          <input type="password" id="adminPassword" placeholder="••••••••" required autocomplete="current-password">
+        <div>
+          <label for="adminPassword" class="block text-xs font-medium text-slate-400 mb-1">Password</label>
+          <input type="password" id="adminPassword" required autocomplete="current-password" placeholder="••••••••"
+            class="w-full bg-slate-900 border-slate-700 text-slate-100 rounded-md focus:ring-brand-orange focus:border-brand-orange text-sm">
         </div>
-        <div class="admin-login__error" id="loginError"></div>
-        <button type="submit" class="admin-btn admin-btn--primary admin-btn--full">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <div id="loginError" class="text-red-400 text-xs hidden"></div>
+        <button type="submit" class="w-full py-2.5 bg-brand-orange hover:bg-orange-600 text-white rounded-md text-sm font-semibold transition-all shadow-lg shadow-orange-900/20">
           Sign In
         </button>
       </form>
@@ -36,70 +52,100 @@
   </div>
 
   <!-- ========== DASHBOARD ========== -->
-  <div class="admin-dashboard" id="adminDashboard">
+  <div class="hidden flex h-full" id="adminDashboard">
 
     <!-- Sidebar -->
-    <aside class="admin-sidebar" id="adminSidebar">
-      <div class="admin-sidebar__header">
-        <img src="img/logo.png" alt="Logo" class="admin-sidebar__logo">
-        <div class="admin-sidebar__brand">
-          TTJD Admin
-          <small>Content Management</small>
+    <aside class="w-64 bg-brand-navy border-r border-brand-border flex flex-col shrink-0" id="adminSidebar">
+      <div class="p-5 border-b border-brand-border flex items-center gap-3">
+        <div class="w-8 h-8 bg-brand-orange rounded flex items-center justify-center font-bold text-white text-sm">T</div>
+        <div>
+          <h1 class="text-sm font-bold tracking-tight leading-tight">Time to Jump</h1>
+          <p class="text-[10px] text-slate-500">Content Management</p>
         </div>
       </div>
-
-      <nav class="admin-sidebar__nav" id="sidebarNav">
+      <nav class="flex-1 p-3 space-y-1 overflow-y-auto" id="sidebarNav">
         <!-- Populated by JS -->
       </nav>
-
-      <div class="admin-sidebar__footer">
-        <button class="admin-btn admin-btn--outline admin-btn--sm admin-btn--full" id="exportBtn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <div class="p-3 border-t border-brand-border space-y-1.5">
+        <button id="exportBtn" class="w-full flex items-center gap-2 px-3 py-1.5 text-xs text-slate-400 hover:text-white hover:bg-slate-800 rounded-md transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><polyline points="7 10 12 15 17 10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><line x1="12" y1="15" x2="12" y2="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
           Export JSON
         </button>
-        <button class="admin-btn admin-btn--outline admin-btn--sm admin-btn--full" id="importBtn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <button id="importBtn" class="w-full flex items-center gap-2 px-3 py-1.5 text-xs text-slate-400 hover:text-white hover:bg-slate-800 rounded-md transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><polyline points="17 8 12 3 7 8" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><line x1="12" y1="3" x2="12" y2="15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
           Import JSON
         </button>
-        <input type="file" id="importFileInput" accept=".json" style="display:none;">
-        <button class="admin-btn admin-btn--danger admin-btn--sm admin-btn--full" id="logoutBtn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <input type="file" id="importFileInput" accept=".json" class="hidden">
+        <button id="logoutBtn" class="w-full flex items-center gap-2 px-3 py-1.5 text-xs text-red-400 hover:text-red-300 hover:bg-red-900/20 rounded-md transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><polyline points="16 17 21 12 16 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><line x1="21" y1="12" x2="9" y2="12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
           Logout
         </button>
       </div>
     </aside>
 
-    <!-- Main Content -->
-    <main class="admin-main">
-      <div class="admin-main__header">
-        <div style="display:flex;align-items:center;gap:12px;">
-          <button class="admin-mobile-toggle" id="adminMobileToggle">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-          </button>
-          <h1 class="admin-main__title" id="adminSectionTitle">Navigation</h1>
-        </div>
-      </div>
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-full bg-slate-950 overflow-hidden">
 
-      <div id="adminSections">
-        <!-- Populated by JS -->
+      <!-- Top Bar -->
+      <header class="h-14 border-b border-brand-border flex items-center justify-between px-6 bg-brand-dark z-10 shrink-0">
+        <div class="flex items-center gap-3">
+          <button class="lg:hidden text-slate-400 hover:text-white" id="adminMobileToggle">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="6" x2="21" y2="6" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="18" x2="21" y2="18" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div>
+            <h2 class="text-base font-semibold">Editing: <span class="text-brand-orange" id="adminSectionTitle">Navigation</span></h2>
+            <p class="text-[10px] text-slate-500" id="adminLastSaved"></p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="px-3 py-1.5 text-xs font-medium text-slate-400 hover:text-white transition-colors" id="discardBtn">Discard Changes</button>
+          <button class="px-4 py-1.5 bg-brand-orange hover:bg-orange-600 text-white rounded-md text-xs font-semibold transition-all shadow-lg shadow-orange-900/20" id="savePublishBtn">Save &amp; Publish</button>
+        </div>
+      </header>
+
+      <!-- Split Editor View -->
+      <div class="flex-1 flex overflow-hidden">
+
+        <!-- Content Editor Pane -->
+        <section class="w-[420px] xl:w-[480px] border-r border-brand-border bg-brand-navy overflow-y-auto p-5 space-y-6 shrink-0" id="adminEditorPane">
+          <div id="adminSections">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- Live Preview Pane -->
+        <section class="flex-1 bg-slate-900 relative p-4 flex flex-col" id="adminPreviewPane">
+          <!-- Preview Toolbar -->
+          <div class="flex items-center justify-between mb-3 bg-slate-800 p-2 rounded-lg border border-slate-700 shadow-xl shrink-0">
+            <div class="flex items-center gap-3 px-2">
+              <div class="flex items-center gap-1">
+                <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+              </div>
+              <span class="text-[10px] text-slate-500 font-mono">timetojumpdolomites.com</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <button class="p-1 rounded hover:bg-slate-700 text-slate-400" title="Desktop" id="previewDesktop">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+              </button>
+              <button class="p-1 rounded hover:bg-slate-700 text-slate-400" title="Mobile" id="previewMobile">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+              </button>
+              <div class="w-px h-3 bg-slate-700 mx-1"></div>
+              <button class="p-1 rounded hover:bg-slate-700 text-slate-400" title="Toggle Preview" id="previewToggleBtn">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke-width="2"/></svg>
+              </button>
+            </div>
+          </div>
+          <!-- Preview iframe -->
+          <div class="flex-1 rounded-xl overflow-hidden border border-slate-800 shadow-2xl" id="previewFrameWrap">
+            <iframe id="previewFrame" src="index.html" class="w-full h-full border-0 bg-white"></iframe>
+          </div>
+        </section>
+
       </div>
     </main>
-
-    <!-- Live Preview (outside main for position:fixed to work) -->
-    <div class="admin-preview" id="adminPreview" style="display:none;">
-      <div class="admin-preview__header">
-        <span class="admin-preview__label">📺 Live Preview</span>
-        <div class="admin-preview__controls">
-          <button class="admin-btn admin-btn--outline admin-btn--sm" id="previewToggleBtn" title="Toggle preview">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            Hide
-          </button>
-        </div>
-      </div>
-      <div class="admin-preview__frame-wrap" id="previewFrameWrap">
-        <iframe id="previewFrame" src="index.html"></iframe>
-      </div>
-    </div>
   </div>
 
   <script src="js/translations.js"></script>
