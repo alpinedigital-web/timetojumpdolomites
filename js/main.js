@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(el => revealObserver.observe(el));
   }
 
-  // ---- Contact Form ----
+  // ---- Contact Form (sends via FormSubmit.co) ----
   const contactForm = document.getElementById('contactForm');
   const formSuccess = document.getElementById('formSuccess');
 
@@ -74,18 +74,44 @@ document.addEventListener('DOMContentLoaded', () => {
       const telephone = document.getElementById('telephone').value.trim();
       const message = document.getElementById('message').value.trim();
 
-      if (!name || !email || !telephone || !message) {
-        return;
-      }
+      if (!name || !email || !telephone || !message) return;
 
-      contactForm.style.display = 'none';
-      formSuccess.classList.add('visible');
+      // Show loading state
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const origHTML = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Sending...</span>';
 
-      setTimeout(() => {
-        contactForm.reset();
-        contactForm.style.display = '';
-        formSuccess.classList.remove('visible');
-      }, 5000);
+      // Send via AJAX to FormSubmit.co
+      fetch(contactForm.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name, email, telephone, message,
+          _subject: 'Neue Website-Anfrage — Time to Jump Dolomites',
+          _template: 'table'
+        })
+      })
+      .then(res => {
+        if (res.ok) {
+          contactForm.style.display = 'none';
+          formSuccess.classList.add('visible');
+          setTimeout(() => {
+            contactForm.reset();
+            contactForm.style.display = '';
+            formSuccess.classList.remove('visible');
+          }, 6000);
+        } else {
+          throw new Error('Form submission failed');
+        }
+      })
+      .catch(() => {
+        alert('Could not send your message. Please try again or contact us directly via WhatsApp/Email.');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = origHTML;
+      });
     });
   }
 

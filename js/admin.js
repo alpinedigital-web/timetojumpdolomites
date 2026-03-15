@@ -448,6 +448,7 @@
 
   // ---- Image Management ----
   function handleImageUpload(imageId, file) {
+    if (file.size > 2 * 1024 * 1024) { showToast('Image too large (max 2 MB).', 'error'); return; }
     const reader = new FileReader();
     reader.onload = (e) => {
       imageOverrides[imageId] = e.target.result;
