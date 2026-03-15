@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time to Jump Dolomites | Skydiving in the Dolomites</title>
+  <meta name="description" content="Time to Jump Dolomites — Skydiving in the heart of the Dolomites, Trentino South Tyrol. Helicopter jumps with breathtaking views. The Eden of Skydiving.">
+  <meta property="og:title" content="Time to Jump Dolomites | Skydiving in the Dolomites">
+  <meta property="og:description" content="Time to Jump Dolomites — Skydiving in the heart of the Dolomites, Trentino South Tyrol. Helicopter jumps with breathtaking views.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.timetojumpdolomites.com/">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪂</text></svg>">
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="#" class="navbar__logo">
+        <img src="img/logo.png" alt="Time to Jump Dolomites Logo" style="width:50px;height:50px;border-radius:50%;object-fit:contain;background:#1a2744;">
+        <div>
+          <span class="navbar__logo-text">Time to Jump Dolomites</span>
+          <span class="navbar__logo-tagline">feel the Freedom as a Big</span>
+        </div>
+      </a>
+      <div class="navbar__links">
+        <a href="#about" class="navbar__link" data-i18n="nav.about">About</a>
+        <a href="#pricing" class="navbar__link" data-i18n="nav.prices">Prices</a>
+        <a href="#events" class="navbar__link" data-i18n="nav.events">Events</a>
+        <a href="blog.html" class="navbar__link" data-i18n="nav.blog">Blog</a>
+        <a href="https://www.elikos.com/helicopter/index.php" class="navbar__link" target="_blank" rel="noopener">Elikos</a>
+        <a href="privacy.html" class="navbar__link" data-i18n="nav.privacy">Privacy</a>
+      </div>
+      <div class="navbar__actions">
+        <a href="https://www.instagram.com/time_to_jump_dolomites/" target="_blank" rel="noopener" class="navbar__social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@timetojumpdolomites" target="_blank" rel="noopener" class="navbar__social-link" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/p/Time-to-Jump-Dolomites-100077926092104/" target="_blank" rel="noopener" class="navbar__social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <!-- Language Dropdown -->
+        <div class="lang-dropdown" id="langDropdown">
+          <button class="lang-dropdown__toggle" aria-label="Select language">
+            <span class="lang-dropdown__flag">🇬🇧</span><span class="lang-dropdown__code">EN</span><svg class="lang-dropdown__arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="lang-dropdown__menu"></div>
+        </div>
+        <a href="https://www.elikos.com/helicopter/index.php" target="_blank" rel="noopener" class="btn btn--primary btn--sm navbar__cta" data-i18n="nav.book">Book Now</a>
+      </div>
+      <button class="navbar__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <!-- Mobile Navigation -->
+    <div class="navbar__mobile" id="mobileNav">
+      <a href="#about" class="navbar__link" data-i18n="nav.about">About</a>
+      <a href="#pricing" class="navbar__link" data-i18n="nav.prices">Prices</a>
+      <a href="#events" class="navbar__link" data-i18n="nav.events">Events</a>
+      <a href="blog.html" class="navbar__link" data-i18n="nav.blog">Blog</a>
+      <a href="https://www.elikos.com/helicopter/index.php" class="navbar__link" target="_blank" rel="noopener">Elikos</a>
+      <a href="privacy.html" class="navbar__link" data-i18n="nav.privacy">Privacy</a>
+      <a href="https://www.elikos.com/helicopter/index.php" target="_blank" rel="noopener" class="btn btn--primary" data-i18n="nav.book" style="margin-top:var(--space-md);">Book Now</a>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero__video-wrap">
+      <img src="img/hero.jpg" alt="Skydivers in formation freefall over the Dolomites mountains" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <div class="hero__badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <span data-i18n="hero.badge">The Eden of Skydiving</span>
+      </div>
+      <h1 class="hero__title" data-i18n="hero.title">Welcome to<br>Time to Jump Dolomites</h1>
+      <p class="hero__subtitle" data-i18n="hero.subtitle">Skydiving in the heart of the Dolomites — UNESCO World Heritage.<br>Breathtaking helicopter jumps over Trentino South Tyrol.</p>
+      <div class="hero__trust-cues">
+        <div class="hero__trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span data-i18n="hero.trust.heli">Helicopter Jumps from 775 €</span>
+        </div>
+        <div class="hero__trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-i18n="hero.trust.unesco">UNESCO Dolomites</span>
+        </div>
+        <div class="hero__trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span data-i18n="hero.trust.days">Fri – Sun · Weather Permitting</span>
+        </div>
+      </div>
+      <div class="hero__cta-group">
+        <a href="#pricing" class="btn btn--primary">
+          <span data-i18n="hero.cta.prices">View Prices</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn btn--outline">
+          <span data-i18n="hero.cta.contact">Contact Us</span>
+        </a>
+        <a href="https://www.elikos.com/helicopter/index.php" target="_blank" rel="noopener" class="btn btn--outline">
+          <span data-i18n="hero.cta.book">Book Your Jump</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero__scroll-indicator">
+      <span data-i18n="hero.scroll">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__image-wrap reveal">
+          <img src="img/about.png" alt="Dolomites mountains landscape at golden hour">
+          <div class="about__image-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span data-i18n="about.badge">Dolomites UNESCO</span>
+          </div>
+        </div>
+        <div class="about__content reveal reveal-delay-1">
+          <span class="section-label" data-i18n="about.label">About Us</span>
+          <h2 class="section-title" data-i18n="about.title">About Time to Jump Dolomites</h2>
+
+          <p class="about__text" data-i18n="about.text">Skydiving in Trentino-South Tyrol-Tyrol-East Tyrol or too "Tyrol Land", in the Heart of the Dolomites and with breathtaking Views and in Places where Tourism is coordinated and organized in an optimal Way for pleasant and unforgettable Stays.</p>
+
+          <div class="about__stats">
+            <div class="about__stat">
+              <div class="about__stat-number">2500m</div>
+              <div class="about__stat-label" data-i18n="about.stat.altitude">Max Altitude</div>
+            </div>
+            <div class="about__stat">
+              <div class="about__stat-number">UNESCO</div>
+              <div class="about__stat-label" data-i18n="about.stat.heritage">Heritage Site</div>
+            </div>
+            <div class="about__stat">
+              <div class="about__stat-number">Fri–Sun</div>
+              <div class="about__stat-label" data-i18n="about.stat.days">Open Days</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHAT TO EXPECT ========== -->
+  <section class="section section--dark" id="experience">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-label" data-i18n="experience.label">How It Works</span>
+        <h2 class="section-title" data-i18n="experience.title">What to Expect</h2>
+        <p class="section-subtitle" data-i18n="experience.subtitle">From first contact to freefall — your jump day in 4 simple steps.</p>
+      </div>
+      <div class="experience__grid">
+        <div class="experience__step reveal reveal-delay-1">
+          <div class="experience__step-number">01</div>
+          <div class="experience__step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <h3 data-i18n="experience.step1.title">Contact & Reserve</h3>
+          <p data-i18n="experience.step1.text">Reach out via WhatsApp, email, or phone to reserve your helicopter slot for the weekend.</p>
+        </div>
+        <div class="experience__step reveal reveal-delay-2">
+          <div class="experience__step-number">02</div>
+          <div class="experience__step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h3 data-i18n="experience.step2.title">Gear Check & Briefing</h3>
+          <p data-i18n="experience.step2.text">On-site safety briefing and equipment check. Bring your own rig or rent one from us.</p>
+        </div>
+        <div class="experience__step reveal reveal-delay-3">
+          <div class="experience__step-number">03</div>
+          <div class="experience__step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+          </div>
+          <h3 data-i18n="experience.step3.title">Helicopter Scenic Flight</h3>
+          <p data-i18n="experience.step3.text">Breathtaking flight over the UNESCO Dolomites to your jump altitude up to 2,500m.</p>
+        </div>
+        <div class="experience__step reveal reveal-delay-3">
+          <div class="experience__step-number">04</div>
+          <div class="experience__step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+          </div>
+          <h3 data-i18n="experience.step4.title">Freefall & Canopy</h3>
+          <p data-i18n="experience.step4.text">Jump, enjoy the adrenaline of freefall, and land with an unforgettable panoramic view.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRICING ========== -->
+  <section class="section section--dark" id="pricing">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-label" data-i18n="pricing.label">Prices 2025</span>
+        <h2 class="section-title" data-i18n="pricing.title">Pricing List</h2>
+        <p class="section-subtitle" data-i18n="pricing.subtitle">Professional skydivers only (No Tandem). All prices include helicopter flights over the stunning Dolomites landscape.</p>
+      </div>
+      <div class="pricing__grid">
+        <!-- Card 1: Helicopter Jumps -->
+        <div class="pricing-card pricing-card--featured reveal reveal-delay-1">
+          <div class="pricing-card__badge" data-i18n="pricing.popular">⭐ Most Popular</div>
+          <div class="pricing-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+          </div>
+          <h3 class="pricing-card__title" data-i18n="pricing.helicopter.title">Helicopter Jumps</h3>
+          <p class="pricing-card__desc" data-i18n="pricing.helicopter.desc">Scenic jumps from helicopter over UNESCO Dolomites</p>
+          <div class="pricing-card__list">
+            <div class="pricing-card__item">
+              <span class="pricing-card__item-name">Saslong Unesco Jump — 1 Load* 1,600m</span>
+              <span class="pricing-card__item-price">775 €</span>
+            </div>
+            <div class="pricing-card__item">
+              <span class="pricing-card__item-name">Mulin da Coi Jump — 1 Load* 2,500m</span>
+              <span class="pricing-card__item-price">825 €</span>
+            </div>
+            <div class="pricing-card__item">
+              <span class="pricing-card__item-name">2 or more Loads</span>
+              <span class="pricing-card__item-price" data-i18n="pricing.onrequest">On request</span>
+            </div>
+          </div>
+          <p class="pricing-card__note" data-i18n="pricing.helicopter.note">* 1 Load = 5 Skydivers. The jump level can be lower in case of bad weather and/or local air traffic.</p>
+          <a href="https://www.elikos.com/helicopter/index.php" target="_blank" rel="noopener" class="btn btn--primary btn--sm pricing-card__cta">
+            <span data-i18n="pricing.cta">Book via Elikos</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <!-- Card 2: Pack Jobs -->
+        <div class="pricing-card reveal reveal-delay-2">
+          <div class="pricing-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <h3 class="pricing-card__title" data-i18n="pricing.pack.title">Pack Jobs</h3>
+          <p class="pricing-card__desc" data-i18n="pricing.pack.desc">Professional packing services & training courses</p>
+          <div class="pricing-card__list">
+            <div class="pricing-card__item">
+              <span class="pricing-card__item-name">1 Pack Job</span>
+              <span class="pricing-card__item-price">20 €</span>
+            </div>
+            <div class="pricing-card__item">
+              <span class="pricing-card__item-name">10 + 1 Pack Jobs</span>
+              <span class="pricing-card__item-price">200 €</span>
+            </div>
+            <div class="pricing-card__item">
+              <span class="pricing-card__item-name">Complete Packing Course*</span>
+              <span class="pricing-card__item-price">600 €</span>
+            </div>
+          </div>
+          <p class="pricing-card__note" data-i18n="pricing.pack.note">* On ground 1 and 2 + Pro-pack with life assistance. About 12 hours — on request.</p>
+          <a href="#contact" class="btn btn--outline btn--sm pricing-card__cta">
+            <span data-i18n="pricing.cta.contact">Request Info</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+
+        <!-- Card 3: Parachutes Renting -->
+        <div class="pricing-card reveal reveal-delay-3">
+          <div class="pricing-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+          </div>
+          <h3 class="pricing-card__title" data-i18n="pricing.rent.title">Parachutes Renting</h3>
+          <p class="pricing-card__desc" data-i18n="pricing.rent.desc">Equipment rental including pack job service</p>
+          <div class="pricing-card__list">
+            <div class="pricing-card__item">
+              <span class="pricing-card__item-name">1 Jump Rent + 1 Pack Job</span>
+              <span class="pricing-card__item-price">45 €</span>
+            </div>
+            <div class="pricing-card__item">
+              <span class="pricing-card__item-name">10+1 Jumps Rent + Pack Jobs</span>
+              <span class="pricing-card__item-price">450 €</span>
+            </div>
+            <div class="pricing-card__item">
+              <span class="pricing-card__item-name">1 Day Rent + 1 Pack Job</span>
+              <span class="pricing-card__item-price">100 €</span>
+            </div>
+            <div class="pricing-card__item">
+              <span class="pricing-card__item-name">2 Days Rent + 1 Pack Job</span>
+              <span class="pricing-card__item-price">180 €</span>
+            </div>
+            <div class="pricing-card__item">
+              <span class="pricing-card__item-name">3 Days Rent + 1 Pack Job</span>
+              <span class="pricing-card__item-price">260 €</span>
+            </div>
+            <div class="pricing-card__item">
+              <span class="pricing-card__item-name">4 Days Rent + 1 Pack Job</span>
+              <span class="pricing-card__item-price">340 €</span>
+            </div>
+            <div class="pricing-card__item">
+              <span class="pricing-card__item-name">5 Days Rent + 1 Pack Job</span>
+              <span class="pricing-card__item-price">420 €</span>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn--outline btn--sm pricing-card__cta">
+            <span data-i18n="pricing.cta.contact">Request Info</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Requirements Info -->
+      <div class="requirements reveal" style="margin-top:var(--space-xl);">
+        <div class="requirements__grid">
+          <div class="requirements__item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <div>
+              <strong data-i18n="req.license.title">License Required</strong>
+              <span data-i18n="req.license.text">Professional skydivers only — valid license mandatory</span>
+            </div>
+          </div>
+          <div class="requirements__item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div>
+              <strong data-i18n="req.safety.title">Safety First</strong>
+              <span data-i18n="req.safety.text">Full gear inspection required before every jump</span>
+            </div>
+          </div>
+          <div class="requirements__item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>
+            <div>
+              <strong data-i18n="req.weather.title">Weather Dependent</strong>
+              <span data-i18n="req.weather.text">Jumps depend on conditions — flexible rescheduling available</span>
+            </div>
+          </div>
+          <div class="requirements__item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            <div>
+              <strong data-i18n="req.payment.title">Easy Booking</strong>
+              <span data-i18n="req.payment.text">Reserve via WhatsApp, email, or phone — pay on site</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PARTNERS (TRAVEL Parachute Systems) ========== -->
+  <section class="section" id="partners">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-label" data-i18n="partners.label">Our Partner</span>
+        <h2 class="section-title">TRAVEL Parachute Systems</h2>
+      </div>
+      <div class="partners__card reveal">
+        <div class="partners__image">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#0A1628,#1a3a6c);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:rgba(255,255,255,0.6);font-family:var(--font-heading);font-weight:700;font-size:1.4rem;letter-spacing:0.05em;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(245,166,35,0.6)" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            TRAVEL
+          </div>
+        </div>
+        <div class="partners__content">
+          <h3 class="partners__name">TRAVEL Parachute Systems</h3>
+          <p class="partners__desc" data-i18n="partners.desc">Our trusted equipment partner for premium parachute systems. Design your custom rig with their state-of-the-art configurator, or browse their measurement guides for the perfect fit.</p>
+          <div class="partners__cta-group">
+            <a href="http://www.travelparachutesystems.com" target="_blank" rel="noopener" class="btn btn--dark btn--sm">
+              <span data-i18n="partners.visit">Visit Website</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+            <a href="http://www.travelparachutesystems.com/customize/sport-container/" target="_blank" rel="noopener" class="btn btn--primary btn--sm">
+              <span data-i18n="partners.design">Design a Rig +</span>
+            </a>
+            <a href="http://www.travelparachutesystems.com/how-to-measure/" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">
+              <span data-i18n="partners.measurements">Measurements</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIALS ========== -->
+  <section class="section section--dark" id="testimonials">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-label" data-i18n="testimonials.label">Reviews</span>
+        <h2 class="section-title" data-i18n="testimonials.title">What Jumpers Say</h2>
+      </div>
+      <div class="testimonials__grid">
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__text" data-i18n="testimonials.t1.text">"Absolutely stunning scenery! The helicopter ride alone is worth it, and the freefall over the Dolomites is an experience I will never forget. Professional team and top safety standards."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">M</div>
+            <div>
+              <strong>Marco R.</strong>
+              <span data-i18n="testimonials.t1.info">500+ jumps · Munich, Germany</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__text" data-i18n="testimonials.t2.text">"Best dropzone in the Alps, hands down. The views from 2,500m over the UNESCO Dolomites are unreal. Great vibes, well-organized, and the Elikos helicopter team is fantastic."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">S</div>
+            <div>
+              <strong>Sophie L.</strong>
+              <span data-i18n="testimonials.t2.info">300+ jumps · Vienna, Austria</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-3">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__text" data-i18n="testimonials.t3.text">"A truly unique experience. Jumping from a helicopter over these mountains is something every skydiver should try at least once. Very flexible with weather rescheduling too."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">J</div>
+            <div>
+              <strong>Jan K.</strong>
+              <span data-i18n="testimonials.t3.info">800+ jumps · Prague, Czech Republic</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EVENTS ========== -->
+  <section class="section section--navy" id="events">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-label" data-i18n="events.label">Events</span>
+        <h2 class="section-title" data-i18n="events.title">Upcoming Events</h2>
+        <p class="section-subtitle" data-i18n="events.subtitle">Stay tuned for our upcoming skydiving events and boogie calendar.</p>
+      </div>
+      <div class="events__empty reveal">
+        <div class="events__empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <h3 data-i18n="events.empty.title">No events at the moment</h3>
+        <p data-i18n="events.empty.text">Check back soon for exciting skydiving events in the Dolomites. Follow us on social media for the latest updates!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SHOP ========== -->
+  <section class="section" id="shop">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-label" data-i18n="shop.label">Shop</span>
+        <h2 class="section-title" data-i18n="shop.title">Shop</h2>
+        <p class="section-subtitle" style="color:var(--color-text-muted);" data-i18n="shop.subtitle">Browse our selection of skydiving gear and merchandise.</p>
+      </div>
+      <div class="shop__empty reveal">
+        <div class="shop__empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </div>
+        <h3 data-i18n="shop.empty.title">Nothing to book right now</h3>
+        <p data-i18n="shop.empty.text">Check back soon — new gear and bookings coming your way!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="section section--navy" id="faq">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-label" data-i18n="faq.label">FAQ</span>
+        <h2 class="section-title" data-i18n="faq.title">Frequently Asked Questions</h2>
+      </div>
+      <div class="faq__list reveal">
+        <div class="faq__item">
+          <button class="faq__question">
+            <span data-i18n="faq.q1">Do I need a skydiving license?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p data-i18n="faq.a1">Yes. We operate exclusively for licensed skydivers. You must hold a valid skydiving license (e.g., USPA, FAI, or equivalent national license). No tandem jumps are offered.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">
+            <span data-i18n="faq.q2">What happens if the weather is bad?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p data-i18n="faq.a2">Safety comes first. If weather conditions don't allow safe jumping, we will reschedule your jump to the next available date at no extra cost. The jump altitude may also be adjusted based on conditions and local air traffic.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">
+            <span data-i18n="faq.q3">How do I book a jump?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p data-i18n="faq.a3">Contact us via WhatsApp (+39 342 763 5478), email (Info@timetojumpdolomites.com), or phone to reserve your slot. The helicopter is booked through our partner Elikos. Payment is on site.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">
+            <span data-i18n="faq.q4">What's included in the price?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p data-i18n="faq.a4">All prices include the helicopter flight over the Dolomites and the jump itself. Pack jobs, equipment rental, and additional loads are priced separately — see our pricing section for details.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">
+            <span data-i18n="faq.q5">Do I need my own equipment?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p data-i18n="faq.a5">You can bring your own rig or rent complete parachute equipment from us. Rental includes a pack job. See our pricing section for rental rates.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">
+            <span data-i18n="faq.q6">When are you open?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p data-i18n="faq.a6">We operate Friday through Sunday, weather permitting. Contact us in advance to reserve your slot as helicopter availability is limited.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="section section--dark" id="contact">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-label" data-i18n="contact.label">Get in Touch</span>
+        <h2 class="section-title" data-i18n="contact.title">Contacts</h2>
+        <p class="section-subtitle" data-i18n="contact.subtitle">Open Friday – Sunday. We speak Italiano, Deutsch, English, Français, and Español.</p>
+      </div>
+      <div class="contact__grid">
+        <div class="contact__info reveal">
+          <h3 data-i18n="contact.reach">Reach us anytime</h3>
+          <div class="contact__detail">
+            <div class="contact__detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact__detail-label" data-i18n="contact.location">Location</div>
+              <div class="contact__detail-value">Dolomites UNESCO<br>South Tyrol, Italy</div>
+            </div>
+          </div>
+          <div class="contact__detail">
+            <div class="contact__detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact__detail-label" data-i18n="contact.email">Email</div>
+              <div class="contact__detail-value"><a href="mailto:Info@timetojumpdolomites.com">Info@timetojumpdolomites.com</a></div>
+            </div>
+          </div>
+          <div class="contact__detail">
+            <div class="contact__detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="contact__detail-label" data-i18n="contact.hotline">Hotline + WhatsApp</div>
+              <div class="contact__detail-value"><a href="tel:+393427635478">+39 342 763 5478</a></div>
+            </div>
+          </div>
+          <div class="contact__detail">
+            <div class="contact__detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="contact__detail-label" data-i18n="contact.timezone">Local Time Zone</div>
+              <div class="contact__detail-value">GMT+1 until 28.03.2026<br>GMT+2 from 29.03.2026 until 25.10.2026</div>
+            </div>
+          </div>
+
+          <div class="contact__socials">
+            <a href="https://www.instagram.com/time_to_jump_dolomites/" target="_blank" rel="noopener" class="contact__social-btn" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@timetojumpdolomites" target="_blank" rel="noopener" class="contact__social-btn" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/p/Time-to-Jump-Dolomites-100077926092104/" target="_blank" rel="noopener" class="contact__social-btn" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact__form-card reveal reveal-delay-1">
+          <h3 data-i18n="contact.form.title">Send us a message</h3>
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name" data-i18n="contact.form.name">Name *</label>
+              <input type="text" id="name" name="name" placeholder="Your full name" data-i18n-placeholder="placeholder.name" required>
+            </div>
+            <div class="form-group">
+              <label for="email" data-i18n="contact.form.email">E-mail *</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" data-i18n-placeholder="placeholder.email" required>
+            </div>
+            <div class="form-group">
+              <label for="telephone" data-i18n="contact.form.phone">Telephone *</label>
+              <input type="tel" id="telephone" name="telephone" placeholder="+39 ..." data-i18n-placeholder="placeholder.phone" required>
+            </div>
+            <div class="form-group">
+              <label for="message" data-i18n="contact.form.message">Message *</label>
+              <textarea id="message" name="message" placeholder="Tell us about your jump experience and what you'd like to do..." data-i18n-placeholder="placeholder.message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary" style="width:100%;">
+              <span data-i18n="contact.form.send">Send Message</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </form>
+          <div class="form-success" id="formSuccess">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <h3 data-i18n="contact.form.success.title">Message Sent!</h3>
+            <p class="text-light" data-i18n="contact.form.success.text">Thank you for reaching out. We'll get back to you shortly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MAP ========== -->
+  <section class="section section--light" id="map">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-label" data-i18n="map.label">Find Us</span>
+        <h2 class="section-title" data-i18n="map.title">Our Location</h2>
+        <p class="section-subtitle" style="color:var(--color-text-muted);" data-i18n="map.subtitle">Located in the heart of the Dolomites UNESCO World Heritage Site, South Tyrol.</p>
+      </div>
+      <div class="map__wrap reveal">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d43819.89867090638!2d11.664!3d46.574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47782b3e65b6c0af%3A0x5b4b1e82c6e5e0f2!2sOrtisei%2C%20South%20Tyrol!5e0!3m2!1sen!2sit!4v1711000000000!5m2!1sen!2sit"
+          width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Time to Jump Dolomites Location">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__copy">Time to Jump Dolomites 2026 © Since 2022 ©</span>
+        <a href="#" class="footer__back-top">
+          <span data-i18n="footer.backtop">Back to top</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== CHAT WIDGET ========== -->
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-widget__panel" id="chatPanel">
+      <div class="chat-widget__header">
+        <h4 data-i18n="chat.title">What would You know?</h4>
+        <p data-i18n="chat.subtitle">Reach us via WhatsApp or Email</p>
+      </div>
+      <div class="chat-widget__body">
+        <a href="https://wa.me/393427635478" target="_blank" rel="noopener" class="chat-widget__link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          <span data-i18n="chat.whatsapp">WhatsApp Message</span>
+        </a>
+        <a href="mailto:Info@timetojumpdolomites.com" class="chat-widget__link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span data-i18n="chat.email">Send an Email</span>
+        </a>
+        <a href="tel:+393427635478" class="chat-widget__link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span data-i18n="chat.call">Call Hotline</span>
+        </a>
+      </div>
+    </div>
+    <button class="chat-widget__btn" id="chatToggle" aria-label="Open chat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+  </div>
+
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
