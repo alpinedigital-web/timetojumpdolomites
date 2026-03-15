@@ -206,7 +206,9 @@
     document.getElementById('savePublishBtn')?.addEventListener('click', () => {
       saveOverrides();
       updateLastSaved();
-      showToast('All changes saved!', 'success');
+      showToast('Saved & published!', 'success');
+      // Refresh preview to apply overrides
+      if (previewIframe) previewIframe.src = previewIframe.src;
     });
     document.getElementById('discardBtn')?.addEventListener('click', () => {
       if (confirm('Discard all unsaved changes and reload?')) location.reload();
@@ -256,31 +258,37 @@
     section.keys.forEach(key => {
       if (typeof TRANSLATIONS === 'undefined' || !TRANSLATIONS[key]) return;
       const enVal = getTranslationValue(key, 'en');
-      const preview = enVal.replace(/<[^>]*>/g, '').substring(0, 55);
+      const preview = enVal.replace(/<[^>]*>/g, '').substring(0, 60);
       const isLong = enVal.length > 80;
+      const friendlyName = key.split('.').slice(1).join(' ').replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+      const hasOverride = translationOverrides[key] ? true : false;
 
-      html += `<div class="editor-card mb-2 bg-slate-900/50 border border-slate-800 rounded-lg overflow-hidden" data-key="${key}">
-        <div class="editor-card-header flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-slate-800/50 transition-colors">
-          <div class="min-w-0">
-            <div class="text-xs font-mono text-brand-orange truncate">${key}</div>
-            <div class="text-xs text-slate-500 truncate mt-0.5">${preview}${preview.length >= 55 ? '\u2026' : ''}</div>
+      html += `<div class="editor-card mb-1.5 bg-slate-900/50 border border-slate-800 rounded-lg overflow-hidden" data-key="${key}">
+        <div class="editor-card-header flex items-center gap-3 px-3 py-2.5 cursor-pointer hover:bg-slate-800/50 transition-colors">
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-medium text-slate-200 truncate">${friendlyName || key}</span>
+              ${hasOverride ? '<span class="w-1.5 h-1.5 rounded-full bg-brand-orange shrink-0" title="Modified"></span>' : ''}
+            </div>
+            <div class="text-[10px] text-slate-500 truncate mt-0.5">${preview}${preview.length >= 60 ? '…' : ''}</div>
           </div>
-          <svg class="chevron-icon w-4 h-4 text-slate-500 shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" stroke-width="2"/></svg>
+          <span class="text-[9px] text-slate-600 font-mono shrink-0">${key}</span>
+          <svg class="chevron-icon w-3.5 h-3.5 text-slate-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" stroke-width="2"/></svg>
         </div>
-        <div class="editor-card-body px-4 pb-4">
-          <div class="flex flex-wrap gap-1 mb-3">
+        <div class="editor-card-body px-3 pb-3">
+          <div class="flex flex-wrap gap-1 mb-2">
             ${LANGUAGES.map((lang, i) => `<button class="lang-tab px-2 py-1 text-[10px] font-semibold rounded ${i === 0 ? 'bg-brand-orange text-white' : 'bg-slate-800 text-slate-400 hover:text-white'} transition-colors" data-lang="${lang.code}" data-key="${key}">${lang.flag} ${lang.code.toUpperCase()}</button>`).join('')}
           </div>
           ${LANGUAGES.map((lang, i) => {
             const value = getTranslationValue(key, lang.code);
             return `<div class="lang-panel ${i === 0 ? '' : 'hidden'}" data-lang="${lang.code}" data-key="${key}">
-              <textarea rows="${isLong ? 4 : 2}" data-key="${key}" data-lang="${lang.code}"
-                class="w-full bg-slate-900 border border-slate-700 text-slate-200 rounded-md text-sm focus:ring-brand-orange focus:border-brand-orange">${escapeHtml(value)}</textarea>
+              <textarea rows="${isLong ? 3 : 2}" data-key="${key}" data-lang="${lang.code}"
+                class="w-full bg-slate-900 border border-slate-700 text-slate-200 rounded-md text-xs focus:ring-brand-orange focus:border-brand-orange">${escapeHtml(value)}</textarea>
             </div>`;
           }).join('')}
-          <div class="flex justify-end gap-2 mt-3">
-            <button class="px-3 py-1.5 text-xs text-slate-400 hover:text-white border border-slate-700 rounded-md transition-colors" data-action="reset" data-key="${key}">Reset</button>
-            <button class="px-3 py-1.5 text-xs bg-brand-orange hover:bg-orange-600 text-white rounded-md font-medium transition-colors" data-action="save-text" data-key="${key}">Save</button>
+          <div class="flex justify-end gap-2 mt-2">
+            <button class="px-2.5 py-1 text-[10px] text-slate-400 hover:text-white border border-slate-700 rounded transition-colors" data-action="reset" data-key="${key}">Reset</button>
+            <button class="px-2.5 py-1 text-[10px] bg-brand-orange hover:bg-orange-600 text-white rounded font-medium transition-colors" data-action="save-text" data-key="${key}">Save</button>
           </div>
         </div>
       </div>`;
