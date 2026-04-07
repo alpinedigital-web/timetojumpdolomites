@@ -16,4 +16,5 @@
 *Lösung der drängenden Kunden-Pains: Viel Zeitaufwand ohne Commitment, hohe Absprungraten, unklares dynamisches Preismodell.*
 - **Strategische Beratung:** Pivot zu einem Fix-Deposit-Modell (z.B. 500€), um "No Shows" technisch elegant und ohne dynamische Kassen-Code-Anpassungen zu stoppen.
 - **Frontend Implementierung:** Neuentwicklung einer "Live Tracker" Sektion. Visuelle Fortschrittsbalken motivieren User (Gamification), weitereSpringer aus ihrem Umfeld zu werben, um den Restpreis zu senken.
+- **Datenmigration & SEO-Sync:** Inhaltlicher Abgleich und Überführung von Navigationsstrukturen, SEO-Metadaten und bestehenden Texten der Legacy-Website.
 - **Repository Setup:** Isolation als eigenständiges Projekt im Antigravity-Netzwerk (Trennung von SolumInvest und Europegel).

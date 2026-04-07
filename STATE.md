@@ -19,3 +19,4 @@
 
 ## Session-Log
 - **07.04.2026**: Initialisierung des Alpine Digital (Dolomites) Repositories mit vollem State-Management. Frontend-Erweiterung ("Flight Tracker" UI/UX) fertiggestellt und live auf GitHub `main` gepushed!
+- **07.04.2026 (Part 2)**: Alte Website analysiert und Content-Abgleich mit dem UX-Facelift durchgeführt. Fehlende Links (Shop, App) und SEO-Keywords im `<title>` ergänzt.
