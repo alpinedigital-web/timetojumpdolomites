@@ -2082,9 +2082,265 @@ p {
 }
 
 @media (max-width: 768px) {
-  .lang-dropdown {
-    position: absolute;
-    top: 20px;
-    right: 60px;
+}
+
+/* ============================================================
+   UPCOMING JUMPS (LIVE TRACKER)
+   ============================================================ */
+.upcoming__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+  margin-top: var(--space-lg);
+}
+
+.flight-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.flight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.flight-card__header {
+  background: var(--color-light);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.flight-card__date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  border-radius: var(--radius-md);
+  min-width: 65px;
+  padding: 8px 10px;
+  box-shadow: 0 4px 12px var(--color-accent-glow);
+}
+
+.flight-card__month {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.flight-card__day {
+  font-size: 1.4rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.flight-card__info {
+  flex-grow: 1;
+}
+
+.flight-card__title {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+
+.flight-card__time {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.flight-card__status {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.flight-card__status--filling {
+  background: rgba(245, 166, 35, 0.15);
+  color: #D97706;
+}
+
+.flight-card__status--open {
+  background: rgba(34, 197, 94, 0.15);
+  color: #15803D;
+}
+
+.flight-card__progress-container {
+  padding: var(--space-md) var(--space-lg);
+}
+
+.flight-card__progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+  font-size: 0.9rem;
+}
+
+.flight-card__seats-text strong {
+  color: var(--color-primary);
+}
+
+.flight-card__current-price strong {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.flight-card__progress-bar {
+  width: 100%;
+  height: 10px;
+  background: rgba(0,0,0,0.05);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+}
+
+.flight-card__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #F5A623, #EF4444);
+  border-radius: var(--radius-full);
+  transition: width 1s ease-in-out;
+}
+
+.flight-card__pricing-tiers {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tier {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  text-align: center;
+  padding: 4px;
+}
+
+.tier--passed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.tier--active {
+  color: var(--color-primary);
+  font-weight: 700;
+  background: rgba(0,0,0,0.03);
+  border-radius: 4px;
+}
+
+.flight-card__footer {
+  padding: var(--space-md) var(--space-lg);
+  background: rgba(0,0,0,0.01);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.flight-card__deposit-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.flight-card__deposit-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(10, 22, 40, 0.05);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.flight-card__deposit-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.flight-card__deposit-info strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--color-primary);
+}
+
+.flight-card__deposit-info span {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.hiw-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.hiw-step {
+  padding: var(--space-lg);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.hiw-step__icon {
+  width: 48px;
+  height: 48px;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  margin: 0 auto var(--space-md);
+}
+
+.hiw-step h4 {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.hiw-step p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 992px) {
+  .upcoming__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hiw-grid {
+    grid-template-columns: 1fr;
+  }
+  .flight-card__footer {
+    flex-direction: column;
+    text-align: center;
+  }
+  .flight-card__footer .btn {
+    width: 100%;
   }
 }
