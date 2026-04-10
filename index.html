@@ -228,11 +228,20 @@
           
           <div class="flight-card__progress-container">
             <div class="flight-card__progress-header">
-              <span class="flight-card__seats-text"><strong>2</strong> of <strong>4</strong> Seats Booked</span>
+              <span class="flight-card__seats-text"><strong>2</strong> of <strong>5</strong> Seats Booked</span>
               <span class="flight-card__current-price">Current Price: <strong>1,500 €</strong> / person</span>
             </div>
+            
+            <div class="passengers-preview">
+              <span class="passenger-pill">@TheFalcon</span>
+              <span class="passenger-pill">@MaxFly</span>
+              <span class="passenger-pill passenger-pill--empty">open</span>
+              <span class="passenger-pill passenger-pill--empty">open</span>
+              <span class="passenger-pill passenger-pill--empty">open</span>
+            </div>
+
             <div class="flight-card__progress-bar">
-              <div class="flight-card__progress-fill" style="width: 50%;"></div>
+              <div class="flight-card__progress-fill" style="width: 40%;"></div>
             </div>
             <div class="flight-card__pricing-tiers">
               <span class="tier tier--passed">1 Person: 3,000€</span>
@@ -248,12 +257,12 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
               </div>
               <div>
-                <strong>Secure Spot: 500 € Deposit</strong>
-                <span>Balance paid on-site based on final capacity.</span>
+                <strong>Secure Spot: 0,00 € Card Hold</strong>
+                <span>Balance paid on-site. SetupIntent authorizes card.</span>
               </div>
             </div>
-            <a href="#contact" class="btn btn--primary">
-              Pay Deposit
+            <a href="#" class="btn btn--primary btn-reserve-seat" data-event-id="fc1">
+              Reserve Seat (0.00€ Hold)
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
           </div>
@@ -270,16 +279,25 @@
               <h3 class="flight-card__title">Saslong UNESCO Jump</h3>
               <p class="flight-card__time">Helicopter Rotation: 10:30 AM</p>
             </div>
-            <div class="flight-card__status flight-card__status--open">
-              Open
+            <div class="flight-card__status flight-card__status--locked" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">
+              Locked (Load 1 First)
             </div>
           </div>
           
           <div class="flight-card__progress-container">
             <div class="flight-card__progress-header">
-              <span class="flight-card__seats-text"><strong>0</strong> of <strong>4</strong> Seats Booked</span>
+              <span class="flight-card__seats-text"><strong>0</strong> of <strong>5</strong> Seats Booked</span>
               <span class="flight-card__current-price">Current Price: <strong>3,000 €</strong> / person</span>
             </div>
+            
+            <div class="passengers-preview" style="opacity: 0.5;">
+              <span class="passenger-pill passenger-pill--empty">open</span>
+              <span class="passenger-pill passenger-pill--empty">open</span>
+              <span class="passenger-pill passenger-pill--empty">open</span>
+              <span class="passenger-pill passenger-pill--empty">open</span>
+              <span class="passenger-pill passenger-pill--empty">open</span>
+            </div>
+
             <div class="flight-card__progress-bar">
               <div class="flight-card__progress-fill" style="width: 0%;"></div>
             </div>
@@ -297,12 +315,12 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
               </div>
               <div>
-                <strong>Secure Spot: 500 € Deposit</strong>
-                <span>Balance paid on-site based on final capacity.</span>
+                <strong>Secure Spot: 0,00 € Card Hold</strong>
+                <span>Balance paid on-site. SetupIntent authorizes card.</span>
               </div>
             </div>
-            <a href="#contact" class="btn btn--primary">
-              Pay Deposit
+            <a href="#" class="btn btn--primary btn-reserve-seat" data-event-id="fc2">
+              Reserve Seat (0.00€ Hold)
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
           </div>
@@ -820,7 +838,82 @@
     </button>
   </div>
 
+  <!-- ========== BOOKING MODAL (SetupIntent) ========== -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Reserve Your Flight</h2>
+        <button class="btn-close" id="closeModalBtn" aria-label="Close modal">&times;</button>
+      </div>
+      
+      <form id="setupIntentForm">
+        <input type="hidden" id="bookingEventId" name="eventId">
+        
+        <div class="form-group-grid">
+          <div class="form-group">
+            <label class="form-label">First Name *</label>
+            <input type="text" name="firstName" required class="form-input" placeholder="John">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name *</label>
+            <input type="text" name="lastName" required class="form-input" placeholder="Doe">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Nickname (Publicly Visible on Load) *</label>
+          <input type="text" name="nickname" required class="form-input" placeholder="e.g. TheFalcon">
+        </div>
+
+        <div class="form-group-grid">
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            <input type="email" name="email" required class="form-input" placeholder="john@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number *</label>
+            <input type="tel" name="phone" required class="form-input" placeholder="+39 123 456 789">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Date of Birth *</label>
+          <input type="date" name="dateOfBirth" required class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Emergency Contact *</label>
+          <input type="text" name="emergencyContact" required class="form-input" placeholder="Name & Phone Number">
+        </div>
+
+        <div class="form-group-grid">
+          <div class="form-group">
+            <label class="form-label">License Country *</label>
+            <input type="text" name="licenseCountry" required class="form-input" placeholder="e.g. IT, DE, AT">
+          </div>
+          <div class="form-group">
+            <label class="form-label">License Number *</label>
+            <input type="text" name="licenseNumber" required class="form-input" placeholder="12345678">
+          </div>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" name="insuranceProvided" id="insuranceProv" required>
+          <label for="insuranceProv">
+            I confirm that I possess a valid third-party liability insurance for skydiving/base jumping (e.g. <a href="https://www.pianetavolo.it" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">pianetavolo.it</a>). I will present this on-site.
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn--primary" style="width:100%; margin-top:24px;">
+          Proceed to Secure Checkout (0.00€)
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script src="js/translations.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/supabase-client.js"></script>
 </body>
 </html>

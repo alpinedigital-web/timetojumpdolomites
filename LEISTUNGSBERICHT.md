@@ -6,7 +6,7 @@
 |---|---|
 | Aktuelle Version | 1.1.0 |
 | GitHub Synchronität | Sync ✅ |
-| Fokus | Conversion-Optimierung (Deposit & Scarcity) |
+| Fokus | SetupIntent Booking Engine (Phase 2) |
 
 ---
 
@@ -18,9 +18,15 @@
 - **Mobile First & Responsive Design:** Aufbau einer responsiven Struktur, die das atemberaubende Bildmaterial der Dolomiten auf allen Endgeräten perfekt in Szene setzt.
 - **Content-Migration (Part 1):** Initiale Übernahme der Grundstruktur (Preise, FAQs, Kontakte) in ein zukunftssicheres, sauberes HTML/CSS Basis-Setup.
 
-### Phase 2: UX-Facelift & Conversion Injection (April 2026)
-*Lösung der drängenden Kunden-Pains: Viel Zeitaufwand ohne Commitment, hohe Absprungraten, unklares dynamisches Preismodell.*
-- **Strategische Beratung:** Pivot zu einem Fix-Deposit-Modell (z.B. 500€), um "No Shows" technisch elegant und ohne dynamische Kassen-Code-Anpassungen zu stoppen.
-- **Frontend Implementierung:** Neuentwicklung einer "Live Tracker" Sektion. Visuelle Fortschrittsbalken motivieren User (Gamification), weitere Springer aus ihrem Umfeld zu werben, um den Restpreis zu senken.
-- **Datenmigration & SEO-Sync:** Finaler inhaltlicher Abgleich und Überführung von Navigationsstrukturen (Shop, App), SEO-Metadaten und bestehenden Texten der Legacy-Website.
-- **Repository Setup:** Isolation als eigenständiges Projekt im Antigravity-Netzwerk (Trennung von SolumInvest und Europegel).
+### Strategischer Meilenstein (10.04.2026): Workshop & Pivot
+*Offizielles Vor-Ort-Besprechungsprotokoll zwischen **David (Dolomites Jump)** und **Axel Mühlbacher (SolumInvest GmbH / Alpine Digital)**.*
+- **Zieldefinition:** Steuerung der Commitment-Hemmschwelle bei gleichzeitiger Absicherung der finanziellen Ausfallsrisiken (Helikopter-Leerflüge & No-Shows).
+- **Beschluss 1 (Payment Hold anstelle von Deposit):** Wegfall des starren 500€ Deposits zugunsten einer Kreditkarten-Hinterlegung (0,00€ Hold via Stripe SetupIntent). Strafklauseln (z.B. für verpasste Briefings) können manuell eingezogen werden, während der Ticketpreis flexibel vor Ort gezahlt wird.
+- **Beschluss 2 (Sequenzielle Loads & Sichtbarkeit):** Einführung einer Scarcity- und Motivations-Logik. Helikopter 2 wird erst freigeschaltet, wenn Helikopter 1 voll besetzt ist (max. 5 Personen). Zur Förderung der Gruppenbildung werden die "Nicknames" der gebuchten Fluggäste eines Loads öffentlich sichtbar gemacht.
+- **Beschluss 3 (Bürokratie-Reduktion im Vorfeld):** Alle essenziellen Metadaten (Lizenzland, Lizenznummer, Geburtsdatum, Notfallkontakt, Nachweis der Haftpflichtversicherung z.B. pianetavolo.it) werden zwingend beim Checkout abgefragt, um die Abwicklung am Sprungplatz zu verschlanken.
+- **Beschluss 4 (Migration):** Langfristige Ablöse des alten Wix-Setups und Transition auf die native Architektur bis Juli 2026.
+
+### Phase 2: Booking Engine Development (Supabase & Stripe)
+*Technische Umsetzung der im Workshop definierten Booking-Logik.*
+- **Backend Setup (Supabase):** Architektur der Datenstruktur für `events` und `bookings` inkl. Row Level Security.
+- **Frontend Formular:** Implementierung des komplexen Buchungsformulars (Lizenz, Versicherung, Nickname etc.) direkt auf der Website.

@@ -1,22 +1,25 @@
 # Alpine Digital Agency (Time to Jump Dolomites) — Aktueller Projektstatus
-> Letztes Update: 07.04.2026 — Live Flight Tracker (Deposit System) implementiert
+> Letztes Update: 10.04.2026 — Pivot zu dynamischem Event-Booking (Supabase & Stripe SetupIntent) gestartet
 
 ## Aktueller Fokus
-- Optimierung der Buchungs-Pipeline via "Deposit First" Modell.
-- Integration der finalen Payment Links (Tally / Stripe).
+- **Phase 1-3 Merge**: Umbau der Buchungs-Pipeline von statischem Deposit-Checkout auf eine dynamische Event-Datenbank via Supabase.
+- **Payment Logik (Save Card for Later)**: Einführung von Stripe SetupIntents, um Kreditkarten bei der Buchung für den Kunden mit 0,00 € zu autorisieren, anstatt fixe Deposits abzubuchen.
 
 ## Entscheidungen
-- **Payment Logik**: Anstelle dynamischer Stripe-Checkouts wird künftig ein fixes Deposit-Modell (z. B. 500 €) genutzt, um den Flug zu sichern, wobei der Restbetrag vor Ort bezahlt wird. Dies verhindert "No Shows".
-- **Flight Tracker**: Startseite (`index.html`) nutzt eine visuelle "Live Availability"-Ansicht (Scarcity), die live aufzeigt, wie Preise pro Kopf mit steigender Teilnehmeranzahl sinken.
-- **Projekt-Instanzierung**: Dieses Projekt (Time to Jump Dolomites) wurde formell als eigenständige Instanz für "Alpine Digital Agency" innerhalb des Antigravity-Umfelds ausgegliedert, voll ausgestattet mit Standard-Tracking (`/start`, `/done`, `STATE.md`, etc.).
+- **Payment Hold vs. Deposit**: Da reine Authorization-Holds bei Stripe auf 7 Tage begrenzt sind, wird die Karte hinterlegt. Belastungen (z.B. Strafen bei Verpassen des Briefings: 50 €) werden manuell ausgelöst. Zahlung des eigentlichen Flugs erfolgt vor Ort (Karte/Bar).
+- **Sequenzielle Loads & Sichtbarkeit**: Helikopter 2 wird erst freigeschaltet, wenn Helikopter 1 (Load 1) voll ist (max. 5 Personen). Die Buchungsdatenbank (Supabase) ermöglicht die sichtbare Anzeige von Nicknames der Mitflieger, um Gruppen zu motivieren.
+- **Wix Migration**: Langfristiges Ziel ist der Wegzug von Wix. Das Setup auf der neuen Architektur legt den Grundstein für den nativen Hosting-Wechsel im Juli 2026.
 
 ## Blocker
-- Es werden noch die live Checkout/Stripe-Links vom Kunden (Tally / Stripe) benötigt, um sie im Ticker-Button aktiv zu verknüpfen.
+- (Gelöst) Supabase Schema muss weiterhin MANUELL im Dashboard ausgeführt werden (`20260410_init_dolomites.sql`).
 
 ## Nächste Schritte
-1. [ ] Checkouts (Stripe/Tally) in die "Upcoming Jumps" Sektion einpflegen.
-2. [ ] Feedback-Loop zum neuen Design (Conversion Test).
+1. [x] Supabase Tabellen `events` & `bookings` inkl. RLS Policies anlegen (SQL erstellt).
+2. [x] Stripe Hosted Checkout Backend-Weiche (Edge Function) implementieren.
+3. [x] Frontend `index.html` an Live-Datenbank anbinden (Glassmorphism Modal, Nickname Pills, Scarcity-UI gebaut).
+4. [ ] n8n Automatisierung an Supabase-Webhook anknüpfen für WhatsApp Benachrichtigung.
 
 ## Session-Log
+- **10.04.2026 (Phase 2)**: Umstellung auf "Stripe Hosted Checkout" (mode: setup) in der Edge Function, um Checkout sicherer und performanter zu gestalten (`success.html` implementiert). Frontend wurde mit Premium Glassmorphism und "Nick-Pills" aufgewertet. Cloudflare Push ausgelöst.
+- **10.04.2026**: Evaluierung des DolomiteFly-Meetings mit der Geschäftsführung. Beschluss des Strategiewechsels: Abkehr von simplen Checkouts hin zu einem Supabase/Stripe gesteuerten System (`Phase 1` & `Phase 3` verschmolzen).
 - **07.04.2026**: Initialisierung des Alpine Digital (Dolomites) Repositories mit vollem State-Management. Frontend-Erweiterung ("Flight Tracker" UI/UX) fertiggestellt und live auf GitHub `main` gepushed!
-- **07.04.2026 (Part 2)**: Alte Website analysiert und Content-Abgleich mit dem UX-Facelift durchgeführt. Fehlende Links (Shop, App) und SEO-Keywords im `<title>` ergänzt.
