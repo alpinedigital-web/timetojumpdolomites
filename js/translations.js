@@ -316,7 +316,7 @@ const TRANSLATIONS = {
 
   // ---- PRICING CTA & BADGE ----
   'pricing.popular': { en: '⭐ Most Popular', de: '⭐ Beliebteste', it: '⭐ Più Popolare', lad: '⭐ Plü Popular', nl: '⭐ Populairst', fr: '⭐ Plus Populaire', pl: '⭐ Najpopularniejszy', es: '⭐ Más Popular', cs: '⭐ Nejoblíbenější' },
-  'pricing.cta': { en: 'Book via Elikos', de: 'Über Elikos buchen', it: 'Prenota tramite Elikos', lad: 'Prenota tres Elikos', nl: 'Boek via Elikos', fr: 'Réserver via Elikos', pl: 'Rezerwuj przez Elikos', es: 'Reservar vía Elikos', cs: 'Rezervovat přes Elikos' },
+  'pricing.cta': { en: 'Book Load', de: 'Load buchen', it: 'Prenota Load', lad: 'Prenota Load', nl: 'Boek Load', fr: 'Réserver Load', pl: 'Rezerwuj Load', es: 'Reservar Load', cs: 'Rezervovat Load' },
   'pricing.cta.contact': { en: 'Request Info', de: 'Infos anfragen', it: 'Richiedi info', lad: 'Dumandé info', nl: 'Info aanvragen', fr: 'Demander infos', pl: 'Zapytaj o info', es: 'Solicitar info', cs: 'Vyžádat info' },
 
   // ---- REQUIREMENTS ----
