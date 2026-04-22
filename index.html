@@ -31,6 +31,7 @@
         <a href="#shop" class="navbar__link" data-i18n="nav.shop">Shop</a>
         <a href="blog.html" class="navbar__link" data-i18n="nav.blog">Blog</a>
         <a href="https://app.timetojumpdolomites.com" class="navbar__link" target="_blank" rel="noopener">App</a>
+        <a href="terms.html" class="navbar__link" data-i18n="nav.terms">Terms</a>
         <a href="privacy.html" class="navbar__link" data-i18n="nav.privacy">Privacy</a>
       </div>
       <div class="navbar__actions">
@@ -66,6 +67,7 @@
       <a href="#shop" class="navbar__link" data-i18n="nav.shop">Shop</a>
       <a href="blog.html" class="navbar__link" data-i18n="nav.blog">Blog</a>
       <a href="https://app.timetojumpdolomites.com" class="navbar__link" target="_blank" rel="noopener">App</a>
+      <a href="terms.html" class="navbar__link" data-i18n="nav.terms">Terms</a>
       <a href="privacy.html" class="navbar__link" data-i18n="nav.privacy">Privacy</a>
       <a href="#upcoming" class="btn btn--primary" data-i18n="nav.book" style="margin-top:var(--space-md);">Book Now</a>
     </div>
@@ -205,127 +207,17 @@
         <p class="section-subtitle" data-i18n="upcoming.subtitle">Secure your spot with a deposit. Prices drop as more skydivers join a flight!</p>
       </div>
 
-      <div class="upcoming__grid reveal reveal-delay-1">
-        
-        <!-- Flight Card 1 -->
-        <div class="flight-card">
-          <div class="flight-card__header">
-            <div class="flight-card__date">
-              <span class="flight-card__month">Mar</span>
-              <span class="flight-card__day">27</span>
-            </div>
-            <div class="flight-card__info">
-              <h3 class="flight-card__title">Saslong UNESCO Jump</h3>
-              <p class="flight-card__time">Helicopter Rotation: 09:00 AM</p>
-            </div>
-            <div class="flight-card__status flight-card__status--filling">
-              Filling Fast
-            </div>
-          </div>
-          
-          <div class="flight-card__progress-container">
-            <div class="flight-card__progress-header">
-              <span class="flight-card__seats-text"><strong>2</strong> of <strong>5</strong> Seats Booked</span>
-              <span class="flight-card__current-price">Current Price: <strong>388 €</strong> / person</span>
-            </div>
-            
-            <div class="passengers-preview">
-              <span class="passenger-pill">@TheFalcon</span>
-              <span class="passenger-pill">@MaxFly</span>
-              <span class="passenger-pill passenger-pill--empty">open</span>
-              <span class="passenger-pill passenger-pill--empty">open</span>
-              <span class="passenger-pill passenger-pill--empty">open</span>
-            </div>
-
-            <div class="flight-card__progress-bar">
-              <div class="flight-card__progress-fill" style="width: 40%;"></div>
-            </div>
-            <div class="flight-card__pricing-tiers">
-              <span class="tier tier--passed">1 Person: 775€</span>
-              <span class="tier tier--active">2 People: 388€</span>
-              <span class="tier">3 People: 258€</span>
-              <span class="tier">4 People: 194€</span>
-              <span class="tier">5 People: 155€</span>
-            </div>
-          </div>
-
-          <div class="flight-card__footer">
-            <div class="flight-card__deposit-info">
-              <div class="flight-card__deposit-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              </div>
-              <div>
-                <strong>Secure Spot: 0,00 € Card Hold</strong>
-                <span>Balance paid on-site. SetupIntent authorizes card.</span>
-              </div>
-            </div>
-            <a href="#" class="btn btn--primary btn-reserve-seat" data-event-id="fc1">
-              Reserve Seat (0.00€ Hold)
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </a>
+      <!-- Dynamic Flight Cards — populated from Supabase by supabase-client.js -->
+      <div class="upcoming__grid reveal reveal-delay-1" id="flightCardsContainer">
+        <!-- Loading State -->
+        <div class="flight-card" id="flightCardsLoading" style="grid-column:1/-1;text-align:center;padding:var(--space-xl);">
+          <div style="display:inline-flex;align-items:center;gap:12px;color:var(--color-text-muted);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+            <span>Loading upcoming jumps...</span>
           </div>
         </div>
-
-        <!-- Flight Card 2 -->
-        <div class="flight-card">
-          <div class="flight-card__header">
-            <div class="flight-card__date">
-              <span class="flight-card__month">Apr</span>
-              <span class="flight-card__day">03</span>
-            </div>
-            <div class="flight-card__info">
-              <h3 class="flight-card__title">Mulin da Coi Jump</h3>
-              <p class="flight-card__time">Helicopter Rotation: 10:30 AM</p>
-            </div>
-            <div class="flight-card__status flight-card__status--locked" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">
-              Locked (Load 1 First)
-            </div>
-          </div>
-          
-          <div class="flight-card__progress-container">
-            <div class="flight-card__progress-header">
-              <span class="flight-card__seats-text"><strong>0</strong> of <strong>5</strong> Seats Booked</span>
-              <span class="flight-card__current-price">Current Price: <strong>825 €</strong> / person</span>
-            </div>
-            
-            <div class="passengers-preview" style="opacity: 0.5;">
-              <span class="passenger-pill passenger-pill--empty">open</span>
-              <span class="passenger-pill passenger-pill--empty">open</span>
-              <span class="passenger-pill passenger-pill--empty">open</span>
-              <span class="passenger-pill passenger-pill--empty">open</span>
-              <span class="passenger-pill passenger-pill--empty">open</span>
-            </div>
-
-            <div class="flight-card__progress-bar">
-              <div class="flight-card__progress-fill" style="width: 0%;"></div>
-            </div>
-            <div class="flight-card__pricing-tiers">
-              <span class="tier tier--active">1 Person: 825€</span>
-              <span class="tier">2 People: 413€</span>
-              <span class="tier">3 People: 275€</span>
-              <span class="tier">4 People: 206€</span>
-              <span class="tier">5 People: 165€</span>
-            </div>
-          </div>
-
-          <div class="flight-card__footer">
-            <div class="flight-card__deposit-info">
-              <div class="flight-card__deposit-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              </div>
-              <div>
-                <strong>Secure Spot: 0,00 € Card Hold</strong>
-                <span>Balance paid on-site. SetupIntent authorizes card.</span>
-              </div>
-            </div>
-            <a href="#" class="btn btn--primary btn-reserve-seat" data-event-id="fc2">
-              Reserve Seat (0.00€ Hold)
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
-
       </div>
+      <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
       
       <div class="upcoming__how-it-works mt-xl reveal reveal-delay-2">
         <h3 class="text-center mb-md" data-i18n="upcoming.hiw.title" style="margin-bottom:var(--space-md);margin-top:var(--space-xl);">How Group Pricing Works</h3>
@@ -900,6 +792,13 @@
           <input type="checkbox" name="insuranceProvided" id="insuranceProv" required>
           <label for="insuranceProv">
             I confirm that I possess a valid third-party liability insurance for skydiving/base jumping (e.g. <a href="https://www.pianetavolo.it" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">pianetavolo.it</a>). I will present this on-site.
+          </label>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" name="termsAccepted" id="termsAccepted" required>
+          <label for="termsAccepted">
+            I have read and accept the <a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">Terms & Conditions</a>, including the cancellation policy, mandatory Friday briefing, and the 50 € missed-briefing penalty.
           </label>
         </div>
 
