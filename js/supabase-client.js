@@ -7,7 +7,7 @@
 const SUPABASE_URL = "https://rcfmmogsudqfknabuluv.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjZm1tb2dzdWRxZmtuYWJ1bHV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4Mjc1OTAsImV4cCI6MjA5MTQwMzU5MH0.WRlHObX_eKNbW__V4ihh7EcjhBA9_nXns92lCTTp6bw";
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let events = null;
 
       // Phase 1: Try query with extended columns (after migration)
-      const { data: extData, error: extError } = await supabase
+      const { data: extData, error: extError } = await sb
         .from('events')
         .select(`
           id, jump_date, time_slot, capacity, status,
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         // Phase 2: Fallback — query with base schema only (before migration)
         console.warn('Extended columns not available, falling back to base schema:', extError.message);
-        const { data: baseData, error: baseError } = await supabase
+        const { data: baseData, error: baseError } = await sb
           .from('events')
           .select(`
             id, jump_date, time_slot, capacity, status,
@@ -315,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
           returnUrl: window.location.origin + '/success.html'
         };
 
-        const { data, error } = await supabase.functions.invoke('create-setup-intent', {
+        const { data, error } = await sb.functions.invoke('create-setup-intent', {
           body: payloadWithReturnUrl
         });
 
