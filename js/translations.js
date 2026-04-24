@@ -413,5 +413,46 @@ const TRANSLATIONS = {
     pl: 'Działamy od piątku do niedzieli, zależnie od pogody. Skontaktuj się z wyprzedzeniem, aby zarezerwować miejsce — dostępność helikoptera jest ograniczona.',
     es: 'Operamos de viernes a domingo, según el clima. Contáctanos con antelación ya que la disponibilidad del helicóptero es limitada.',
     cs: 'Provozujeme od pátku do neděle, dle počasí. Kontaktujte nás předem pro rezervaci, dostupnost vrtulníku je omezená.'
-  }
+  },
+
+  // ---- NAVIGATION EXTRAS ----
+  'nav.terms': { en: 'Terms', de: 'AGB', it: 'Termini', lad: 'Termins', nl: 'Voorwaarden', fr: 'Conditions', pl: 'Regulamin', es: 'Términos', cs: 'Podmínky' },
+  'nav.shop': { en: 'Shop', de: 'Shop', it: 'Shop', lad: 'Shop', nl: 'Winkel', fr: 'Boutique', pl: 'Sklep', es: 'Tienda', cs: 'Obchod' },
+
+  // ---- BOOKING MODAL ----
+  'booking.title': { en: 'Reserve Your Flight', de: 'Flug reservieren', it: 'Prenota il tuo volo', lad: 'Prenota to volo', nl: 'Reserveer je vlucht', fr: 'Réservez votre vol', pl: 'Zarezerwuj lot', es: 'Reserva tu vuelo', cs: 'Rezervujte si let' },
+  'booking.firstName': { en: 'First Name *', de: 'Vorname *', it: 'Nome *', lad: 'Inom *', nl: 'Voornaam *', fr: 'Prénom *', pl: 'Imię *', es: 'Nombre *', cs: 'Jméno *' },
+  'booking.lastName': { en: 'Last Name *', de: 'Nachname *', it: 'Cognome *', lad: 'Cognom *', nl: 'Achternaam *', fr: 'Nom *', pl: 'Nazwisko *', es: 'Apellido *', cs: 'Příjmení *' },
+  'booking.nickname': { en: 'Nickname (Publicly Visible on Load) *', de: 'Spitzname (öffentlich sichtbar am Load) *', it: 'Soprannome (visibile sul Load) *', lad: 'Surinom (visibel sö l Load) *', nl: 'Bijnaam (zichtbaar op Load) *', fr: 'Surnom (visible sur le Load) *', pl: 'Pseudonim (widoczny na Load) *', es: 'Apodo (visible en el Load) *', cs: 'Přezdívka (viditelná na Load) *' },
+  'booking.email': { en: 'Email Address *', de: 'E-Mail-Adresse *', it: 'Indirizzo Email *', lad: 'Adresa Email *', nl: 'E-mailadres *', fr: 'Adresse e-mail *', pl: 'Adres e-mail *', es: 'Correo electrónico *', cs: 'E-mailová adresa *' },
+  'booking.phone': { en: 'Phone Number *', de: 'Telefonnummer *', it: 'Numero di telefono *', lad: 'Numer de telefon *', nl: 'Telefoonnummer *', fr: 'Numéro de téléphone *', pl: 'Numer telefonu *', es: 'Número de teléfono *', cs: 'Telefonní číslo *' },
+  'booking.dob': { en: 'Date of Birth *', de: 'Geburtsdatum *', it: 'Data di nascita *', lad: 'Data de nascita *', nl: 'Geboortedatum *', fr: 'Date de naissance *', pl: 'Data urodzenia *', es: 'Fecha de nacimiento *', cs: 'Datum narození *' },
+  'booking.birthplace': { en: 'Place of Birth *', de: 'Geburtsort *', it: 'Luogo di nascita *', lad: 'Luech de nascita *', nl: 'Geboorteplaats *', fr: 'Lieu de naissance *', pl: 'Miejsce urodzenia *', es: 'Lugar de nacimiento *', cs: 'Místo narození *' },
+  'booking.address': { en: 'Full Address *', de: 'Vollständige Adresse *', it: 'Indirizzo completo *', lad: 'Adresa completa *', nl: 'Volledig adres *', fr: 'Adresse complète *', pl: 'Pełny adres *', es: 'Dirección completa *', cs: 'Úplná adresa *' },
+  'booking.emergency': { en: 'Emergency Contact *', de: 'Notfallkontakt *', it: 'Contatto di emergenza *', lad: 'Contat de emergënza *', nl: 'Noodcontact *', fr: 'Contact d\'urgence *', pl: 'Kontakt awaryjny *', es: 'Contacto de emergencia *', cs: 'Nouzový kontakt *' },
+  'booking.licenseCountry': { en: 'License Country *', de: 'Lizenzland *', it: 'Paese licenza *', lad: 'Paeje de lizënza *', nl: 'Licentieland *', fr: 'Pays de licence *', pl: 'Kraj licencji *', es: 'País de licencia *', cs: 'Země licence *' },
+  'booking.licenseNumber': { en: 'License Number *', de: 'Lizenznummer *', it: 'Numero licenza *', lad: 'Numer de lizënza *', nl: 'Licentienummer *', fr: 'Numéro de licence *', pl: 'Numer licencji *', es: 'Número de licencia *', cs: 'Číslo licence *' },
+  'booking.insurance': {
+    en: 'I confirm that I possess a valid third-party liability insurance for skydiving/base jumping (e.g. <a href="https://www.pianetavolo.it" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">pianetavolo.it</a>). I will present this on-site.',
+    de: 'Ich bestätige, dass ich eine gültige Haftpflichtversicherung für Fallschirmspringen/Base Jumping besitze (z.B. <a href="https://www.pianetavolo.it" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">pianetavolo.it</a>). Ich werde diese vor Ort vorlegen.',
+    it: 'Confermo di possedere un\'assicurazione di responsabilità civile valida per paracadutismo/base jumping (es. <a href="https://www.pianetavolo.it" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">pianetavolo.it</a>). La presenterò in loco.',
+    lad: 'Confermëie de avëi na assicurazion valida per paracadutism/base jumping (p.ej. <a href="https://www.pianetavolo.it" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">pianetavolo.it</a>). La presenterai sö l post.',
+    nl: 'Ik bevestig dat ik een geldige aansprakelijkheidsverzekering bezit voor skydiven/base jumping (bijv. <a href="https://www.pianetavolo.it" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">pianetavolo.it</a>). Ik toon deze ter plaatse.',
+    fr: 'Je confirme posséder une assurance responsabilité civile valide pour le parachutisme/base jump (ex. <a href="https://www.pianetavolo.it" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">pianetavolo.it</a>). Je la présenterai sur place.',
+    pl: 'Potwierdzam, że posiadam ważne ubezpieczenie OC dla skoków spadochronowych/base jumping (np. <a href="https://www.pianetavolo.it" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">pianetavolo.it</a>). Przedstawię je na miejscu.',
+    es: 'Confirmo que poseo un seguro de responsabilidad civil válido para paracaidismo/salto BASE (ej. <a href="https://www.pianetavolo.it" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">pianetavolo.it</a>). Lo presentaré en el lugar.',
+    cs: 'Potvrzuji, že mám platné pojištění odpovědnosti pro seskoky/base jumping (např. <a href="https://www.pianetavolo.it" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">pianetavolo.it</a>). Předložím ho na místě.'
+  },
+  'booking.terms': {
+    en: 'I have read and accept the <a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">Terms & Conditions</a>, including the cancellation policy, mandatory Friday briefing, and the 50 € missed-briefing penalty.',
+    de: 'Ich habe die <a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">AGB</a> gelesen und akzeptiere diese, einschließlich der Stornierungsrichtlinie, des verpflichtenden Freitag-Briefings und der 50 € Strafe bei versäumtem Briefing.',
+    it: 'Ho letto e accetto i <a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">Termini e Condizioni</a>, inclusa la politica di cancellazione, il briefing obbligatorio del venerdì e la penale di 50 € per briefing mancato.',
+    lad: 'Ëi liesjù y acetëie i <a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">Termins y Condiziuns</a>, inclus la politica de stornazion y la strafa de 50 € per briefing falé.',
+    nl: 'Ik heb de <a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">Algemene Voorwaarden</a> gelezen en geaccepteerd, inclusief het annuleringsbeleid, de verplichte vrijdagbriefing en de boete van 50 €.',
+    fr: 'J\'ai lu et j\'accepte les <a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">Conditions Générales</a>, y compris la politique d\'annulation, le briefing obligatoire du vendredi et la pénalité de 50 €.',
+    pl: 'Przeczytałem/am i akceptuję <a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">Regulamin</a>, w tym politykę anulowania, obowiązkowy piątkowy briefing i karę 50 € za nieobecność.',
+    es: 'He leído y acepto los <a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">Términos y Condiciones</a>, incluyendo la política de cancelación, el briefing obligatorio del viernes y la penalización de 50 €.',
+    cs: 'Přečetl/a jsem si a souhlasím s <a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">Obchodními podmínkami</a>, včetně storno podmínek, povinného pátečního briefingu a pokuty 50 €.'
+  },
+  'booking.submit': { en: 'Proceed to Secure Checkout (0.00€)', de: 'Weiter zur sicheren Kasse (0,00€)', it: 'Procedi al checkout sicuro (0,00€)', lad: 'Va inant al checkout sigü (0,00€)', nl: 'Doorgaan naar veilige checkout (0,00€)', fr: 'Passer à la caisse sécurisée (0,00€)', pl: 'Przejdź do bezpiecznej kasy (0,00€)', es: 'Proceder al pago seguro (0,00€)', cs: 'Pokračovat k bezpečné pokladně (0,00€)' }
 };

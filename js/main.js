@@ -285,6 +285,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // HTML content (for labels with links, e.g. checkbox labels)
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.dataset.i18nHtml;
+      if (TRANSLATIONS[key] && TRANSLATIONS[key][lang]) {
+        el.innerHTML = TRANSLATIONS[key][lang];
+      }
+    });
+
     // Update <html lang>
     document.documentElement.lang = lang;
   }

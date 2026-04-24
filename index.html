@@ -733,7 +733,7 @@
   <div class="modal-overlay" id="bookingModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Reserve Your Flight</h2>
+        <h2 data-i18n="booking.title">Reserve Your Flight</h2>
         <button class="btn-close" id="closeModalBtn" aria-label="Close modal">&times;</button>
       </div>
       
@@ -742,67 +742,78 @@
         
         <div class="form-group-grid">
           <div class="form-group">
-            <label class="form-label">First Name *</label>
+            <label class="form-label" data-i18n="booking.firstName">First Name *</label>
             <input type="text" name="firstName" required class="form-input" placeholder="John">
           </div>
           <div class="form-group">
-            <label class="form-label">Last Name *</label>
+            <label class="form-label" data-i18n="booking.lastName">Last Name *</label>
             <input type="text" name="lastName" required class="form-input" placeholder="Doe">
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Nickname (Publicly Visible on Load) *</label>
+          <label class="form-label" data-i18n="booking.nickname">Nickname (Publicly Visible on Load) *</label>
           <input type="text" name="nickname" required class="form-input" placeholder="e.g. TheFalcon">
         </div>
 
         <div class="form-group-grid">
           <div class="form-group">
-            <label class="form-label">Email Address *</label>
+            <label class="form-label" data-i18n="booking.email">Email Address *</label>
             <input type="email" name="email" required class="form-input" placeholder="john@example.com">
           </div>
           <div class="form-group">
-            <label class="form-label">Phone Number *</label>
+            <label class="form-label" data-i18n="booking.phone">Phone Number *</label>
             <input type="tel" name="phone" required class="form-input" placeholder="+39 123 456 789">
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Date of Birth *</label>
-          <input type="date" name="dateOfBirth" required class="form-input">
+        <div class="form-group-grid">
+          <div class="form-group">
+            <label class="form-label" data-i18n="booking.dob">Date of Birth *</label>
+            <input type="date" name="dateOfBirth" required class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="booking.birthplace">Place of Birth *</label>
+            <input type="text" name="birthPlace" required class="form-input" placeholder="e.g. Bolzano">
+          </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Emergency Contact *</label>
+          <label class="form-label" data-i18n="booking.address">Full Address *</label>
+          <input type="text" name="address" required class="form-input" placeholder="Street, ZIP, City, Country">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-i18n="booking.emergency">Emergency Contact *</label>
           <input type="text" name="emergencyContact" required class="form-input" placeholder="Name & Phone Number">
         </div>
 
         <div class="form-group-grid">
           <div class="form-group">
-            <label class="form-label">License Country *</label>
+            <label class="form-label" data-i18n="booking.licenseCountry">License Country *</label>
             <input type="text" name="licenseCountry" required class="form-input" placeholder="e.g. IT, DE, AT">
           </div>
           <div class="form-group">
-            <label class="form-label">License Number *</label>
+            <label class="form-label" data-i18n="booking.licenseNumber">License Number *</label>
             <input type="text" name="licenseNumber" required class="form-input" placeholder="12345678">
           </div>
         </div>
 
         <div class="checkbox-group">
           <input type="checkbox" name="insuranceProvided" id="insuranceProv" required>
-          <label for="insuranceProv">
+          <label for="insuranceProv" data-i18n-html="booking.insurance">
             I confirm that I possess a valid third-party liability insurance for skydiving/base jumping (e.g. <a href="https://www.pianetavolo.it" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">pianetavolo.it</a>). I will present this on-site.
           </label>
         </div>
 
         <div class="checkbox-group">
           <input type="checkbox" name="termsAccepted" id="termsAccepted" required>
-          <label for="termsAccepted">
+          <label for="termsAccepted" data-i18n-html="booking.terms">
             I have read and accept the <a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">Terms & Conditions</a>, including the cancellation policy, mandatory Friday briefing, and the 50 € missed-briefing penalty.
           </label>
         </div>
 
-        <button type="submit" class="btn btn--primary" style="width:100%; margin-top:24px;">
+        <button type="submit" class="btn btn--primary" style="width:100%; margin-top:24px;" data-i18n="booking.submit">
           Proceed to Secure Checkout (0.00€)
         </button>
       </form>
