@@ -24,14 +24,25 @@ const TRANSLATIONS = {
   'nav.prices': {
     en: 'Prices', de: 'Preise', it: 'Prezzi', lad: 'Priesc', nl: 'Prijzen', fr: 'Tarifs', pl: 'Cennik', es: 'Precios', cs: 'Ceny'
   },
-  'nav.events': {
-    en: 'Events', de: 'Events', it: 'Eventi', lad: 'Evenc', nl: 'Evenementen', fr: 'Événements', pl: 'Wydarzenia', es: 'Eventos', cs: 'Události'
+  'nav.jumps': {
+    en: 'Jumps', de: 'Sprünge', it: 'Salti', lad: 'Sauc', nl: 'Sprongen', fr: 'Sauts', pl: 'Skoki', es: 'Saltos', cs: 'Seskoky'
   },
-  'nav.blog': {
-    en: 'Blog', de: 'Blog', it: 'Blog', lad: 'Blog', nl: 'Blog', fr: 'Blog', pl: 'Blog', es: 'Blog', cs: 'Blog'
+  'nav.terms': {
+    en: 'Terms', de: 'AGB', it: 'Termini', lad: 'Termins', nl: 'Voorwaarden', fr: 'Conditions', pl: 'Regulamin', es: 'Términos', cs: 'Podmínky'
   },
   'nav.privacy': {
     en: 'Privacy', de: 'Datenschutz', it: 'Privacy', lad: 'Privacy', nl: 'Privacy', fr: 'Confidentialité', pl: 'Prywatność', es: 'Privacidad', cs: 'Ochrana údajů'
+  },
+
+  // ---- TERMS PAGE (i18n for headings) ----
+  'terms.label': {
+    en: 'Legal', de: 'Rechtliches', it: 'Legale', lad: 'Legal', nl: 'Juridisch', fr: 'Juridique', pl: 'Prawne', es: 'Legal', cs: 'Právní'
+  },
+  'terms.heading': {
+    en: 'Terms & Conditions', de: 'Allgemeine Geschäftsbedingungen', it: 'Termini e Condizioni', lad: 'Termins y Condiziuns', nl: 'Algemene Voorwaarden', fr: 'Conditions Générales', pl: 'Regulamin', es: 'Términos y Condiciones', cs: 'Obchodní podmínky'
+  },
+  'terms.updated': {
+    en: 'Last updated: April 2026', de: 'Zuletzt aktualisiert: April 2026', it: 'Ultimo aggiornamento: Aprile 2026', lad: 'Ultim ajornament: Auril 2026', nl: 'Laatst bijgewerkt: April 2026', fr: 'Dernière mise à jour: Avril 2026', pl: 'Ostatnia aktualizacja: Kwiecień 2026', es: 'Última actualización: Abril 2026', cs: 'Poslední aktualizace: Duben 2026'
   },
 
   // ---- HERO ----
