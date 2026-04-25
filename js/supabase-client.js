@@ -15,7 +15,29 @@ document.addEventListener('DOMContentLoaded', () => {
   //  DYNAMIC FLIGHT CARD RENDERING
   // ============================================================
 
-  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  /**
+   * Translation helper — reads from TRANSLATIONS if available, else returns English fallback.
+   */
+  function t(key, fallback) {
+    const lang = localStorage.getItem('ttjd_lang') || 'en';
+    if (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[key] && TRANSLATIONS[key][lang]) {
+      return TRANSLATIONS[key][lang];
+    }
+    return fallback || key;
+  }
+
+  /**
+   * Get localized month abbreviation.
+   */
+  function getLocalizedMonth(dateObj) {
+    const lang = localStorage.getItem('ttjd_lang') || 'en';
+    try {
+      return dateObj.toLocaleDateString(lang, { month: 'short' });
+    } catch (e) {
+      const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return MONTHS[dateObj.getMonth()];
+    }
+  }
 
   /**
    * Calculates per-person price for a given total load price and number of booked seats.
@@ -30,9 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   function renderPricingTiers(pricePerLoad, bookedSeats, capacity) {
     let html = '';
+    const personLabel = t('fc.person', 'Person');
+    const peopleLabel = t('fc.people', 'People');
     for (let i = 1; i <= capacity; i++) {
       const price = Math.ceil(pricePerLoad / i);
-      const label = i === 1 ? '1 Person' : `${i} People`;
+      const label = i === 1 ? `1 ${personLabel}` : `${i} ${peopleLabel}`;
       let tierClass = 'tier';
       if (i < bookedSeats) tierClass += ' tier--passed';
       else if (i === Math.max(1, bookedSeats)) tierClass += ' tier--active';
@@ -46,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   function renderPassengerPills(bookings, capacity) {
     let html = '';
+    const openLabel = t('fc.open', 'open');
     // Booked passengers
     if (bookings && bookings.length > 0) {
       bookings.forEach(b => {
@@ -56,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Empty slots
     const booked = bookings ? bookings.length : 0;
     for (let i = booked; i < capacity; i++) {
-      html += `<span class="passenger-pill passenger-pill--empty">open</span>`;
+      html += `<span class="passenger-pill passenger-pill--empty">${openLabel}</span>`;
     }
     return html;
   }
@@ -66,18 +91,18 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   function getStatusBadge(booked, capacity, isLocked) {
     if (isLocked) {
-      return `<div class="flight-card__status flight-card__status--locked" style="background:rgba(239,68,68,0.1);color:#ef4444;">Locked (Load 1 First)</div>`;
+      return `<div class="flight-card__status flight-card__status--locked" style="background:rgba(239,68,68,0.1);color:#ef4444;">${t('fc.locked', 'Locked (Load 1 First)')}</div>`;
     }
     if (booked >= capacity) {
-      return `<div class="flight-card__status" style="background:rgba(34,197,94,0.1);color:#22c55e;">Full</div>`;
+      return `<div class="flight-card__status" style="background:rgba(34,197,94,0.1);color:#22c55e;">${t('fc.full', 'Full')}</div>`;
     }
     if (booked >= Math.ceil(capacity / 2)) {
-      return `<div class="flight-card__status flight-card__status--filling">Filling Fast</div>`;
+      return `<div class="flight-card__status flight-card__status--filling">${t('fc.filling', 'Filling Fast')}</div>`;
     }
     if (booked > 0) {
-      return `<div class="flight-card__status flight-card__status--filling" style="background:rgba(59,130,246,0.1);color:#3b82f6;">Booking Open</div>`;
+      return `<div class="flight-card__status flight-card__status--filling" style="background:rgba(59,130,246,0.1);color:#3b82f6;">${t('fc.bookingOpen', 'Booking Open')}</div>`;
     }
-    return `<div class="flight-card__status" style="background:rgba(148,163,184,0.1);color:#94a3b8;">New</div>`;
+    return `<div class="flight-card__status" style="background:rgba(148,163,184,0.1);color:#94a3b8;">${t('fc.new', 'New')}</div>`;
   }
 
   /**
@@ -85,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   function renderFlightCard(event, index, allEvents) {
     const date = new Date(event.jump_date);
-    const month = MONTHS[date.getMonth()];
+    const month = getLocalizedMonth(date);
     const day = date.getDate();
     const bookings = event.bookings || [];
     const booked = bookings.length;
@@ -115,6 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentPricePerPerson = calcPricePerPerson(pricePerLoad, booked, capacity);
     const progressPercent = Math.round((booked / capacity) * 100);
 
+    // Localized labels
+    const heliRotation = t('fc.heliRotation', 'Helicopter Rotation');
+    const seatsOf = t('fc.of', 'of');
+    const seatsBooked = t('fc.seatsBooked', 'Seats Booked');
+    const currentPrice = t('fc.currentPrice', 'Current Price');
+    const perPerson = t('fc.perPerson', '/ person');
+    const secureSpot = t('fc.secureSpot', 'Secure Spot: 0,00 € Card Hold');
+    const balanceText = t('fc.balanceText', 'Balance paid on-site. SetupIntent authorizes card.');
+    const reserveBtn = t('fc.reserveBtn', 'Reserve Seat (0.00€ Hold)');
+    const fullyBooked = t('fc.fullyBooked', 'Fully Booked');
+    const lockedLabel = t('fc.lockedBtn', 'Locked');
+
     return `
       <div class="flight-card${isLocked ? ' flight-card--locked' : ''}${isFull ? ' flight-card--full' : ''}">
         <div class="flight-card__header">
@@ -124,15 +161,15 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div class="flight-card__info">
             <h3 class="flight-card__title">${title}</h3>
-            <p class="flight-card__time">Helicopter Rotation: ${timeSlot} · ${altitudeM.toLocaleString()}m</p>
+            <p class="flight-card__time">${heliRotation}: ${timeSlot} · ${altitudeM.toLocaleString()}m</p>
           </div>
           ${getStatusBadge(booked, capacity, isLocked)}
         </div>
         
         <div class="flight-card__progress-container">
           <div class="flight-card__progress-header">
-            <span class="flight-card__seats-text"><strong>${booked}</strong> of <strong>${capacity}</strong> Seats Booked</span>
-            <span class="flight-card__current-price">Current Price: <strong>${currentPricePerPerson} €</strong> / person</span>
+            <span class="flight-card__seats-text"><strong>${booked}</strong> ${seatsOf} <strong>${capacity}</strong> ${seatsBooked}</span>
+            <span class="flight-card__current-price">${currentPrice}: <strong>${currentPricePerPerson} €</strong> ${perPerson}</span>
           </div>
           
           <div class="passengers-preview"${isLocked ? ' style="opacity:0.5;"' : ''}>
@@ -153,14 +190,14 @@ document.addEventListener('DOMContentLoaded', () => {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             </div>
             <div>
-              <strong>Secure Spot: 0,00 € Card Hold</strong>
-              <span>Balance paid on-site. SetupIntent authorizes card.</span>
+              <strong>${secureSpot}</strong>
+              <span>${balanceText}</span>
             </div>
           </div>
           <a href="#" class="btn btn--primary btn-reserve-seat${isLocked || isFull ? ' btn--disabled' : ''}" 
              data-event-id="${event.id}"
              ${isLocked || isFull ? 'style="opacity:0.5;pointer-events:none;"' : ''}>
-            ${isFull ? 'Fully Booked' : isLocked ? 'Locked' : 'Reserve Seat (0.00€ Hold)'}
+            ${isFull ? fullyBooked : isLocked ? lockedLabel : reserveBtn}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
         </div>
@@ -179,11 +216,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
           </svg>
         </div>
-        <h3 style="margin-bottom:8px;color:var(--color-white);">No upcoming jumps scheduled</h3>
+        <h3 style="margin-bottom:8px;color:var(--color-white);">${t('fc.emptyTitle', 'No upcoming jumps scheduled')}</h3>
         <p style="color:var(--color-text-muted);max-width:400px;margin:0 auto;">
-          Check back soon or contact us via WhatsApp to be notified when the next helicopter jump is announced.
+          ${t('fc.emptyText', 'Check back soon or contact us via WhatsApp to be notified when the next helicopter jump is announced.')}
         </p>
-        <a href="#contact" class="btn btn--outline btn--sm" style="margin-top:20px;">Contact Us</a>
+        <a href="#contact" class="btn btn--outline btn--sm" style="margin-top:20px;">${t('fc.contactUs', 'Contact Us')}</a>
       </div>
     `;
   }

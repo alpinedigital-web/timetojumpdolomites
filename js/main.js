@@ -212,49 +212,55 @@ document.addEventListener('DOMContentLoaded', () => {
   //  GLOBAL i18n LANGUAGE SYSTEM
   // ============================================================
 
-  // Build the language dropdown UI
+  // Build the language dropdown UI (supports multiple instances)
   function buildLanguageDropdown() {
-    const langDropdown = document.getElementById('langDropdown');
-    if (!langDropdown || typeof LANGUAGES === 'undefined') return;
+    if (typeof LANGUAGES === 'undefined') return;
 
     const currentLang = localStorage.getItem('ttjd_lang') || 'en';
     const currentLangObj = LANGUAGES.find(l => l.code === currentLang) || LANGUAGES[0];
 
-    // Set the toggle button
-    const toggle = langDropdown.querySelector('.lang-dropdown__toggle');
-    if (toggle) {
-      toggle.innerHTML = `<span class="lang-dropdown__flag">${currentLangObj.flag}</span><span class="lang-dropdown__code">${currentLangObj.code.toUpperCase()}</span><svg class="lang-dropdown__arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>`;
-    }
+    document.querySelectorAll('.lang-dropdown').forEach(langDropdown => {
+      // Set the toggle button
+      const toggle = langDropdown.querySelector('.lang-dropdown__toggle');
+      if (toggle) {
+        toggle.innerHTML = `<span class="lang-dropdown__flag">${currentLangObj.flag}</span><span class="lang-dropdown__code">${currentLangObj.code.toUpperCase()}</span><svg class="lang-dropdown__arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>`;
+      }
 
-    // Build the menu
-    const menu = langDropdown.querySelector('.lang-dropdown__menu');
-    if (menu) {
-      menu.innerHTML = '';
-      LANGUAGES.forEach(lang => {
-        const item = document.createElement('button');
-        item.className = 'lang-dropdown__item' + (lang.code === currentLang ? ' active' : '');
-        item.dataset.lang = lang.code;
-        item.innerHTML = `<span class="lang-dropdown__flag">${lang.flag}</span>${lang.label}`;
-        item.addEventListener('click', () => {
-          setLanguage(lang.code);
-          langDropdown.classList.remove('open');
+      // Build the menu
+      const menu = langDropdown.querySelector('.lang-dropdown__menu');
+      if (menu) {
+        menu.innerHTML = '';
+        LANGUAGES.forEach(lang => {
+          const item = document.createElement('button');
+          item.className = 'lang-dropdown__item' + (lang.code === currentLang ? ' active' : '');
+          item.type = 'button';
+          item.dataset.lang = lang.code;
+          item.innerHTML = `<span class="lang-dropdown__flag">${lang.flag}</span>${lang.label}`;
+          item.addEventListener('click', () => {
+            setLanguage(lang.code);
+            langDropdown.classList.remove('open');
+          });
+          menu.appendChild(item);
         });
-        menu.appendChild(item);
-      });
-    }
+      }
 
-    // Toggle dropdown
-    if (toggle) {
-      toggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        langDropdown.classList.toggle('open');
-      });
-    }
+      // Toggle dropdown
+      if (toggle) {
+        toggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          // Close all other dropdowns first
+          document.querySelectorAll('.lang-dropdown').forEach(dd => {
+            if (dd !== langDropdown) dd.classList.remove('open');
+          });
+          langDropdown.classList.toggle('open');
+        });
+      }
+    });
 
     // Close on outside click
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('#langDropdown')) {
-        langDropdown.classList.remove('open');
+      if (!e.target.closest('.lang-dropdown')) {
+        document.querySelectorAll('.lang-dropdown').forEach(dd => dd.classList.remove('open'));
       }
     });
   }
@@ -302,18 +308,21 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('ttjd_lang', lang);
     applyTranslations(lang);
 
-    // Update dropdown UI
-    const langDropdown = document.getElementById('langDropdown');
-    if (langDropdown) {
-      const langObj = LANGUAGES.find(l => l.code === lang) || LANGUAGES[0];
+    // Update ALL dropdown toggles and active states
+    const langObj = LANGUAGES.find(l => l.code === lang) || LANGUAGES[0];
+    document.querySelectorAll('.lang-dropdown').forEach(langDropdown => {
       const toggle = langDropdown.querySelector('.lang-dropdown__toggle');
       if (toggle) {
         toggle.innerHTML = `<span class="lang-dropdown__flag">${langObj.flag}</span><span class="lang-dropdown__code">${langObj.code.toUpperCase()}</span><svg class="lang-dropdown__arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>`;
       }
-      // Update active state
       langDropdown.querySelectorAll('.lang-dropdown__item').forEach(item => {
         item.classList.toggle('active', item.dataset.lang === lang);
       });
+    });
+
+    // Re-render flight cards to match the new language
+    if (typeof loadUpcomingJumps === 'function') {
+      loadUpcomingJumps();
     }
   }
 

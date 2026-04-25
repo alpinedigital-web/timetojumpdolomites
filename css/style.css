@@ -2081,7 +2081,31 @@ p {
   font-weight: 600;
 }
 
+/* Mobile language dropdown — hidden on desktop, visible in mobile nav */
+.lang-dropdown--mobile {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .lang-dropdown--mobile {
+    display: block;
+    margin: var(--space-sm) 0;
+  }
+  .lang-dropdown--mobile .lang-dropdown__menu {
+    position: static;
+    max-height: 0;
+    overflow: hidden;
+    margin-top: 0;
+    box-shadow: none;
+    border: none;
+    background: rgba(255,255,255,0.05);
+    transition: max-height 0.3s ease;
+  }
+  .lang-dropdown--mobile.open .lang-dropdown__menu {
+    max-height: 500px;
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 /* ============================================================
