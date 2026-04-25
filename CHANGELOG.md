@@ -10,6 +10,7 @@
 - **`data-i18n-html` Handler**: Neuer Translation-Modus in `applyTranslations()` für Checkbox-Labels mit eingebettetem HTML (Links).
 
 ### Fixed
+- **QA Bugfix**: `loadUpcomingJumps` global zugänglich gemacht und in `setLanguage` aufgerufen, damit sich die Supabase Flight Cards auch ohne Reload dynamisch an die Sprache anpassen.
 - **B15 Language-Button doppelt**: Language-Dropdown-Architektur von `getElementById` auf `querySelectorAll('.lang-dropdown')` refaktoriert. Desktop + Mobile synchronisiert.
 - **R5 Gemischte Sprachen**: Flight Cards (Supabase-Rendered) zeigen jetzt konsistent die gewählte Sprache an. Sprachwechsel triggert automatischen Re-Render der Flight Cards.
 

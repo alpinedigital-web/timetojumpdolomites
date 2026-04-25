@@ -38,4 +38,5 @@
 - **Fehlende Formularfelder:** Geburtsort und vollständige Adresse gemäß Besuchsbericht vom 07.04 nachgezogen.
 - **Language-Dropdown Refactoring:** Multi-Dropdown-Architektur für Desktop + Mobile. Synchronisierte Sprachauswahl ohne doppelte Anzeige.
 - **Pricing-Bereinigung:** 10er Ticket-Bündel (Pack Jobs + Rental) entfernt.
+- **QA-Test & Bugfixing:** Manueller End-to-End-Test durchgeführt, um UI, Typografie, und Modal-Inhalte auf Desktop und Mobile zu verifizieren. Live-Re-Render Bug beim Sprachwechsel behoben.
 - **Gap-Analyse & Scope-Management:** Faktenbasierte Dokumentation des tatsächlichen Aufwands (~2.890€ Mehrleistung über Originalangebot von 900€). Grundlage für Phase-2-Angebotsstellung.

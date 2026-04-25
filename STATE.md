@@ -29,6 +29,7 @@
 8. [ ] n8n Automatisierung an Supabase-Webhook anknüpfen für WhatsApp Benachrichtigung (→ Phase 2 Angebot).
 
 ## Session-Log
+- **25.04.2026 (QA Test & Bugfix)**: Manueller End-to-End QA-Test über lokalen Server durchgeführt. Layout, i18n, Modal-Pflichtfelder und Pricing-Cleanups verifiziert. Bug gefunden (Flight Cards reagierten nicht dynamisch auf Sprachwechsel im Dropdown) und behoben durch globales Exposing von `loadUpcomingJumps` und Aufruf in `setLanguage`. Status: Bereit für Go-Live.
 - **25.04.2026 (i18n & Pricing)**: B10 (10er Tickets entfernt), B15 (Language-Button doppelt → Multi-Dropdown-Architektur), B16/B17 (Adresse + Geburtsort im Booking Modal), R5 (Flight Cards i18n → keine gemischten Sprachen). 35+ neue Translation Keys (`fc.*`, `upcoming.*`, `booking.*`). Supabase-Client mit `t()` Helper refaktoriert. Sprachwechsel triggert Flight-Card-Re-Render.
 - **22.04.2026 (Gap-Analyse & Modal)**: Faktenbasierte Gap-Analyse erstellt (Originalangebot 900€ vs. tatsächlicher Aufwand ~2.890€ Mehrleistung). Booking Modal mit `data-i18n`-Attributen versehen, neue Pflichtfelder (Geburtsdatum, Geburtsort, Adresse) implementiert. `data-i18n-html` Support in `applyTranslations()` eingebaut.
 - **10.04.2026 (Fix & Audit)**: Fatalen Marketing-Fehler der Vorversion korrigiert (3.000 € -> echter Preis 775/825 € pro Load). "Book Now" Links wurden bereinigt und zwingen den User nun in unseren Stripe-Checkout-Flow, statt ihn an Elikos (Helikopterbetreiber) zu verlieren.
