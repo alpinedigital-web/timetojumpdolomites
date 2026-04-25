@@ -378,5 +378,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============================================================
   //  INITIALIZATION
   // ============================================================
+  
+  // Expose loadUpcomingJumps globally so it can be re-triggered on language change
+  window.ttjd = window.ttjd || {};
+  window.ttjd.loadUpcomingJumps = loadUpcomingJumps;
+
   loadUpcomingJumps();
 });

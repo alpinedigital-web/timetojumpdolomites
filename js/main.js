@@ -307,6 +307,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function setLanguage(lang) {
     localStorage.setItem('ttjd_lang', lang);
     applyTranslations(lang);
+    
+    // Trigger re-render of Flight Cards if the supabase client is loaded
+    if (window.ttjd && typeof window.ttjd.loadUpcomingJumps === 'function') {
+      window.ttjd.loadUpcomingJumps();
+    }
 
     // Update ALL dropdown toggles and active states
     const langObj = LANGUAGES.find(l => l.code === lang) || LANGUAGES[0];
