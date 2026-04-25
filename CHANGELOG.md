@@ -1,5 +1,21 @@
 # CHANGELOG: Time to Jump Dolomites
 
+## [1.3.0] - 2026-04-25
+### Added
+- **Booking Modal i18n (9 Sprachen)**: Alle Labels, Checkbox-Texte und Submit-Button mit `data-i18n` / `data-i18n-html` Attributen versehen. 15+ neue Translation Keys (`booking.*`).
+- **Flight Cards i18n**: Dynamisch gerenderte Supabase-Karten vollständig lokalisiert. Neuer `t()` Translation Helper in `supabase-client.js`. 22 neue Keys (`fc.*`). Monatsnamen via `toLocaleDateString()`.
+- **Upcoming Section i18n**: "How Group Pricing Works" Sektion vollständig mit Translation Keys versehen (`upcoming.*`).
+- **Fehlende Formularfelder**: Geburtsort (`birthPlace`) und vollständige Adresse (`address`) im Booking Modal ergänzt.
+- **Mobile Language Switcher**: Eigener Language-Dropdown im Mobile-Nav (`langDropdownMobile`) mit CSS-Slide-Animation.
+- **`data-i18n-html` Handler**: Neuer Translation-Modus in `applyTranslations()` für Checkbox-Labels mit eingebettetem HTML (Links).
+
+### Fixed
+- **B15 Language-Button doppelt**: Language-Dropdown-Architektur von `getElementById` auf `querySelectorAll('.lang-dropdown')` refaktoriert. Desktop + Mobile synchronisiert.
+- **R5 Gemischte Sprachen**: Flight Cards (Supabase-Rendered) zeigen jetzt konsistent die gewählte Sprache an. Sprachwechsel triggert automatischen Re-Render der Flight Cards.
+
+### Removed
+- **B10 10er Tickets**: `10 + 1 Pack Jobs` (200€) und `10+1 Jumps Rent + Pack Jobs` (450€) aus Pricing-Sektion entfernt.
+
 ## [1.2.1] - 2026-04-10
 ### Fixed
 - **Pricing Logic**: Falsche 3.000 € Dummy-Baseprice Angaben aus der Vorversion mit den echten Live-Werten (775 € Saslong, 825 € Mulin) ersetzt und korrekterweise dynamisch durch 5 Skydiver dividiert.

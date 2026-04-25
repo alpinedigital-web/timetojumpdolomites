@@ -4,9 +4,9 @@
 ## Kennzahlen
 | KPI | Status |
 |---|---|
-| Aktuelle Version | 1.1.0 |
+| Aktuelle Version | 1.3.0 |
 | GitHub Synchronität | Sync ✅ |
-| Fokus | SetupIntent Booking Engine (Phase 2) |
+| Fokus | i18n & UX-Polish abgeschlossen, Blocker bei Client (Stripe/DNS) |
 
 ---
 
@@ -30,3 +30,12 @@
 *Technische Umsetzung der im Workshop definierten Booking-Logik.*
 - **Backend Setup (Supabase):** Architektur der Datenstruktur für `events` und `bookings` inkl. Row Level Security.
 - **Frontend Formular:** Implementierung des komplexen Buchungsformulars (Lizenz, Versicherung, Nickname etc.) direkt auf der Website.
+
+### Phase 3: Lokalisierung & UX-Polish (22.–25.04.2026)
+*Vollständige Internationalisierung und Qualitätssicherung der Website.*
+- **Booking Modal i18n (9 Sprachen):** Alle Labels, Checkbox-Texte (mit HTML-Links für AGB/Versicherung) und Submit-Button über `data-i18n` / `data-i18n-html` Attribute lokalisierbar gemacht. 15+ neue Translation Keys.
+- **Flight Cards i18n:** Dynamisch gerenderte Supabase-Karten (Status-Badges, Seat-Counter, Pricing-Tiers, Deposit-Info, CTA-Buttons) vollständig lokalisiert via `t()` Helper. 22 neue Keys. Sprachwechsel triggert automatischen Re-Render.
+- **Fehlende Formularfelder:** Geburtsort und vollständige Adresse gemäß Besuchsbericht vom 07.04 nachgezogen.
+- **Language-Dropdown Refactoring:** Multi-Dropdown-Architektur für Desktop + Mobile. Synchronisierte Sprachauswahl ohne doppelte Anzeige.
+- **Pricing-Bereinigung:** 10er Ticket-Bündel (Pack Jobs + Rental) entfernt.
+- **Gap-Analyse & Scope-Management:** Faktenbasierte Dokumentation des tatsächlichen Aufwands (~2.890€ Mehrleistung über Originalangebot von 900€). Grundlage für Phase-2-Angebotsstellung.
