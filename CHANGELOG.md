@@ -1,5 +1,26 @@
 # CHANGELOG: Time to Jump Dolomites
 
+## [1.4.0] - 2026-04-25 (Abend)
+### Added
+- **Emergency Contact Split**: Einzelfeld aufgetrennt in `emergencyName` + `emergencyPhone` mit separaten Labels und Placeholders (9 Sprachen).
+- **Tooltip-System**: CSS-only Fragezeichen-Icons (`.form-tooltip`) bei Nickname, Emergency Contact, License Country/Number. Hover zeigt kontextuellen Hilfetext via `data-tooltip` / `data-tooltip-key` Attributen.
+- **Tooltip i18n**: `data-tooltip-key` Handler in `applyTranslations()` fuer dynamische Sprachanpassung der Tooltip-Texte.
+- **AGB Headings i18n**: `terms.label`, `terms.heading`, `terms.updated` Translation Keys (9 Sprachen).
+- **nav.jumps Key**: Neuer Navigation Translation Key "Spruenge" in allen 9 Sprachen.
+
+### Fixed
+- **Flight Card Titelkontrast**: Explizite Farbe (`color: var(--color-primary)`, `font-weight: 700`) fuer lesbare Titel auf hellem Hintergrund.
+- **Button-Overflow**: Flight Card Footer mit `flex-wrap: wrap` und angepasstem Button-Sizing — Buttons bleiben im Container.
+- **section--light Kontrast**: Globaler Fix fuer alle Light-Sections (Map, Upcoming) — dunkle Textfarbe auf hellem Hintergrund.
+- **DE DE Sprachanzeige**: Flag-Emoji (`lang-dropdown__flag`) auf `display: none` gesetzt — Windows rendert Flag-Emojis als Text, was zu "DE DE" fuehrte.
+- **Edge Function Error UX**: Verbesserte Fehlermeldung (DE/EN mit technischem Detail) statt rohem Error-Dump.
+- **Nav-Konsistenz**: Alle drei HTML-Dateien (index, terms, privacy) mit identischer Navigation synchronisiert.
+
+### Removed
+- **Events-Section**: Leere Events-Sektion komplett entfernt. "Spruenge" Nav-Link zeigt direkt auf #upcoming (Live-Verfuegbarkeit).
+- **Shop-Section**: Komplett entfernt (Nav + HTML).
+- **Blog-Link**: Aus allen Navigationen entfernt.
+
 ## [1.3.0] - 2026-04-25
 ### Added
 - **Booking Modal i18n (9 Sprachen)**: Alle Labels, Checkbox-Texte und Submit-Button mit `data-i18n` / `data-i18n-html` Attributen versehen. 15+ neue Translation Keys (`booking.*`).

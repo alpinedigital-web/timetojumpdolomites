@@ -4,7 +4,7 @@
 ## Kennzahlen
 | KPI | Status |
 |---|---|
-| Aktuelle Version | 1.3.0 |
+| Aktuelle Version | 1.4.0 |
 | GitHub Synchronität | Sync ✅ |
 | Fokus | i18n & UX-Polish abgeschlossen, Blocker bei Client (Stripe/DNS) |
 
@@ -38,5 +38,16 @@
 - **Fehlende Formularfelder:** Geburtsort und vollständige Adresse gemäß Besuchsbericht vom 07.04 nachgezogen.
 - **Language-Dropdown Refactoring:** Multi-Dropdown-Architektur für Desktop + Mobile. Synchronisierte Sprachauswahl ohne doppelte Anzeige.
 - **Pricing-Bereinigung:** 10er Ticket-Bündel (Pack Jobs + Rental) entfernt.
-- **QA-Test & Bugfixing:** Manueller End-to-End-Test durchgeführt, um UI, Typografie, und Modal-Inhalte auf Desktop und Mobile zu verifizieren. Live-Re-Render Bug beim Sprachwechsel behoben.
-- **Gap-Analyse & Scope-Management:** Faktenbasierte Dokumentation des tatsächlichen Aufwands (~2.890€ Mehrleistung über Originalangebot von 900€). Grundlage für Phase-2-Angebotsstellung.
+- **QA-Test & Bugfixing:** Manueller End-to-End-Test durchgefuehrt, um UI, Typografie, und Modal-Inhalte auf Desktop und Mobile zu verifizieren. Live-Re-Render Bug beim Sprachwechsel behoben.
+- **Gap-Analyse & Scope-Management:** Faktenbasierte Dokumentation des tatsaechlichen Aufwands (~2.890 EUR Mehrleistung ueber Originalangebot von 900 EUR). Grundlage fuer Phase-2-Angebotsstellung.
+
+### Phase 4: UX Optimization & Site Cleanup (25.04.2026 Abend)
+*Usability-Verbesserungen, visuelle Bugfixes und Bereinigung nicht benoetigter Sektionen.*
+- **Emergency Contact Redesign:** Einzelnes Textfeld in zwei separate Eingabefelder (Name + Telefonnummer) aufgeteilt fuer saubere Datenerfassung und bessere UX.
+- **Kontextuelle Tooltip-Hints:** CSS-only Fragezeichen-Icons bei kritischen Formularfeldern (Nickname, Notfallkontakt, Lizenzland, Lizenznummer) mit Hover-Erklaerungen in 9 Sprachen.
+- **Flight Card Visual Fixes:** Titelkontrast auf hellem Hintergrund verbessert, Button-Overflow behoben (Buttons bleiben jetzt im Container).
+- **Seitenweiter Kontrastfix:** section--light Hintergrund bekommt dunkle Textfarbe — betrifft "Finde uns" (Map), "Kommende Spruenge" (Upcoming) und weitere helle Sections.
+- **Navigation-Bereinigung:** Shop, Blog und leere Events-Sektion komplett entfernt. "Events" umbenannt in "Spruenge" mit Direktlink auf die Live-Verfuegbarkeit (#upcoming). Alle drei HTML-Seiten synchronisiert.
+- **Sprachanzeige-Fix:** "DE DE" Doppelanzeige im Language-Dropdown behoben (Windows-spezifisches Flag-Emoji-Rendering).
+- **AGB-Seite i18n:** Headings (Label, Ueberschrift, Aktualisierungsdatum) in 9 Sprachen uebersetzt. Volltext-Uebersetzung als Phase-2-Scope dokumentiert.
+- **Booking Error UX:** Verbesserte Fehlermeldung bei fehlgeschlagener Reservierung (lokalisiert DE/EN, mit technischem Detail).

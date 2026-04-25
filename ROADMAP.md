@@ -16,6 +16,17 @@
 - [x] **Pricing-Bereinigung (B10)**: 10er Ticket-Bündel (Pack Jobs + Rental) entfernt.
 - [x] **Gap-Analyse**: Dokumentation Originalangebot vs. Ist-Zustand inkl. kommerzielle Bewertung der Mehrleistung.
 
+## Phase 1.6: UX Optimization & Site Cleanup [COMPLETED]
+- [x] **Emergency Contact Split**: Einzelfeld in Name + Telefon aufgetrennt fuer saubere Datenerfassung.
+- [x] **Tooltip-Hints**: CSS-only Fragezeichen-Icons bei Nickname, Emergency Contact, Lizenz mit Hover-Erklaerung.
+- [x] **Edge Function Error UX**: Verbesserte Fehlermeldung (DE/EN) statt rohem Fehlerdump.
+- [x] **Navigation Cleanup**: Shop, Blog, Events-Section komplett entfernt. Events -> "Spruenge" (#upcoming).
+- [x] **Flight Card CSS Fixes**: Titelkontrast (dunkel auf weiss), Button-Overflow (flex-wrap), Sizing.
+- [x] **section--light Kontrast**: Globaler Fix fuer alle Light-Sections (Map, Upcoming).
+- [x] **Language Dropdown Fix**: DE DE Doppelanzeige behoben (Flag-Emoji hidden auf Windows).
+- [x] **AGB Headings i18n**: terms.label, terms.heading, terms.updated in 9 Sprachen.
+- [x] **Nav-Konsistenz**: index.html, terms.html, privacy.html synchronisiert.
+
 ## Phase 2: Flow Automatisierung & Operations (n8n) — Neues Angebot
 - [ ] Webhook-Catch via n8n für erfolgreiche Event-Buchungen / Stripe SetupIntents.
 - [ ] Automatisierte Invoice & Confirmation-Email an Teilnehmer.
