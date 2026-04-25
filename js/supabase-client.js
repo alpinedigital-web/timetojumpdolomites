@@ -346,6 +346,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData(setupIntentForm);
       const payload = Object.fromEntries(formData.entries());
 
+      // Combine split emergency contact fields into one string for the Edge Function
+      if (payload.emergencyName || payload.emergencyPhone) {
+        payload.emergencyContact = `${payload.emergencyName || ''} — ${payload.emergencyPhone || ''}`.trim();
+        delete payload.emergencyName;
+        delete payload.emergencyPhone;
+      }
+
       try {
         const payloadWithReturnUrl = {
           ...payload,
@@ -359,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (error) throw error;
         
         // Redirect the user to Stripe Checkout
-        if (data.checkoutUrl) {
+        if (data && data.checkoutUrl) {
           window.location.href = data.checkoutUrl;
         } else {
           throw new Error("Missing checkoutUrl in response");
@@ -367,7 +374,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
       } catch (err) {
         console.error("Payment initialization failed:", err);
-        alert("There was an error initiating the booking: " + err.message);
+        const lang = localStorage.getItem('ttjd_lang') || 'en';
+        const msg = lang === 'de' 
+          ? 'Die Reservierung konnte nicht gestartet werden. Bitte versuche es später erneut oder kontaktiere uns per WhatsApp.'
+          : 'The reservation could not be processed. Please try again later or contact us via WhatsApp.';
+        alert(msg + '\n\n(Technical: ' + (err.message || err) + ')');
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerText = origText;

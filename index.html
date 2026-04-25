@@ -752,7 +752,10 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" data-i18n="booking.nickname">Nickname (Publicly Visible on Load) *</label>
+          <label class="form-label">
+            <span data-i18n="booking.nickname">Nickname (Publicly Visible on Load) *</span>
+            <span class="form-tooltip" data-tooltip-key="tooltip.nickname" data-tooltip="Your nickname will be publicly visible on the flight card so other skydivers can see who's on their load.">?</span>
+          </label>
           <input type="text" name="nickname" required class="form-input" placeholder="e.g. TheFalcon">
         </div>
 
@@ -783,18 +786,34 @@
           <input type="text" name="address" required class="form-input" placeholder="Street, ZIP, City, Country">
         </div>
 
-        <div class="form-group">
-          <label class="form-label" data-i18n="booking.emergency">Emergency Contact *</label>
-          <input type="text" name="emergencyContact" required class="form-input" placeholder="Name & Phone Number">
+        <!-- Emergency Contact: split into Name + Phone -->
+        <div class="form-group-grid">
+          <div class="form-group">
+            <label class="form-label">
+              <span data-i18n="booking.emergencyName">Emergency Contact Name *</span>
+              <span class="form-tooltip" data-tooltip-key="tooltip.emergency" data-tooltip="Person to contact in case of an emergency (e.g. family member, partner).">?</span>
+            </label>
+            <input type="text" name="emergencyName" required class="form-input" data-i18n-placeholder="booking.emergencyNamePh" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="booking.emergencyPhone">Emergency Phone *</label>
+            <input type="tel" name="emergencyPhone" required class="form-input" data-i18n-placeholder="booking.emergencyPhonePh" placeholder="+43 660 1234567">
+          </div>
         </div>
 
         <div class="form-group-grid">
           <div class="form-group">
-            <label class="form-label" data-i18n="booking.licenseCountry">License Country *</label>
+            <label class="form-label">
+              <span data-i18n="booking.licenseCountry">License Country *</span>
+              <span class="form-tooltip" data-tooltip-key="tooltip.licenseCountry" data-tooltip="Country that issued your skydiving license (e.g. IT, DE, AT, US).">?</span>
+            </label>
             <input type="text" name="licenseCountry" required class="form-input" placeholder="e.g. IT, DE, AT">
           </div>
           <div class="form-group">
-            <label class="form-label" data-i18n="booking.licenseNumber">License Number *</label>
+            <label class="form-label">
+              <span data-i18n="booking.licenseNumber">License Number *</span>
+              <span class="form-tooltip" data-tooltip-key="tooltip.licenseNumber" data-tooltip="Your skydiving license number (USPA B-license or equivalent, min. 100 jumps required).">?</span>
+            </label>
             <input type="text" name="licenseNumber" required class="form-input" placeholder="12345678">
           </div>
         </div>

@@ -299,6 +299,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Tooltip data-attribute translations
+    document.querySelectorAll('[data-tooltip-key]').forEach(el => {
+      const key = el.dataset.tooltipKey;
+      if (TRANSLATIONS[key] && TRANSLATIONS[key][lang]) {
+        el.setAttribute('data-tooltip', TRANSLATIONS[key][lang]);
+      }
+    });
+
     // Update <html lang>
     document.documentElement.lang = lang;
   }
