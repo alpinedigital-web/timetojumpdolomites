@@ -1,5 +1,24 @@
 # CHANGELOG: Time to Jump Dolomites
 
+## [1.5.0] - 2026-04-27
+### Added
+- **FAQ Q7**: Neuer FAQ-Eintrag „Can I book the helicopter directly?" mit klarer Absage an Direktbuchungen beim Helikopterbetreiber (9 Sprachen).
+- **Zwei Karten-Standorte**: Map-Sektion von einer generischen Ortisei-Karte auf zwei spezifische Landing Zones umgestellt: Saslong (1.600m) und Mont de Côi (2.500m), Side-by-Side Layout.
+- **Neue i18n-Keys**: `map.saslong.*`, `map.montdecoi.*`, `pricing.rent.day`, `pricing.rent.additional`, `faq.q7`, `faq.a7` in allen 9 Sprachen.
+
+### Changed
+- **Pricing: „2 or more Loads"** entfernt — nicht mehr „auf Anfrage", sondern komplett raus.
+- **Equipment Rental vereinfacht**: Von 6 Einzelzeilen (45€/100€/180€/260€/340€/420€) auf 2 Zeilen: „1 Day Rent + 1 Pack Job = 100 €" + „Each additional day = +80 €".
+- **Gruppenpreis-Texte flexibilisiert**: Hardcoded Beträge (500€, 3.000€, 250€, 750€) aus den „How it Works"-Steps entfernt. Texte sind jetzt generisch und zukunftssicher.
+- **Reservierungshinweis**: „Reserve via WhatsApp, email, or phone" → „Book exclusively via our platform" (Requirements-Karte + FAQ A3).
+- **FAQ A3 aktualisiert**: Elikos-Referenz entfernt, Buchungsweg ausschließlich über Website beschrieben.
+- **AGB (terms.html)**: „DolomitesFly / " und „operated by David Prato" entfernt. „helicopter operator Elikos" → „the helicopter operator".
+- **Logo**: Davids Original-Logo (LOGO.PNG.png) eingebunden, ersetzt das bisherige 3D-Badge.
+
+### Meta
+- **Telefonat-Transkript**: 40-Minuten-Telefonat mit David Prato (27.04.2026) transkribiert, bereinigt und als Referenzdokument unter `Korrespondenz/` archiviert.
+- **Media-Input**: Davids Foto-Lieferung (Logo, Teamfotos, Referenzbilder) unter `Korrespondenz/media-input-dp-27-04-2026/` abgelegt.
+
 ## [1.4.0] - 2026-04-25 (Abend)
 ### Added
 - **Emergency Contact Split**: Einzelfeld aufgetrennt in `emergencyName` + `emergencyPhone` mit separaten Labels und Placeholders (9 Sprachen).

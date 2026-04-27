@@ -1,9 +1,9 @@
 # Alpine Digital Agency (Time to Jump Dolomites) — Aktueller Projektstatus
-> Letztes Update: 25.04.2026 (Abend) — Booking Modal UX, CSS Fixes, Nav-Bereinigung, i18n Hardening
+> Letztes Update: 27.04.2026 — Telefonat-Umsetzung, Content-Korrektur, Logo-Update, Media-Input
 
 ## Aktueller Fokus
-- **Booking Modal UX Optimization**: Emergency Contact aufgeteilt (Name + Telefon), Tooltip-Fragezeichen bei kritischen Feldern (Nickname, Lizenz).
-- **CSS & UI Bugfixing**: Flight Card Titelkontrast, Button-Overflow, section--light Kontrast, DE DE Sprachanzeige.
+- **Telefonat-Umsetzung (27.04.2026)**: 19 Action Items aus 40-Min-Telefonat mit David identifiziert; 7 Sofort-Maßnahmen (Batch 1-3) umgesetzt.
+- **Media-Integration**: Davids Logo eingebunden. Hero-Bild (5er Stern-Formation) und About-Bild (64.jpg ausgebessert) ausstehend (KI-Generierung).
 
 ## Entscheidungen
 - **Payment Hold vs. Deposit**: Da reine Authorization-Holds bei Stripe auf 7 Tage begrenzt sind, wird die Karte hinterlegt. Belastungen (z.B. Strafen bei Verpassen des Briefings: 50 €) werden manuell ausgelöst. Zahlung des eigentlichen Flugs erfolgt vor Ort (Karte/Bar).
@@ -13,11 +13,16 @@
 - **Keine n8n-Automatismen im aktuellen Scope (22.04.2026)**: Automatisierungen sind nicht im Originalangebot inkludiert. Werden perspektivisch als Phase-2-Angebot aufgenommen.
 - **Shop/Blog deaktiviert (25.04.2026)**: Shop- und Blog-Sections samt Nav-Links entfernt. Events-Section durch direkten Link auf #upcoming (Spruenge) ersetzt.
 - **AGB-Seite bleibt vorerst auf Englisch (25.04.2026)**: Nur Heading/Label sind mehrsprachig. Volluebersetzung der juristischen Paragraphen ist Phase-2-Scope.
+- **Elikos-Referenz entfernt (27.04.2026)**: David will nicht, dass Kunden den Helikopterbetreiber direkt kontaktieren. Alle namentlichen Erwähnungen von „Elikos" wurden durch generische Formulierungen ersetzt.
+- **Buchung nur über Plattform (27.04.2026)**: Keine WhatsApp/Telefon-Reservierung mehr. Alle Buchungen laufen ausschließlich über die Website.
+- **Equipment Rental vereinfacht (27.04.2026)**: Statt 6 Einzelpreise nur noch 2 Zeilen: 100 €/Tag + 80 €/weiterer Tag. David regelt individuelle Absprachen direkt.
+- **Dynamische Anzahlung (27.04.2026)**: Fester 500€-Deposit entfällt. Die Anzahlung entspricht dem anteiligen Helikopterkosten — technische Umsetzung in Phase 2.
 
 ## Blocker
 - **DNS-Umschaltung**: Migration zur Produktionsdomain (`timetojumpdolomites.com`) blockiert bis **Aruba DNS-Zugangsdaten** von David geliefert werden.
 - **Stripe-Integration**: Checkout funktional scaffolded, aber inoperabel bis David **Stripe Business Account** einrichtet.
 - **FormSubmit.co**: E-Mail-Validierung steht noch aus (Client-Aktion).
+- **Hero-Bild & About-Bild**: KI-Generierung (5er Stern-Formation + 64.jpg-Verbesserung) ausstehend — Bilder müssen als `img/hero.jpg` und `img/about.png` eingesetzt werden.
 - (Gelöst) Supabase Schema muss weiterhin MANUELL im Dashboard ausgeführt werden (`20260410_init_dolomites.sql`).
 
 ## Nächste Schritte
@@ -34,8 +39,11 @@
 11. [x] CSS-Fixes: Flight Card Kontrast, Button-Overflow, section--light Kontrast, DE DE Language-Display.
 12. [x] AGB/Terms Headings i18n (Label, Heading, Updated).
 13. [ ] AGB-Volltext in 9 Sprachen uebersetzen (Phase 2).
+14. [x] Telefonat-Action-Items umgesetzt (Pricing, FAQ, Map, AGB, Equipment Rental, Logo).
+15. [ ] Hero-Bild (5er Stern-Formation) und About-Bild (64.jpg) via KI generieren und einbinden.
 
 ## Session-Log
+- **27.04.2026 (Telefonat-Umsetzung & Media)**: 40-Min-Telefonat mit David Prato transkribiert und bereinigt. 19 Action Items extrahiert, 7 Sofort-Maßnahmen in 3 Batches umgesetzt: (1) index.html — „2+ Loads" entfernt, Equipment Rental auf 2 Zeilen (100€+80€/Tag), Gruppenpreis-Texte generisch, Buchung nur über Plattform, FAQ Q3 ohne Elikos, neuer FAQ Q7 (Direktbuchung), Map mit Saslong + Mont de Côi. (2) terms.html — DolomitesFly/David Prato entfernt, Elikos generisiert. (3) translations.js — Alle betroffenen Keys in 9 Sprachen aktualisiert + 12 neue Keys. Logo von David eingebaut. Media-Input (Teamfotos) archiviert unter Korrespondenz/.
 - **25.04.2026 (Abend - UX & CSS Bugfix Session)**: Emergency Contact aufgeteilt (Name + Telefon, zwei Felder). Tooltip-System implementiert (CSS-only data-tooltip mit ::after). Booking-Fehlerbehandlung verbessert (DE/EN Fehlermeldung). Navigation komplett bereinigt: Shop, Blog, Events entfernt; Spruenge -> #upcoming. Flight Card CSS gefixt: Titelkontrast, Button-Overflow. section--light Kontrast global gefixt. DE DE Sprachanzeige behoben (Flag-Emoji hidden). AGB Headings i18n. Alle Navs (index, terms, privacy) synchronisiert.
 - **25.04.2026 (QA Test & Bugfix)**: Manueller End-to-End QA-Test ueber lokalen Server durchgefuehrt. Layout, i18n, Modal-Pflichtfelder und Pricing-Cleanups verifiziert. Bug gefunden (Flight Cards reagierten nicht dynamisch auf Sprachwechsel im Dropdown) und behoben durch globales Exposing von loadUpcomingJumps und Aufruf in setLanguage. Status: Bereit fuer Go-Live.
 - **25.04.2026 (i18n & Pricing)**: B10 (10er Tickets entfernt), B15 (Language-Button doppelt → Multi-Dropdown-Architektur), B16/B17 (Adresse + Geburtsort im Booking Modal), R5 (Flight Cards i18n → keine gemischten Sprachen). 35+ neue Translation Keys (`fc.*`, `upcoming.*`, `booking.*`). Supabase-Client mit `t()` Helper refaktoriert. Sprachwechsel triggert Flight-Card-Re-Render.

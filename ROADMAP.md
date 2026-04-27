@@ -27,6 +27,21 @@
 - [x] **AGB Headings i18n**: terms.label, terms.heading, terms.updated in 9 Sprachen.
 - [x] **Nav-Konsistenz**: index.html, terms.html, privacy.html synchronisiert.
 
+## Phase 1.7: Telefonat-Umsetzung & Media-Integration [IN PROGRESS]
+- [x] **Telefonat-Transkription**: 40-Min-Telefonat mit David (27.04.2026) transkribiert, bereinigt, archiviert.
+- [x] **„2 or more Loads" entfernt**: Pricing-Abschnitt vereinfacht (keine „auf Anfrage"-Preise mehr).
+- [x] **Equipment Rental vereinfacht**: Von 6 Einzelpreise auf 2 Zeilen (100 €/Tag + 80 €/weiterer Tag).
+- [x] **Gruppenpreis-Texte flexibilisiert**: Hardcoded Beträge entfernt, generische Formulierungen.
+- [x] **Buchung nur über Plattform**: WhatsApp/Telefon-Reservierung entfernt, Website-only.
+- [x] **Elikos-Referenzen entfernt**: FAQ, AGB, Sicherheitsbriefing — alle Nennungen generisiert.
+- [x] **FAQ Q7 ergänzt**: „Can I book the helicopter directly?" mit klarer Absage.
+- [x] **Zwei Karten-Standorte**: Saslong (1.600m) + Mont de Côi (2.500m) side-by-side.
+- [x] **AGB bereinigt**: DolomitesFly/David Prato entfernt, Elikos generisiert.
+- [x] **i18n aktualisiert**: Alle betroffenen Keys in 9 Sprachen (12 neue Keys).
+- [x] **Logo**: Davids Original-Logo eingebunden.
+- [ ] **Hero-Bild**: KI-generiertes Panorama mit 5er Stern-Formation (Team ohne Helm, mit Brillen).
+- [ ] **About-Bild**: Bild 64 (Heli-Ausstieg) ausgebessert und eingebunden.
+
 ## Phase 2: Flow Automatisierung & Operations (n8n) — Neues Angebot
 - [ ] Webhook-Catch via n8n für erfolgreiche Event-Buchungen / Stripe SetupIntents.
 - [ ] Automatisierte Invoice & Confirmation-Email an Teilnehmer.

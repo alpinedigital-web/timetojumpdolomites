@@ -1,1 +1,15 @@
+# Secrets
 .env
+
+# Internal agent config (not for deployment)
+.agents/
+
+# Client correspondence & raw media assets (large binaries, not for prod)
+Korrespondenz/media-input-dp-*/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Editor
+.vscode/
