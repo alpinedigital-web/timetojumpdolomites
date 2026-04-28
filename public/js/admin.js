@@ -16,6 +16,11 @@
   let currentEvents = [];
   let currentBookings = [];
 
+  // Helper: combine first_name + last_name
+  function fullName(b) {
+    return [b.first_name, b.last_name].filter(Boolean).join(' ') || 'Unknown';
+  }
+
   // ---- Init ----
   document.addEventListener('DOMContentLoaded', async () => {
     // Check existing session
@@ -73,6 +78,9 @@
     document.querySelectorAll('.admin-tab').forEach(tab => {
       tab.addEventListener('click', () => switchTab(tab.dataset.tab));
     });
+
+    // Cleanup abandoned bookings before loading data
+    sb.rpc('cleanup_abandoned_bookings').catch(() => {});
 
     // Load data
     loadLocations();
@@ -166,8 +174,8 @@
         cancelled: 'bg-red-900/30 text-red-400 border-red-800'
       };
       const statusClass = statusColors[ev.status] || statusColors.open;
-      const bookedCount = ev.confirmed_count || 0;
-      const maxCap = ev.max_capacity || 5;
+      const bookedCount = ev.booked_count || 0;
+      const maxCap = ev.capacity || 5;
       const fillPct = Math.min(100, Math.round((bookedCount / maxCap) * 100));
 
       return `<div class="bg-brand-navy border border-brand-border rounded-xl p-4 hover:border-brand-orange/50 transition-colors">
@@ -210,12 +218,12 @@
     if (event) {
       title.textContent = 'Event bearbeiten';
       document.getElementById('eventId').value = event.id;
-      document.getElementById('eventDate').value = event.flight_date?.split('T')[0] || '';
-      document.getElementById('eventTime').value = event.flight_date?.split('T')[1]?.substring(0, 5) || '09:00';
+      document.getElementById('eventDate').value = event.jump_date?.split('T')[0] || '';
+      document.getElementById('eventTime').value = event.time_slot?.substring(0, 5) || event.jump_date?.split('T')[1]?.substring(0, 5) || '09:00';
       document.getElementById('eventLocation').value = event.location_id || '';
       document.getElementById('eventLoadNumber').value = event.load_number || 1;
       document.getElementById('eventPrice').value = event.price_per_load || 775;
-      document.getElementById('eventCapacity').value = event.max_capacity || 5;
+      document.getElementById('eventCapacity').value = event.capacity || 5;
       document.getElementById('eventStatus').value = event.status || 'open';
       document.getElementById('eventNotes').value = event.notes || '';
     } else {
@@ -246,11 +254,12 @@
     const flightDate = `${dateVal}T${timeVal}:00`;
 
     const eventData = {
-      flight_date: flightDate,
+      jump_date: flightDate,
+      time_slot: timeVal + ':00',
       location_id: parseInt(document.getElementById('eventLocation').value),
       load_number: parseInt(document.getElementById('eventLoadNumber').value),
       price_per_load: parseInt(document.getElementById('eventPrice').value),
-      max_capacity: parseInt(document.getElementById('eventCapacity').value),
+      capacity: parseInt(document.getElementById('eventCapacity').value),
       status: document.getElementById('eventStatus').value,
       notes: document.getElementById('eventNotes').value || null
     };
@@ -305,7 +314,7 @@
   async function loadBookings() {
     const { data, error } = await sb
       .from('bookings')
-      .select('*, events!inner(flight_date, location_id, load_number, locations(location_name))')
+      .select('*, events!inner(jump_date, location_id, load_number, locations(location_name))')
       .order('created_at', { ascending: false });
 
     if (error) {
@@ -330,7 +339,7 @@
 
     if (searchQuery) {
       filtered = filtered.filter(b =>
-        (b.full_name || '').toLowerCase().includes(searchQuery) ||
+        fullName(b).toLowerCase().includes(searchQuery) ||
         (b.email || '').toLowerCase().includes(searchQuery) ||
         (b.nickname || '').toLowerCase().includes(searchQuery)
       );
@@ -352,8 +361,8 @@
         expired: 'bg-slate-800 text-slate-500 border-slate-700'
       };
       const statusClass = statusColors[b.status] || statusColors.reserved;
-      const eventDate = b.events?.flight_date
-        ? new Date(b.events.flight_date).toLocaleDateString('de-DE', { day: '2-digit', month: 'short', year: 'numeric' })
+      const eventDate = b.events?.jump_date
+        ? new Date(b.events.jump_date).toLocaleDateString('de-DE', { day: '2-digit', month: 'short', year: 'numeric' })
         : '—';
       const location = b.events?.locations?.location_name || '—';
       const depositEur = b.deposit_amount_cents ? (b.deposit_amount_cents / 100).toFixed(0) : '—';
@@ -362,11 +371,11 @@
         <div class="flex items-center justify-between gap-3">
           <div class="flex items-center gap-3 min-w-0 flex-1">
             <div class="w-9 h-9 bg-brand-orange/20 rounded-full flex items-center justify-center text-brand-orange font-bold text-sm shrink-0">
-              ${(b.full_name || '?')[0].toUpperCase()}
+              ${fullName(b)[0].toUpperCase()}
             </div>
             <div class="min-w-0 flex-1">
               <div class="flex items-center gap-2">
-                <span class="font-medium text-sm text-white truncate">${b.full_name || 'Unknown'}</span>
+                <span class="font-medium text-sm text-white truncate">${fullName(b)}</span>
                 ${b.nickname ? `<span class="text-xs text-slate-500">(${b.nickname})</span>` : ''}
                 <span class="px-2 py-0.5 text-[10px] font-semibold rounded border ${statusClass}">${b.status?.toUpperCase()}</span>
               </div>
@@ -387,8 +396,8 @@
     const b = currentBookings.find(bk => bk.id === bookingId);
     if (!b) return;
 
-    const eventDate = b.events?.flight_date
-      ? new Date(b.events.flight_date).toLocaleDateString('de-DE', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' })
+    const eventDate = b.events?.jump_date
+      ? new Date(b.events.jump_date).toLocaleDateString('de-DE', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' })
       : '—';
     const location = b.events?.locations?.location_name || '—';
 
@@ -396,7 +405,7 @@
     detail.innerHTML = `
       <div class="space-y-3">
         <div class="grid grid-cols-2 gap-3">
-          <div><span class="text-xs text-slate-500">Name</span><p class="font-medium">${b.full_name || '—'}</p></div>
+          <div><span class="text-xs text-slate-500">Name</span><p class="font-medium">${fullName(b)}</p></div>
           <div><span class="text-xs text-slate-500">Nickname</span><p class="font-medium">${b.nickname || '—'}</p></div>
           <div><span class="text-xs text-slate-500">Email</span><p class="font-medium"><a href="mailto:${b.email}" class="text-brand-orange hover:underline">${b.email || '—'}</a></p></div>
           <div><span class="text-xs text-slate-500">Telefon</span><p class="font-medium"><a href="tel:${b.phone}" class="text-brand-orange hover:underline">${b.phone || '—'}</a></p></div>
@@ -411,16 +420,16 @@
         <hr class="border-brand-border">
         <div class="grid grid-cols-2 gap-3">
           <div><span class="text-xs text-slate-500">Lizenznummer</span><p class="font-medium">${b.license_number || '—'}</p></div>
-          <div><span class="text-xs text-slate-500">Nationalität</span><p class="font-medium">${b.nationality || '—'}</p></div>
-          <div><span class="text-xs text-slate-500">Equipment Rental</span><p class="font-medium">${b.equipment_rental ? '✅ Ja' : '❌ Nein'}</p></div>
-          <div><span class="text-xs text-slate-500">Rental-Tage</span><p class="font-medium">${b.rental_days || '—'}</p></div>
+          <div><span class="text-xs text-slate-500">Lizenzland</span><p class="font-medium">${b.license_country || '—'}</p></div>
+          <div><span class="text-xs text-slate-500">Notfallkontakt</span><p class="font-medium">${b.emergency_contact || '—'}</p></div>
+          <div><span class="text-xs text-slate-500">Adresse</span><p class="font-medium">${b.address || '—'}</p></div>
         </div>
         <hr class="border-brand-border">
         <div class="grid grid-cols-2 gap-3">
           <div><span class="text-xs text-slate-500">Deposit</span><p class="font-medium text-green-400">€${b.deposit_amount_cents ? (b.deposit_amount_cents / 100).toFixed(2) : '—'}</p></div>
           <div><span class="text-xs text-slate-500">Total</span><p class="font-medium text-green-400">€${b.total_amount_cents ? (b.total_amount_cents / 100).toFixed(2) : '—'}</p></div>
           <div><span class="text-xs text-slate-500">Gebucht am</span><p class="font-medium">${new Date(b.created_at).toLocaleString('de-DE')}</p></div>
-          <div><span class="text-xs text-slate-500">Stripe ID</span><p class="font-medium text-xs font-mono">${b.stripe_checkout_session_id || b.stripe_setup_intent_id || '—'}</p></div>
+          <div><span class="text-xs text-slate-500">Stripe ID</span><p class="font-medium text-xs font-mono">${b.stripe_setup_intent_id || b.stripe_payment_intent_id || '—'}</p></div>
         </div>
         ${b.invite_token ? `<div class="mt-2 p-2 bg-slate-900 rounded"><span class="text-xs text-slate-500">Invite-Token:</span> <span class="font-mono text-xs">${b.invite_token}</span></div>` : ''}
         ${b.status === 'reserved' || b.status === 'confirmed' ? `
@@ -467,20 +476,20 @@
       return;
     }
 
-    const headers = ['Name', 'Nickname', 'Email', 'Phone', 'License', 'Nationality', 'Event Date', 'Location', 'Status', 'Deposit (€)', 'Total (€)', 'Equipment', 'Booked At'];
+    const headers = ['Name', 'Nickname', 'Email', 'Phone', 'License Nr', 'License Country', 'Event Date', 'Location', 'Status', 'Deposit (€)', 'Total (€)', 'Emergency Contact', 'Booked At'];
     const rows = currentBookings.map(b => [
-      b.full_name || '',
+      fullName(b),
       b.nickname || '',
       b.email || '',
       b.phone || '',
       b.license_number || '',
-      b.nationality || '',
-      b.events?.flight_date ? new Date(b.events.flight_date).toLocaleDateString('de-DE') : '',
+      b.license_country || '',
+      b.events?.jump_date ? new Date(b.events.jump_date).toLocaleDateString('de-DE') : '',
       b.events?.locations?.location_name || '',
       b.status || '',
       b.deposit_amount_cents ? (b.deposit_amount_cents / 100).toFixed(2) : '',
       b.total_amount_cents ? (b.total_amount_cents / 100).toFixed(2) : '',
-      b.equipment_rental ? 'Ja' : 'Nein',
+      b.emergency_contact || '',
       new Date(b.created_at).toLocaleString('de-DE')
     ]);
 

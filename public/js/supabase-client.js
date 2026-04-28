@@ -250,6 +250,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const today = new Date().toISOString().split('T')[0];
 
     try {
+      // Cleanup abandoned bookings (reserved > 30 min = expired)
+      await sb.rpc('cleanup_abandoned_bookings').catch(() => {});
       // Use the enriched view — includes booked_count, availability_status, current_price_per_person
       const { data: events, error } = await sb
         .from('events_enriched')
