@@ -1,6 +1,53 @@
 # CHANGELOG: Time to Jump Dolomites
 
-## [2.1.0] - 2026-04-28
+## [2.2.0] - 2026-04-28
+### Added — Admin Panel Rebuild (Phase 2.3)
+- **Supabase Auth Login**: Hardcoded `Jump2025!` Passwort komplett entfernt. Admin-Login über `supabase.auth.signInWithPassword()`.
+- **Admin-User**: `admin@timetojumpdolomites.com` in Supabase Auth angelegt (mit Identity-Record).
+- **RLS Policies**: `anon` = SELECT only, `authenticated` = full CRUD auf `events`, `bookings`, `locations`.
+- **Events CRUD Tab**: Events direkt erstellen, bearbeiten, stornieren — alle Felder korrekt gegen Supabase-Schema gemappt.
+- **Bookings Tab**: Komplette Buchungsübersicht mit Status-Filter, Freitext-Suche, Detail-Modal (Kontaktdaten, Stripe-ID, Lizenz, Notfallkontakt).
+- **CSV Export**: Alle Buchungsdaten als CSV mit BOM für Excel-Kompatibilität.
+- **Stats Dashboard**: Event-Zähler, Buchungs-Zähler, Revenue-Übersicht, Expired-Zähler.
+
+### Added — Abandoned Checkout Cleanup (Phase 2.4)
+- **`cleanup_abandoned_bookings()` SQL-Funktion**: Setzt `reserved`-Bookings älter als 30 Minuten auf `expired`. Gibt Anzahl betroffener Rows zurück.
+- **`cleanup-bookings` Edge Function**: HTTP-aufrufbar (GET/POST), nutzt Service-Role-Key, für externen Cron-Aufruf geeignet.
+- **Frontend Auto-Cleanup**: `sb.rpc('cleanup_abandoned_bookings')` wird bei jedem Event-Page-Load aufgerufen.
+- **Admin Auto-Cleanup**: Cleanup läuft beim Laden des Admin-Dashboards.
+- **`updated_at` Column**: Zu `bookings`-Tabelle hinzugefügt.
+
+### Fixed — Admin Schema-Mapping
+- `flight_date` → `jump_date` (5 Stellen in admin.js).
+- `max_capacity` → `capacity`.
+- `confirmed_count` → `booked_count`.
+- `full_name` → `first_name` + `last_name` (mit `fullName()` Helper).
+- `nationality` → `license_country`.
+- `equipment_rental` → `emergency_contact`.
+- `stripe_checkout_session_id` → `stripe_setup_intent_id || stripe_payment_intent_id`.
+- Events CRUD: `time_slot` wird jetzt separat gespeichert.
+
+### Changed
+- **admin.css**: Alte CMS-Styles entfernt (editor-card, dropzone, preview-pane, sidebar). Nur noch Scrollbar + Login-Error.
+- **admin.html**: Komplett neu — 3-Tab-Layout (Events, Bookings, Settings) mit Tailwind CDN.
+
+### Security
+- Hardcoded Admin-Passwort `Jump2025!` aus öffentlich erreichbarem JS entfernt.
+- Admin-Authentifizierung läuft über Supabase Auth Sessions.
+- `cleanup-bookings` Edge Function mit `verify_jwt=false` (für Cron), aber `SECURITY DEFINER` SQL-Funktion.
+
+### Documentation
+- **ROADMAP.md**: Komplett umstrukturiert — Phase 2.3–2.7 mit granularen Checkboxen, technische Schulden aus Deep Audit integriert.
+- **STATE.md**: Session-Log, neue Blocker (E-Mail API Key), Entscheidungs-Log ergänzt.
+
+### Known Technical Debt (aus Deep Audit)
+- Booking-Insert vor Stripe-Session (Race Condition) — Fix geplant für Phase 2.5.
+- `events_enriched` View: 3 Subqueries statt 1 JOIN — Performance-Optimierung bei Bedarf.
+- `pricing_rules` + `cancellations`: Tote Tabellen, nirgendwo referenziert.
+- `calc_cancellation_fee()`: Rechenfehler (`* 30` statt `* 0.30`).
+- `success.html`: Verspricht nicht-existente WhatsApp-Bestätigung.
+
+
 ### Fixed — Full Website Audit (12 Fixes)
 - **B-01 HTML-Strukturfehler**: Fehlendes `</section>` nach `#experience` behoben — `#upcoming` war als Kindelement gerendert.
 - **H-01 Hero CTAs**: Von 3 auf 2 reduziert (Book Your Jump + View Prices). "Contact Us" entfernt.

@@ -4,9 +4,9 @@
 ## Kennzahlen
 | KPI | Status |
 |---|---|
-| Aktuelle Version | 2.1.0 |
+| Aktuelle Version | 2.2.0 |
 | GitHub Synchronität | Sync ✅ |
-| Fokus | Full Website Audit + 12 Code-Fixes deployed. Phase 2.1+2.2 abgeschlossen. |
+| Fokus | Admin Panel Rebuild (Supabase Auth) + Abandoned Checkout Cleanup deployed. Deep Audit integriert. |
 
 ---
 
@@ -83,3 +83,15 @@
 - **Google Maps:** Fake-Place-IDs durch koordinatenbasierte Embed-URLs für Saslong (46.548°N) und Mont de Côi (46.557°N) ersetzt.
 - **JavaScript-Bugfixes:** Doppelter Supabase-Request bei Sprachwechsel eliminiert, Translation-Bug im Booking-Modal behoben.
 - **Content-Korrekturen:** Chat Widget Text, Zeitzone, Footer Copyright, FormSubmit Redirect-URL, Animation-Delay.
+
+### Phase 8: Übergabe-Sprint — Admin Panel & Operational Readiness (28.04.2026)
+*Kompletter Admin-Panel-Neubau für Davids operativen Betrieb. Sicherheitslücke geschlossen. Automatische Bereinigung abgebrochener Checkouts.*
+- **Admin Panel Rebuild:** Bisheriges CMS-Panel (localStorage-basiert, nur für Übersetzungen) komplett ersetzt durch operatives Event-Management-Tool. 3 Tabs: Events CRUD, Buchungsübersicht, Dashboard-Statistiken.
+- **Sicherheitsfix (KRITISCH):** Hardcoded Admin-Passwort `Jump2025!` aus öffentlich erreichbarem JavaScript entfernt. Login jetzt über Supabase Auth (`signInWithPassword()`). Admin-User mit Identity-Record angelegt.
+- **RLS Policies:** Row-Level-Security auf allen Tabellen: Anonyme User (Website-Besucher) erhalten nur SELECT-Rechte, authentifizierte Admin-User erhalten vollen CRUD-Zugang.
+- **Events CRUD:** David kann direkt im Admin Panel Termine erstellen, bearbeiten und stornieren — ohne Supabase-Dashboard-Zugang.
+- **Buchungsübersicht:** Alle Buchungen mit Status-Filter, Freitext-Suche, Detail-Modal (Kontaktdaten, Stripe-ID, Lizenz, Notfallkontakt) und CSV-Export.
+- **Abandoned Checkout Cleanup:** SQL-Funktion `cleanup_abandoned_bookings()` setzt `reserved`-Buchungen älter als 30 Minuten automatisch auf `expired`. Integriert in Frontend-Laden + Admin-Dashboard + HTTP-aufrufbare Edge Function.
+- **Schema-Mapping korrigiert:** 7 Feldnamen im Admin-Panel gegen das echte Supabase-Schema abgeglichen (jump_date, capacity, first/last_name etc.).
+- **Sprach-Archivierung:** Sprachsupport von 9 auf 4 Sprachen reduziert (EN, DE, IT, LAD). 5 Sprachen aus translations.js entfernt.
+- **Deep Audit Integration:** Technische Schulden aus extern beauftragtem Code-Audit dokumentiert und in ROADMAP als priorisierte Backlog-Items aufgenommen.

@@ -1,10 +1,11 @@
 # Alpine Digital Agency (Time to Jump Dolomites) — Aktueller Projektstatus
-> Letztes Update: 28.04.2026 — Full Website Audit abgeschlossen, 12 Fixes deployed
+> Letztes Update: 28.04.2026 — Admin Panel Rebuild + Abandoned Checkout Cleanup deployed
 
 ## Aktueller Fokus
-- **Website Audit DONE (28.04.2026)**: 12 Code-Fixes deployed (HTML-Strukturfehler, SEO, UX, Navigation, Maps, Footer, Chat Widget). Verifiziert auf Live-Site.
-- **Phase 2.1+2.2 DONE**: Supabase Schema, Edge Function, Frontend Integration, Gruppenbuchung.
-- **Nächster Schritt**: translations.js Trust-Cue-Keys aktualisieren (`hero.trust.heli/unesco/days`), dann Phase 2.3 (n8n) oder Phase 3 (DNS).
+- **Admin Panel REBUILT (28.04.2026)**: Komplettes Redesign — Supabase Auth statt hardcoded Credentials, Events CRUD, Buchungs-Übersicht, Stats-Dashboard.
+- **Abandoned Checkout Cleanup LIVE**: SQL-Funktion + Edge Function + Frontend-Integration. Reservierungen > 30min werden automatisch als `expired` markiert.
+- **Phase 2.1–2.4 DONE**: Schema, Frontend, Admin Panel, Cleanup.
+- **Nächster Schritt**: Phase 2.5 (Stripe Production Mode) — blockiert bis David den Stripe Live-Key liefert.
 
 ## Entscheidungen
 - **Payment Hold vs. Deposit**: Da reine Authorization-Holds bei Stripe auf 7 Tage begrenzt sind, wird die Karte hinterlegt. Belastungen (z.B. Strafen bei Verpassen des Briefings: 50 €) werden manuell ausgelöst. Zahlung des eigentlichen Flugs erfolgt vor Ort (Karte/Bar).
@@ -18,13 +19,25 @@
 - **Buchung nur über Plattform (27.04.2026)**: Keine WhatsApp/Telefon-Reservierung mehr. Alle Buchungen laufen ausschließlich über die Website.
 - **Equipment Rental vereinfacht (27.04.2026)**: Statt 6 Einzelpreise nur noch 2 Zeilen: 100 €/Tag + 80 €/weiterer Tag. David regelt individuelle Absprachen direkt.
 - **Dynamische Anzahlung (27.04.2026)**: Fester 500€-Deposit entfällt. Die Anzahlung entspricht dem anteiligen Helikopterkosten — technische Umsetzung in Phase 2.
+- **Admin Panel Redesign (28.04.2026)**: CMS-artiges localStorage-Panel komplett ersetzt durch operatives Event-Management-Tool mit Supabase Auth. Davids Bedürfnis: Events anlegen, Buchungen einsehen — nicht Website-Texte bearbeiten.
+- **Sprach-Reduktion (28.04.2026)**: 9 Sprachen → 4 (EN, DE, IT, LAD). Niederländisch, Französisch, Polnisch, Spanisch, Tschechisch archiviert.
 
 ## Blocker
+- **Stripe Live-Key**: Stripe-Integration funktional, aber inoperabel bis David **Stripe Business Account** einrichtet und `STRIPE_SECRET_KEY` + Webhook-Signing-Secret in Supabase Secrets hinterlegt.
 - **DNS-Umschaltung**: Migration zur Produktionsdomain (`timetojumpdolomites.com`) blockiert bis **Aruba DNS-Zugangsdaten** von David geliefert werden.
-- **Stripe-Integration**: Edge Function deployed und funktional, aber inoperabel bis David **Stripe Business Account** einrichtet und `STRIPE_SECRET_KEY` in Supabase Secrets hinterlegt.
-- **FormSubmit.co**: E-Mail-Validierung steht noch aus (Client-Aktion).
-- **Hero-Bild & About-Bild**: 6 KI-Varianten generiert (3× Hero, 3× About) in `business/media-input/generated/`. User muss finale Auswahl treffen.
-- ~~(Gelöst) Supabase Schema manuell~~ → Migrationen laufen jetzt via MCP-Token direkt.
+- **E-Mail API Key**: Resend.com (oder SendGrid) API-Key für transaktionale E-Mails (Buchungsbestätigung, Admin-Notification) muss eingerichtet werden.
+- **FormSubmit.co**: E-Mail-Validierung steht noch aus (Client-Aktion). Adresse muss auf Davids persönliche E-Mail umgestellt werden.
+- **Hero-Bild & About-Bild**: 6 KI-Varianten generiert. User muss finale Auswahl treffen.
+
+## Technische Schulden (Deep Audit 28.04.2026)
+> Priorisierte Liste aus dem Claude-Code-Audit. Keine sind Go-Live-Blocker, aber sollten vor v3.0 adressiert werden.
+
+1. **Booking vor Payment Race Condition** (MEDIUM): Edge Function legt Booking in DB an bevor Stripe-Session erstellt wird. Bei Stripe-Fehler bleibt Geister-Booking. → Fix zusammen mit Phase 2.5.
+2. **`events_enriched` View N+1** (MEDIUM): 3 korrelierte Subqueries pro Event-Row. Optimierung: Ein `LEFT JOIN` mit `COUNT()`. Kein Performance-Problem bei < 50 Events.
+3. **Tote Tabellen** (MEDIUM): `pricing_rules` wird nirgendwo gelesen (Preis kommt aus `events.price_per_load`). `cancellations` hat keine Trigger/API. Beide entweder aktivieren oder dokumentieren als Zukunfts-Schema.
+4. **`calc_cancellation_fee()` Bug** (MEDIUM): `CEIL(deposit * 30)` berechnet 30× statt 30%. Fix: `CEIL(deposit * 0.30)`.
+5. **`success.html` Texte** (LOW): „0.00€ hold" stimmt nicht bei Short-Notice. „WhatsApp confirmation" existiert nicht. Booking-Details fehlen.
+6. **Gruppenbuchungs-UX** (LOW): `alert()` für Invite-Link statt Modal.
 
 ## Nächste Schritte
 1. [x] Supabase Tabellen `events` & `bookings` inkl. RLS Policies anlegen.
@@ -37,13 +50,19 @@
 8. [x] Edge Function (create-setup-intent) deployed mit Deposit-Berechnung + Short-Notice.
 9. [x] Frontend auf events_enriched View umgestellt.
 10. [x] Gruppenbuchungs-UI im Booking-Modal.
-11. [ ] Hero-/About-Bild finale Auswahl treffen (6 Varianten liegen bereit).
-12. [ ] n8n Automatisierung (Webhooks, E-Mails, Erinnerungen) — Phase 2.3.
-13. [ ] AGB-Volltext in 9 Sprachen übersetzen.
-14. [ ] DNS-Migration (Aruba → Cloudflare) — Phase 3.
+11. [x] Admin Panel Rebuild: Supabase Auth + Events CRUD + Bookings View.
+12. [x] Abandoned Checkout Cleanup: SQL-Funktion + Edge Function + Frontend-Integration.
+13. [ ] Hero-/About-Bild finale Auswahl treffen (6 Varianten liegen bereit).
+14. [ ] Stripe auf `mode: "payment"` umstellen (Phase 2.5 — blockiert).
+15. [ ] Stripe Webhook implementieren (Phase 2.6 — blockiert).
+16. [ ] E-Mail-Automatisierung (Resend.com) aufsetzen (Phase 2.7 — blockiert).
+17. [ ] DNS-Migration (Aruba → Cloudflare) — Phase 3.
+18. [ ] `calc_cancellation_fee()` Rechenfehler fixen.
+19. [ ] `success.html` Text + Booking-Details korrigieren.
 
 ## Session-Log
-- **28.04.2026 (Full Website Audit — 12 Fixes)**: Kompletter Source-Code-Audit durchgeführt. 4 Blocker, 10 High-Impact, 11 Medium, 5 Low Issues identifiziert. 12 Code-Fixes sofort deployed: (B-01) Fehlendes `</section>` für #experience behoben. (H-01) Hero von 3 auf 2 CTAs reduziert. (H-02) Terms/Privacy aus Hauptnavigation in Footer verschoben. (H-05) Trust Cues auf „Licensed Skydivers Only“/„UNESCO World Heritage“/„Since 2022“ geändert (HTML-Fallback; translations.js Keys noch ausstehend). (H-08) Google Maps Embed-URLs mit echten Koordinaten statt Fake-Place-IDs. (H-09) OG Image Meta-Tag für Social Sharing. (M-01) Doppelter loadUpcomingJumps-Aufruf bei Sprachwechsel entfernt. (M-02) applyTranslations() erhält jetzt lang-Argument im Modal. (M-03) Chat Widget Text korrigiert. (M-04) Zeitzone vereinfacht auf CET/CEST. (M-05) Footer Copyright bereinigt. (M-08) Page Title Keyword-Stuffing behoben. (M-10) Step-4 reveal-delay korrigiert. (M-11) FormSubmit Redirect auf Produktions-URL.
+- **28.04.2026 (Admin Panel Rebuild + Cleanup)**: Komplette Admin-Panel-Neugestaltung: Hardcoded Credentials (`Jump2025!`) durch Supabase Auth ersetzt, Admin-User `admin@timetojumpdolomites.com` angelegt, RLS Policies (anon=SELECT, auth=CRUD) deployed. 3-Tab-Layout: Events CRUD (create/edit/cancel direkt in Supabase), Bookings (Suche, Filter, Detail-Modal, CSV-Export), Settings/Stats. Schema-Mapping korrigiert (jump_date, capacity, first/last_name, license_country). Abandoned Checkout Cleanup implementiert: `cleanup_abandoned_bookings()` SQL-Funktion (reserved > 30min → expired), `cleanup-bookings` Edge Function (HTTP-aufrufbar), Frontend- und Admin-Integration. Deep Audit von Claude Code eingearbeitet: Technische Schulden dokumentiert, ROADMAP umstrukturiert.
+- **28.04.2026 (Full Website Audit — 12 Fixes)**: Kompletter Source-Code-Audit durchgeführt. 4 Blocker, 10 High-Impact, 11 Medium, 5 Low Issues identifiziert. 12 Code-Fixes sofort deployed: (B-01) Fehlendes `</section>` für #experience behoben. (H-01) Hero von 3 auf 2 CTAs reduziert. (H-02) Terms/Privacy aus Hauptnavigation in Footer verschoben. (H-05) Trust Cues auf „Licensed Skydivers Only"/„UNESCO World Heritage"/„Since 2022" geändert (HTML-Fallback; translations.js Keys noch ausstehend). (H-08) Google Maps Embed-URLs mit echten Koordinaten statt Fake-Place-IDs. (H-09) OG Image Meta-Tag für Social Sharing Preview. (M-01) Doppelter loadUpcomingJumps-Aufruf bei Sprachwechsel entfernt. (M-02) applyTranslations() erhält jetzt lang-Argument im Modal. (M-03) Chat Widget Text korrigiert. (M-04) Zeitzone vereinfacht auf CET/CEST. (M-05) Footer Copyright bereinigt. (M-08) Page Title Keyword-Stuffing behoben. (M-10) Step-4 reveal-delay korrigiert. (M-11) FormSubmit Redirect auf Produktions-URL.
 - **28.04.2026 (Phase 1.7 Abschluss)**: Repository-Struktur bereinigt (Korrespondenz → business/), 6 KI-Bildvarianten generiert (3× Hero, 3× About), App-Link aus Navigation entfernt, Cloudflare Build-Output auf public/ konfiguriert.
 - **28.04.2026 (AGB & Booking UX Sprint)**: Verbleibende Action Items aus Telefonat vom 27.04 implementiert: (1) terms.html — Hardcoded Preistabelle entfernt, §3.1a Short-Notice-Booking Klausel (<7 Tage = sofortige Vollzahlung, keine Stornierung), §4a Null-Toleranz Substanzenpolitik. (2) index.html/style.css — Amber-Warning-Banner im Booking-Modal für kurzfristige Buchungen. (3) supabase-client.js — data-event-date auf Reserve-Button, dynamische Anzeige der Warnbox basierend auf Tagesbereching. (4) translations.js — `booking.shortNoticeTitle`/`booking.shortNoticeText` in 9 Sprachen. (5) ROADMAP.md — Phase 2 Items aus Telefonat ergänzt (Dynamische Preisberechnung, Multi-Standort DB, Sequenzielle Load-Logik).
 - **27.04.2026 (Telefonat-Umsetzung & Media)**: 40-Min-Telefonat mit David Prato transkribiert und bereinigt. 19 Action Items extrahiert, 7 Sofort-Maßnahmen in 3 Batches umgesetzt: (1) index.html — „2+ Loads" entfernt, Equipment Rental auf 2 Zeilen (100€+80€/Tag), Gruppenpreis-Texte generisch, Buchung nur über Plattform, FAQ Q3 ohne Elikos, neuer FAQ Q7 (Direktbuchung), Map mit Saslong + Mont de Côi. (2) terms.html — DolomitesFly/David Prato entfernt, Elikos generisiert. (3) translations.js — Alle betroffenen Keys in 9 Sprachen aktualisiert + 12 neue Keys. Logo von David eingebaut. Media-Input (Teamfotos) archiviert unter Korrespondenz/.

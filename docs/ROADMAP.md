@@ -49,7 +49,13 @@
 - [x] **App-Link entfernt**: Externer App-Link aus Desktop- und Mobile-Navigation entfernt.
 - [x] **Korrespondenz-Reste bereinigt**: Verwaiste Dateien nach business/ verschoben.
 
-## Phase 2: Backend & Booking-System [IN PROGRESS]
+## Phase 1.8: Audit & Sprach-Reduktion [COMPLETED]
+- [x] **Full Website Audit**: 12 kritische Fixes deployed (HTML-Struktur, SEO, Maps, Navigation).
+- [x] **Sprach-Archivierung**: 9 → 4 Sprachen (EN, DE, IT, LAD). NL, FR, PL, ES, CS entfernt.
+
+---
+
+## Phase 2: Backend & Übergabe-System [IN PROGRESS]
 
 ### 2.1 Supabase Schema & Backend [COMPLETED]
 - [x] **Multi-Standort DB-Support**: `locations` Tabelle (Saslong + Mont de Côi) mit GPS, Altitude, Maps.
@@ -66,15 +72,68 @@
 - [x] **Load-Badges**: Load-Nummer und Short-Notice Badges auf Flight Cards.
 - [x] **Invite-Link Flow**: URL-Parameter `?invite=token` öffnet automatisch Booking-Modal.
 
-### 2.3 Flow Automatisierung (n8n) — Ausstehend
-- [ ] Webhook-Catch via n8n für erfolgreiche Event-Buchungen / Stripe SetupIntents.
-- [ ] Automatisierte Invoice & Confirmation-Email an Teilnehmer.
-- [ ] Erinnerungs-Sequenzen: 7 Tage, 5 Tage, 3 Tage vor Abflug automatisiert via n8n senden.
-- [ ] Automatischer Opt-In für die gruppenspezifische WhatsApp-Community pro Flugdatum.
-- [ ] **Automatisierte Stripe-Zahlungsabwicklung**: Dynamisches Charging basierend auf finaler Load-Belegung am Sprungtag.
+### 2.3 Admin Panel Rebuild [COMPLETED — 28.04.2026]
+- [x] **Supabase Auth**: Hardcoded `Jump2025!` Passwort entfernt → echte Supabase-Auth-Session.
+- [x] **Admin-User angelegt**: `admin@timetojumpdolomites.com` (mit Identity + Auth-Record).
+- [x] **RLS Policies**: anon=SELECT only, authenticated=full CRUD auf events/bookings.
+- [x] **Events CRUD Tab**: David kann Events erstellen, bearbeiten, stornieren — direkt in Supabase.
+- [x] **Bookings Tab**: Alle Buchungen mit Kontaktdaten, Status-Filter, Suche, CSV-Export.
+- [x] **Settings/Stats Tab**: Event-Übersicht, Buchungszähler, Revenue-Dashboard.
+- [x] **Schema-Mapping**: Alle Feldnamen korrekt gegen echte DB gemappt (jump_date, capacity, first/last_name, license_country).
 
-## Phase 3: Infrastruktur Migration (Wix Ablöse)
-- [ ] Restliche Inhalte aus Wix exportieren und in die Vanilla/Next-Infrastruktur eingliedern.
-- [ ] Domain-Hosting (ARUBA) und DNS-Umzug orchestrieren (Deadline: Juli 2026).
-- [ ] GMB (Google My Business) Validierung unterstützen (Büro-Foto).
+### 2.4 Abandoned Checkout Cleanup [COMPLETED — 28.04.2026]
+- [x] **`cleanup_abandoned_bookings()`**: SQL-Funktion setzt `reserved` > 30min auf `expired`.
+- [x] **`cleanup-bookings` Edge Function**: HTTP-aufrufbar per externem Cron (verify_jwt=false).
+- [x] **Frontend-Integration**: Auto-Cleanup bei jedem Event-Page-Load.
+- [x] **Admin-Integration**: Auto-Cleanup beim Admin-Dashboard-Laden.
+- [x] **`updated_at` Column**: Zu `bookings` hinzugefügt für Tracking.
 
+### 2.5 Stripe Production Mode — ⏳ BLOCKIERT: Stripe Key von David
+- [ ] `mode: "setup"` → `mode: "payment"` umstellen (Deposit sofort einziehen).
+- [ ] Edge Function `create-setup-intent` umbenennen → `create-checkout-session`.
+- [ ] Booking-Insert Timing anpassen: Booking erst nach Stripe-Bestätigung (nicht vorher).
+
+### 2.6 Stripe Webhook — ⏳ BLOCKIERT: Stripe Key + Webhook Secret
+- [ ] Edge Function `stripe-webhook` implementieren (reagiert auf `checkout.session.completed`).
+- [ ] Webhook Signature Verification (Stripe-Secret).
+- [ ] Booking-Status: `reserved` → `confirmed` bei erfolgreicher Zahlung.
+- [ ] Webhook löst E-Mail-Versand aus (2.7).
+
+### 2.7 E-Mail-Automatisierung — ⏳ BLOCKIERT: Resend/SendGrid API Key
+- [ ] Edge Function `send-email` (oder Webhook-intern).
+- [ ] **Template: Buchungsbestätigung an Kunden** (Datum, Location, Load, Referenz-Nr).
+- [ ] **Template: Buchungsbenachrichtigung an David** (auf persönliche E-Mail-Adresse).
+- [ ] **Stornierungsbenachrichtigung** an beide Parteien.
+- [ ] FormSubmit.co: E-Mail-Adresse auf Davids persönliche Adresse umstellen + Aktivierung.
+
+---
+
+## Phase 3: Infrastruktur & Go-Live
+
+### 3.1 DNS-Migration — ⏳ BLOCKIERT: Aruba-Zugangsdaten von David
+- [ ] Aruba DNS-Zugangsdaten von David erhalten.
+- [ ] Cloudflare DNS einrichten, SSL-Zertifikat.
+- [ ] FormSubmit.co Aktivierung (David klickt Bestätigungs-E-Mail).
+- [ ] Stripe Live-Key in Supabase Secrets eintragen.
+- [ ] Webhook-Signing-Secret in Supabase eintragen.
+
+### 3.2 End-to-End Verifikation
+- [ ] Vollständiger Produktions-Test auf finaler Domain.
+- [ ] Booking → Stripe → Webhook → Bestätigungs-E-Mail → Admin Panel prüfen.
+
+---
+
+## Bekannte technische Schulden (aus Deep Audit 28.04.2026)
+
+### MEDIUM Priorität
+- [ ] **Booking vor Payment Race Condition**: Edge Function legt Booking an VOR Stripe-Session-Erstellung. Korrektur: Reihenfolge umdrehen oder Booking erst via Webhook.
+- [ ] **`events_enriched` View N+1**: 3 identische korrelierte Subqueries pro Event. Optimierung: Ein einziger `LEFT JOIN` mit `COUNT()`.
+- [ ] **`pricing_rules` ist tote Tabelle**: Angelegt und RLS konfiguriert, aber nirgendwo gelesen. Preis kommt aus `events.price_per_load`.
+- [ ] **`cancellations` nie aufgerufen**: Tabelle + Funktion existieren, aber kein Trigger/API nutzt sie.
+- [ ] **`calc_cancellation_fee()` Rechenfehler**: `CEIL(deposit * 30)` ergibt 30× statt 30%. Korrekt wäre `CEIL(deposit * 0.30)`.
+- [ ] **Gruppenbuchungs-Invite**: Verwendet `alert()` statt Modal für den generierten Invite-Link.
+
+### LOW Priorität
+- [ ] **`success.html` ehrlicher Text**: "0.00€ hold" stimmt nicht bei Short-Notice. "WhatsApp confirmation" existiert nicht. Booking-Details (Datum, Load, Referenz) fehlen.
+- [ ] **Erinnerungs-Sequenzen**: 7d/5d/3d vor Abflug — Phase 2+ Scope.
+- [ ] **AGB-Volltext in 4 Sprachen**: Juristischer Inhalt bisher nur auf Englisch.
