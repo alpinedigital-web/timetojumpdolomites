@@ -333,10 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Re-render flight cards to match the new language
-    if (typeof loadUpcomingJumps === 'function') {
-      loadUpcomingJumps();
-    }
+    // Re-render flight cards is already handled by window.ttjd.loadUpcomingJumps() above
   }
 
   // Initialize i18n

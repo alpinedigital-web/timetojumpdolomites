@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (groupSizeWrapper) groupSizeWrapper.style.display = 'none';
 
         if (typeof applyTranslations === 'function') {
-          applyTranslations();
+          applyTranslations(localStorage.getItem('ttjd_lang') || 'en');
         }
       });
     });
