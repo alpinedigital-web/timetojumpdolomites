@@ -1,5 +1,5 @@
 /* ============================================================
-   ADMIN PANEL — Minimal Custom Styles (Tailwind handles layout)
+   ADMIN PANEL — Event Manager Styles (Tailwind handles layout)
    ============================================================ */
 
 /* Custom scrollbar */
@@ -8,82 +8,7 @@
 ::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: #FF8A00; }
 
-/* Toast notification */
-.admin-toast {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #fff;
-  z-index: 9999;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.3s, transform 0.3s;
-  pointer-events: none;
-}
-.admin-toast.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.admin-toast--success { background: #16a34a; }
-.admin-toast--error { background: #dc2626; }
-.admin-toast--info { background: #2563eb; }
-
 /* Login error visibility */
 #loginError.visible {
   display: block !important;
-}
-
-/* Editor card expand animation */
-.editor-card-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease, padding 0.3s ease;
-}
-.editor-card.open .editor-card-body {
-  max-height: 600px;
-  padding-top: 12px;
-}
-.editor-card .chevron-icon {
-  transition: transform 0.2s ease;
-}
-.editor-card.open .chevron-icon {
-  transform: rotate(180deg);
-}
-
-/* Image dropzone */
-.admin-dropzone.dragover {
-  border-color: #FF8A00 !important;
-  background: rgba(255, 138, 0, 0.05) !important;
-}
-
-/* Mobile sidebar overlay */
-@media (max-width: 1023px) {
-  #adminSidebar {
-    position: fixed;
-    left: -280px;
-    top: 0;
-    height: 100vh;
-    z-index: 9000;
-    transition: left 0.3s ease;
-  }
-  #adminSidebar.open {
-    left: 0;
-  }
-  #adminEditorPane {
-    width: 100% !important;
-  }
-  #adminPreviewPane {
-    display: none !important;
-  }
-}
-
-/* Preview mobile mode */
-#previewFrame.mobile-preview {
-  max-width: 375px;
-  margin: 0 auto;
-  display: block;
 }

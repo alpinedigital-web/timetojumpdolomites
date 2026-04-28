@@ -20,9 +20,9 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/admin.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="bg-brand-dark text-slate-200 font-sans h-screen overflow-hidden">
+<body class="bg-brand-dark text-slate-200 font-sans min-h-screen">
 
   <!-- ========== LOGIN SCREEN ========== -->
   <div class="fixed inset-0 z-50 flex items-center justify-center bg-brand-dark" id="adminLogin">
@@ -30,12 +30,12 @@
       <div class="flex flex-col items-center mb-6">
         <div class="w-14 h-14 bg-brand-orange rounded-xl flex items-center justify-center text-2xl font-black text-white mb-4">T</div>
         <h1 class="text-xl font-bold">Admin Panel</h1>
-        <p class="text-sm text-slate-500 mt-1">Time to Jump Dolomites — CMS</p>
+        <p class="text-sm text-slate-500 mt-1">Time to Jump Dolomites — Event Manager</p>
       </div>
       <form id="adminLoginForm" class="space-y-4">
         <div>
           <label for="adminEmail" class="block text-xs font-medium text-slate-400 mb-1">Email</label>
-          <input type="email" id="adminEmail" required autocomplete="email" placeholder="admin@example.com"
+          <input type="email" id="adminEmail" required autocomplete="email" placeholder="admin@timetojumpdolomites.com"
             class="w-full bg-slate-900 border-slate-700 text-slate-100 rounded-md focus:ring-brand-orange focus:border-brand-orange text-sm">
         </div>
         <div>
@@ -52,103 +52,169 @@
   </div>
 
   <!-- ========== DASHBOARD ========== -->
-  <div class="hidden flex h-full" id="adminDashboard">
+  <div class="hidden" id="adminDashboard">
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-brand-navy border-r border-brand-border flex flex-col shrink-0" id="adminSidebar">
-      <div class="p-5 border-b border-brand-border flex items-center gap-3">
+    <!-- Top Bar -->
+    <header class="h-14 border-b border-brand-border flex items-center justify-between px-6 bg-brand-navy sticky top-0 z-20">
+      <div class="flex items-center gap-3">
         <div class="w-8 h-8 bg-brand-orange rounded flex items-center justify-center font-bold text-white text-sm">T</div>
-        <div>
-          <h1 class="text-sm font-bold tracking-tight leading-tight">Time to Jump</h1>
-          <p class="text-[10px] text-slate-500">Content Management</p>
-        </div>
+        <h1 class="text-sm font-bold tracking-tight">Time to Jump — Admin</h1>
       </div>
-      <nav class="flex-1 p-3 space-y-1 overflow-y-auto" id="sidebarNav">
-        <!-- Populated by JS -->
+      <div class="flex items-center gap-3">
+        <span class="text-xs text-slate-500" id="adminUserEmail"></span>
+        <button id="logoutBtn" class="px-3 py-1.5 text-xs text-red-400 hover:text-red-300 hover:bg-red-900/20 rounded-md transition-colors">Logout</button>
+      </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <div class="border-b border-brand-border bg-brand-dark">
+      <nav class="flex gap-0 px-6">
+        <button class="admin-tab active px-5 py-3 text-sm font-medium border-b-2 border-brand-orange text-white" data-tab="events">📅 Events</button>
+        <button class="admin-tab px-5 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-white" data-tab="bookings">📋 Bookings</button>
+        <button class="admin-tab px-5 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-white" data-tab="settings">⚙️ Settings</button>
       </nav>
-      <div class="p-3 border-t border-brand-border space-y-1.5">
-        <button id="exportBtn" class="w-full flex items-center gap-2 px-3 py-1.5 text-xs text-slate-400 hover:text-white hover:bg-slate-800 rounded-md transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><polyline points="7 10 12 15 17 10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><line x1="12" y1="15" x2="12" y2="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-          Export JSON
-        </button>
-        <button id="importBtn" class="w-full flex items-center gap-2 px-3 py-1.5 text-xs text-slate-400 hover:text-white hover:bg-slate-800 rounded-md transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><polyline points="17 8 12 3 7 8" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><line x1="12" y1="3" x2="12" y2="15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-          Import JSON
-        </button>
-        <input type="file" id="importFileInput" accept=".json" class="hidden">
-        <button id="logoutBtn" class="w-full flex items-center gap-2 px-3 py-1.5 text-xs text-red-400 hover:text-red-300 hover:bg-red-900/20 rounded-md transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><polyline points="16 17 21 12 16 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><line x1="21" y1="12" x2="9" y2="12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-          Logout
-        </button>
-      </div>
-    </aside>
+    </div>
 
-    <!-- Main Content Area -->
-    <main class="flex-1 flex flex-col h-full bg-slate-950 overflow-hidden">
+    <!-- Tab Content -->
+    <main class="max-w-6xl mx-auto p-6">
 
-      <!-- Top Bar -->
-      <header class="h-14 border-b border-brand-border flex items-center justify-between px-6 bg-brand-dark z-10 shrink-0">
-        <div class="flex items-center gap-3">
-          <button class="lg:hidden text-slate-400 hover:text-white" id="adminMobileToggle">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="6" x2="21" y2="6" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="18" x2="21" y2="18" stroke-width="2" stroke-linecap="round"/></svg>
+      <!-- ===== EVENTS TAB ===== -->
+      <section id="tab-events" class="admin-tab-content">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg font-bold">Events verwalten</h2>
+          <button id="createEventBtn" class="px-4 py-2 bg-brand-orange hover:bg-orange-600 text-white rounded-lg text-sm font-semibold transition-all shadow-lg shadow-orange-900/20">
+            + Neues Event
           </button>
-          <div>
-            <h2 class="text-base font-semibold">Editing: <span class="text-brand-orange" id="adminSectionTitle">Navigation</span></h2>
-            <p class="text-[10px] text-slate-500" id="adminLastSaved"></p>
+        </div>
+        <div id="eventsTable" class="space-y-3">
+          <p class="text-slate-500 text-sm">Lade Events…</p>
+        </div>
+      </section>
+
+      <!-- ===== BOOKINGS TAB ===== -->
+      <section id="tab-bookings" class="admin-tab-content hidden">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg font-bold">Alle Buchungen</h2>
+          <button id="exportBookingsBtn" class="px-4 py-2 border border-slate-600 text-slate-300 hover:text-white rounded-lg text-sm font-medium transition-all">
+            📥 CSV Export
+          </button>
+        </div>
+        <div class="mb-4 flex gap-3">
+          <select id="bookingStatusFilter" class="bg-slate-900 border border-slate-700 text-slate-200 rounded-md text-sm focus:ring-brand-orange">
+            <option value="">Alle Status</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="reserved">Reserved</option>
+            <option value="cancelled">Cancelled</option>
+            <option value="expired">Expired</option>
+          </select>
+          <input type="text" id="bookingSearch" placeholder="Name oder Email suchen…" class="flex-1 bg-slate-900 border border-slate-700 text-slate-200 rounded-md text-sm focus:ring-brand-orange">
+        </div>
+        <div id="bookingsTable" class="space-y-2">
+          <p class="text-slate-500 text-sm">Lade Buchungen…</p>
+        </div>
+      </section>
+
+      <!-- ===== SETTINGS TAB ===== -->
+      <section id="tab-settings" class="admin-tab-content hidden">
+        <h2 class="text-lg font-bold mb-6">Einstellungen</h2>
+        <div class="max-w-lg space-y-6">
+          <div class="bg-brand-navy border border-brand-border rounded-xl p-5">
+            <h3 class="text-sm font-semibold mb-3">🔔 Benachrichtigungen</h3>
+            <label class="block text-xs text-slate-400 mb-1">E-Mail für Buchungsbenachrichtigungen</label>
+            <input type="email" id="notificationEmail" value="Info@timetojumpdolomites.com" class="w-full bg-slate-900 border border-slate-700 text-slate-200 rounded-md text-sm focus:ring-brand-orange">
+            <p class="text-xs text-slate-500 mt-1">Bei jeder neuen Buchung erhältst du eine E-Mail an diese Adresse.</p>
+          </div>
+          <div class="bg-brand-navy border border-brand-border rounded-xl p-5">
+            <h3 class="text-sm font-semibold mb-3">📊 Statistiken</h3>
+            <div class="grid grid-cols-3 gap-4" id="statsGrid">
+              <div class="text-center"><div class="text-2xl font-bold text-brand-orange" id="statEvents">—</div><div class="text-xs text-slate-500">Events</div></div>
+              <div class="text-center"><div class="text-2xl font-bold text-green-400" id="statBookings">—</div><div class="text-xs text-slate-500">Bookings</div></div>
+              <div class="text-center"><div class="text-2xl font-bold text-blue-400" id="statRevenue">—</div><div class="text-xs text-slate-500">Revenue (€)</div></div>
+            </div>
           </div>
         </div>
-        <div class="flex items-center gap-3">
-          <button class="px-3 py-1.5 text-xs font-medium text-slate-400 hover:text-white transition-colors" id="discardBtn">Discard Changes</button>
-          <button class="px-4 py-1.5 bg-brand-orange hover:bg-orange-600 text-white rounded-md text-xs font-semibold transition-all shadow-lg shadow-orange-900/20" id="savePublishBtn">Save &amp; Publish</button>
-        </div>
-      </header>
+      </section>
 
-      <!-- Split Editor View -->
-      <div class="flex-1 flex overflow-hidden">
-
-        <!-- Content Editor Pane -->
-        <section class="w-[420px] xl:w-[480px] border-r border-brand-border bg-brand-navy overflow-y-auto p-5 space-y-6 shrink-0" id="adminEditorPane">
-          <div id="adminSections">
-            <!-- Populated by JS -->
-          </div>
-        </section>
-
-        <!-- Live Preview Pane -->
-        <section class="flex-1 bg-slate-900 relative p-4 flex flex-col" id="adminPreviewPane">
-          <!-- Preview Toolbar -->
-          <div class="flex items-center justify-between mb-3 bg-slate-800 p-2 rounded-lg border border-slate-700 shadow-xl shrink-0">
-            <div class="flex items-center gap-3 px-2">
-              <div class="flex items-center gap-1">
-                <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-                <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-              </div>
-              <span class="text-[10px] text-slate-500 font-mono">timetojumpdolomites.com</span>
-            </div>
-            <div class="flex items-center gap-1">
-              <button class="p-1 rounded hover:bg-slate-700 text-slate-400" title="Desktop" id="previewDesktop">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-              </button>
-              <button class="p-1 rounded hover:bg-slate-700 text-slate-400" title="Mobile" id="previewMobile">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-              </button>
-              <div class="w-px h-3 bg-slate-700 mx-1"></div>
-              <button class="p-1 rounded hover:bg-slate-700 text-slate-400" title="Toggle Preview" id="previewToggleBtn">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke-width="2"/></svg>
-              </button>
-            </div>
-          </div>
-          <!-- Preview iframe -->
-          <div class="flex-1 rounded-xl overflow-hidden border border-slate-800 shadow-2xl" id="previewFrameWrap">
-            <iframe id="previewFrame" src="index.html" class="w-full h-full border-0 bg-white"></iframe>
-          </div>
-        </section>
-
-      </div>
     </main>
   </div>
 
-  <script src="js/translations.js"></script>
+  <!-- ========== EVENT MODAL ========== -->
+  <div class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/60 backdrop-blur-sm" id="eventModal">
+    <div class="w-full max-w-lg mx-4 bg-brand-navy border border-brand-border rounded-2xl shadow-2xl overflow-hidden">
+      <div class="px-6 py-4 border-b border-brand-border flex items-center justify-between">
+        <h3 class="text-base font-bold" id="eventModalTitle">Neues Event</h3>
+        <button id="closeEventModal" class="text-slate-400 hover:text-white text-xl">&times;</button>
+      </div>
+      <form id="eventForm" class="p-6 space-y-4">
+        <input type="hidden" id="eventId">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Datum *</label>
+            <input type="date" id="eventDate" required class="w-full bg-slate-900 border-slate-700 text-slate-100 rounded-md text-sm focus:ring-brand-orange">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Uhrzeit</label>
+            <input type="time" id="eventTime" value="09:00" class="w-full bg-slate-900 border-slate-700 text-slate-100 rounded-md text-sm focus:ring-brand-orange">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Location *</label>
+            <select id="eventLocation" required class="w-full bg-slate-900 border-slate-700 text-slate-100 rounded-md text-sm focus:ring-brand-orange">
+              <!-- Populated by JS from locations table -->
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Load Nr.</label>
+            <input type="number" id="eventLoadNumber" value="1" min="1" max="10" class="w-full bg-slate-900 border-slate-700 text-slate-100 rounded-md text-sm focus:ring-brand-orange">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Preis pro Load (€) *</label>
+            <input type="number" id="eventPrice" required value="775" min="100" step="25" class="w-full bg-slate-900 border-slate-700 text-slate-100 rounded-md text-sm focus:ring-brand-orange">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Max. Kapazität</label>
+            <input type="number" id="eventCapacity" value="5" min="1" max="10" class="w-full bg-slate-900 border-slate-700 text-slate-100 rounded-md text-sm focus:ring-brand-orange">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1">Status</label>
+          <select id="eventStatus" class="w-full bg-slate-900 border-slate-700 text-slate-100 rounded-md text-sm focus:ring-brand-orange">
+            <option value="open">Open</option>
+            <option value="closed">Closed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1">Notizen (optional)</label>
+          <textarea id="eventNotes" rows="2" placeholder="Interne Notizen…" class="w-full bg-slate-900 border-slate-700 text-slate-100 rounded-md text-sm focus:ring-brand-orange"></textarea>
+        </div>
+        <div class="flex justify-end gap-3 pt-2">
+          <button type="button" id="cancelEventBtn" class="px-4 py-2 text-sm text-slate-400 hover:text-white transition-colors">Abbrechen</button>
+          <button type="submit" class="px-6 py-2 bg-brand-orange hover:bg-orange-600 text-white rounded-lg text-sm font-semibold transition-all shadow-lg shadow-orange-900/20">Speichern</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========== BOOKING DETAIL MODAL ========== -->
+  <div class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/60 backdrop-blur-sm" id="bookingModal">
+    <div class="w-full max-w-lg mx-4 bg-brand-navy border border-brand-border rounded-2xl shadow-2xl overflow-hidden max-h-[80vh] overflow-y-auto">
+      <div class="px-6 py-4 border-b border-brand-border flex items-center justify-between sticky top-0 bg-brand-navy z-10">
+        <h3 class="text-base font-bold">Buchungsdetails</h3>
+        <button id="closeBookingModal" class="text-slate-400 hover:text-white text-xl">&times;</button>
+      </div>
+      <div id="bookingDetail" class="p-6 space-y-3 text-sm">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="adminToast" class="fixed bottom-6 right-6 px-4 py-2.5 rounded-lg text-sm font-medium shadow-xl transform translate-y-4 opacity-0 transition-all duration-300 z-50"></div>
+
   <script src="js/admin.js"></script>
 </body>
 </html>
