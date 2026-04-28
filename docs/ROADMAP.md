@@ -27,7 +27,7 @@
 - [x] **AGB Headings i18n**: terms.label, terms.heading, terms.updated in 9 Sprachen.
 - [x] **Nav-Konsistenz**: index.html, terms.html, privacy.html synchronisiert.
 
-## Phase 1.7: Telefonat-Umsetzung & Media-Integration [IN PROGRESS]
+## Phase 1.7: Telefonat-Umsetzung & Media-Integration [COMPLETED]
 - [x] **Telefonat-Transkription**: 40-Min-Telefonat mit David (27.04.2026) transkribiert, bereinigt, archiviert.
 - [x] **„2 or more Loads" entfernt**: Pricing-Abschnitt vereinfacht (keine „auf Anfrage"-Preise mehr).
 - [x] **Equipment Rental vereinfacht**: Von 6 Einzelpreise auf 2 Zeilen (100 €/Tag + 80 €/weiterer Tag).
@@ -44,8 +44,10 @@
 - [x] **AGB Preistabelle**: Hardcoded Preise entfernt, generische Erklärung eingefügt.
 - [x] **Booking-Modal Warnung**: Kurzfristige-Buchung Warnbox (< 7 Tage) mit Amber-Banner.
 - [x] **i18n Short-Notice Keys**: `booking.shortNoticeTitle` / `booking.shortNoticeText` in 9 Sprachen.
-- [ ] **Hero-Bild**: KI-generiertes Panorama mit 5er Stern-Formation (Team ohne Helm, mit Brillen).
-- [ ] **About-Bild**: Bild 64 (Heli-Ausstieg) ausgebessert und eingebunden.
+- [x] **Hero-Bild**: KI-generiertes Panorama mit 5er Stern-Formation über Dolomiten.
+- [x] **About-Bild**: KI-generiertes Heli-Ausstieg Bild eingebunden.
+- [x] **App-Link entfernt**: Externer App-Link aus Desktop- und Mobile-Navigation entfernt.
+- [x] **Korrespondenz-Reste bereinigt**: Verwaiste Dateien nach business/ verschoben.
 
 ## Phase 2: Flow Automatisierung & Operations (n8n) — Neues Angebot
 - [ ] Webhook-Catch via n8n für erfolgreiche Event-Buchungen / Stripe SetupIntents.
