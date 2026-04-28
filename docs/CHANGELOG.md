@@ -1,5 +1,26 @@
 # CHANGELOG: Time to Jump Dolomites
 
+## [2.1.0] - 2026-04-28
+### Fixed — Full Website Audit (12 Fixes)
+- **B-01 HTML-Strukturfehler**: Fehlendes `</section>` nach `#experience` behoben — `#upcoming` war als Kindelement gerendert.
+- **H-01 Hero CTAs**: Von 3 auf 2 reduziert (Book Your Jump + View Prices). "Contact Us" entfernt.
+- **H-02 Navigation bereinigt**: Terms/Privacy aus Hauptnavigation entfernt, stattdessen im Footer verlinkt.
+- **H-05 Trust Cues**: "Helicopter Jumps from 775 €" → "Licensed Skydivers Only", "UNESCO Dolomites" → "UNESCO World Heritage Site", "Fri – Sun" → "Operating since 2022".
+- **H-08 Google Maps**: Fake-Place-IDs (`0x1234567890abcdef`) durch koordinatenbasierte Embed-URLs ersetzt.
+- **H-09 OG Image**: `og:image` Meta-Tag für Social Sharing Preview hinzugefügt.
+- **M-01 Doppelter API-Call**: Zweifacher `loadUpcomingJumps()` Aufruf bei Sprachwechsel entfernt.
+- **M-02 Translation-Bug**: `applyTranslations()` im Booking-Modal erhält jetzt korrektes `lang`-Argument.
+- **M-03 Chat Widget**: "What would You know?" → "Questions? We're here."
+- **M-04 Zeitzone**: Hardcoded Sommer-/Winterzeit-Daten durch "Central European Time (CET/CEST)" ersetzt.
+- **M-05 Footer Copyright**: "Time to Jump Dolomites 2026 © Since 2022 ©" → "© 2022–2026 Time to Jump Dolomites".
+- **M-08 SEO Title**: "Tyrol Tyrol" Keyword-Stuffing behoben.
+- **M-10 Animation**: Step 4 `reveal-delay-3` → `reveal-delay-4` für sequenzielle Einblendung.
+- **M-11 FormSubmit**: Redirect-URL von Staging auf Produktionsdomain aktualisiert.
+
+### Known Issue
+- `translations.js` Trust-Cue-Keys (`hero.trust.heli/unesco/days`) enthalten noch die alten Übersetzungen in 9 Sprachen. HTML-Fallback ist korrekt, i18n-Override steht noch aus.
+
+
 ## [2.0.0] - 2026-04-28
 ### Added — Supabase Phase 2 Schema
 - **`locations` Tabelle**: Multi-Standort-Support — Saslong (1600m) + Mont de Côi (2500m) mit GPS-Koordinaten, Altitude, Maps-Embed.

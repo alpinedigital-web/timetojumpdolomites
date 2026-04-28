@@ -4,9 +4,9 @@
 ## Kennzahlen
 | KPI | Status |
 |---|---|
-| Aktuelle Version | 2.0.0 |
+| Aktuelle Version | 2.1.0 |
 | GitHub Synchronität | Sync ✅ |
-| Fokus | Phase 2.1+2.2 (Backend & Frontend) abgeschlossen. Nächster Schritt: n8n oder DNS-Migration |
+| Fokus | Full Website Audit + 12 Code-Fixes deployed. Phase 2.1+2.2 abgeschlossen. |
 
 ---
 
@@ -73,3 +73,13 @@
 - **Edge Function `create-setup-intent`:** Deployed mit dynamischer Deposit-Berechnung, Short-Notice Payment-Mode (Stripe `payment` statt `setup`), Gruppenbuchung mit Token-Generierung.
 - **Frontend-Integration:** supabase-client.js komplett auf events_enriched View umgestellt, Gruppenbuchungs-UI im Modal, Load-Badges, Invite-Link-Flow.
 - **Security Hardening:** RLS auf allen Tabellen, SECURITY INVOKER View, search_path fix auf Funktionen.
+
+### Phase 7: Full Website Audit & UX-Fixes (28.04.2026)
+*Systematischer Source-Code-Audit mit 30 identifizierten Issues. 12 sofort fixbar, rest erfordert Client-Aktion oder Design-Entscheidung.*
+- **HTML-Strukturfehler (B-01):** Fehlendes `</section>` für Experience-Section behoben — Upcoming Jumps war als verschachteltes Kind gerendert.
+- **SEO-Optimierung:** Page Title de-dupliziert ("Tyrol Tyrol"), OG Image Meta-Tag für Social Sharing hinzugefügt.
+- **Navigation-Redesign:** Terms/Privacy aus der Hauptnavigation entfernt und als Footer-Links positioniert.
+- **Hero-Conversion:** Von 3 auf 2 CTAs reduziert ("Contact Us" entfernt), Trust Cues auf authentische Signale umgestellt.
+- **Google Maps:** Fake-Place-IDs durch koordinatenbasierte Embed-URLs für Saslong (46.548°N) und Mont de Côi (46.557°N) ersetzt.
+- **JavaScript-Bugfixes:** Doppelter Supabase-Request bei Sprachwechsel eliminiert, Translation-Bug im Booking-Modal behoben.
+- **Content-Korrekturen:** Chat Widget Text, Zeitzone, Footer Copyright, FormSubmit Redirect-URL, Animation-Delay.
