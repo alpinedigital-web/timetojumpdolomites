@@ -4,9 +4,9 @@
 ## Kennzahlen
 | KPI | Status |
 |---|---|
-| Aktuelle Version | 1.4.0 |
+| Aktuelle Version | 2.0.0 |
 | GitHub Synchronität | Sync ✅ |
-| Fokus | i18n & UX-Polish abgeschlossen, Blocker bei Client (Stripe/DNS) |
+| Fokus | Phase 2.1+2.2 (Backend & Frontend) abgeschlossen. Nächster Schritt: n8n oder DNS-Migration |
 
 ---
 
@@ -51,3 +51,25 @@
 - **Sprachanzeige-Fix:** "DE DE" Doppelanzeige im Language-Dropdown behoben (Windows-spezifisches Flag-Emoji-Rendering).
 - **AGB-Seite i18n:** Headings (Label, Ueberschrift, Aktualisierungsdatum) in 9 Sprachen uebersetzt. Volltext-Uebersetzung als Phase-2-Scope dokumentiert.
 - **Booking Error UX:** Verbesserte Fehlermeldung bei fehlgeschlagener Reservierung (lokalisiert DE/EN, mit technischem Detail).
+
+### Phase 5: Telefonat-Umsetzung & Go-Live Cleanup (27.–28.04.2026)
+*Alle 19 Action Items aus dem 40-Minuten-Telefonat mit David Prato umgesetzt. Repository-Struktur professionalisiert.*
+- **Pricing Cleanup:** „2 or more Loads“ entfernt, Equipment Rental vereinfacht (100€ + 80€/Tag), Gruppenpreis-Texte generisch.
+- **Elikos-Referenz entfernt:** FAQ, AGB, Sicherheitsbriefing — alle Nennungen generisiert.
+- **Zwei Karten-Standorte:** Saslong (1.600m) + Mont de Côi (2.500m) side-by-side.
+- **AGB-Erweiterung:** §3.1a Short-Notice-Booking, §4a Substanzenpolitik, Preistabelle entfernt.
+- **Booking-Modal Warnung:** Amber-Banner bei kurzfristiger Buchung (< 7 Tage).
+- **Repository-Restrukturierung:** Saubere Trennung in public/, docs/, business/, supabase/.
+- **Cloudflare Pages:** Build-Output auf public/ konfiguriert, Live-Deployment verifiziert.
+
+### Phase 6: Backend & Booking-System (28.04.2026)
+*Komplette Supabase-Infrastruktur für das Buchungssystem gemäß Telefonat-Absprache aufgebaut.*
+- **Multi-Standort DB:** `locations` Tabelle mit Saslong + Mont de Côi (GPS, Altitude, Maps-Embed).
+- **Dynamische Preise:** `pricing_rules` Tabelle pro Location und Season (775€/825€).
+- **Sequenzielle Loads:** `events` erweitert um `load_number`, `parent_event_id` für Load 1 → 2 → 3 Steuerung.
+- **Gruppenbuchung:** `bookings` erweitert um `group_leader_id`, `invite_token`, `group_size`. Hauptperson bucht, Mitspringer per Invite-Link.
+- **Storno-System:** `cancellations` Tabelle + `calc_cancellation_fee()` Funktion (30% bei > 7 Tagen, 100% bei < 7 Tagen).
+- **Events Enriched View:** Vorberechnete Felder (booked_count, availability_status, current_price_per_person, is_short_notice).
+- **Edge Function `create-setup-intent`:** Deployed mit dynamischer Deposit-Berechnung, Short-Notice Payment-Mode (Stripe `payment` statt `setup`), Gruppenbuchung mit Token-Generierung.
+- **Frontend-Integration:** supabase-client.js komplett auf events_enriched View umgestellt, Gruppenbuchungs-UI im Modal, Load-Badges, Invite-Link-Flow.
+- **Security Hardening:** RLS auf allen Tabellen, SECURITY INVOKER View, search_path fix auf Funktionen.

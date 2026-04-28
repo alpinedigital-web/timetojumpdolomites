@@ -1,9 +1,10 @@
 # Alpine Digital Agency (Time to Jump Dolomites) — Aktueller Projektstatus
-> Letztes Update: 28.04.2026 — AGB-Finalisierung, Kurzfristige-Buchung-Warnung, i18n-Erweiterung
+> Letztes Update: 28.04.2026 — Phase 2 Backend & Booking-System komplett
 
 ## Aktueller Fokus
-- **AGB & Booking UX (28.04.2026)**: Verbleibende 5 Action Items aus Telefonat umgesetzt — AGB-Paragraphen §3.1a (Short-Notice) und §4a (Substanzen), Booking-Modal Warnbox, i18n-Keys.
-- **Media-Integration**: Davids Logo eingebunden. Hero-Bild (5er Stern-Formation) und About-Bild (64.jpg ausgebessert) ausstehend (KI-Generierung).
+- **Phase 2 Backend DONE (28.04.2026)**: Supabase Schema-Erweiterung (locations, pricing_rules, cancellations, group bookings), Edge Function deployed, Frontend auf events_enriched View umgestellt.
+- **Phase 1.7 DONE**: Repo-Struktur bereinigt, KI-Bildvarianten generiert (6 Stück zur Auswahl), App-Link entfernt.
+- **Nächster Schritt**: Phase 2.3 (n8n Automatisierung) oder Phase 3 (DNS-Migration).
 
 ## Entscheidungen
 - **Payment Hold vs. Deposit**: Da reine Authorization-Holds bei Stripe auf 7 Tage begrenzt sind, wird die Karte hinterlegt. Belastungen (z.B. Strafen bei Verpassen des Briefings: 50 €) werden manuell ausgelöst. Zahlung des eigentlichen Flugs erfolgt vor Ort (Karte/Bar).
@@ -20,32 +21,30 @@
 
 ## Blocker
 - **DNS-Umschaltung**: Migration zur Produktionsdomain (`timetojumpdolomites.com`) blockiert bis **Aruba DNS-Zugangsdaten** von David geliefert werden.
-- **Stripe-Integration**: Checkout funktional scaffolded, aber inoperabel bis David **Stripe Business Account** einrichtet.
+- **Stripe-Integration**: Edge Function deployed und funktional, aber inoperabel bis David **Stripe Business Account** einrichtet und `STRIPE_SECRET_KEY` in Supabase Secrets hinterlegt.
 - **FormSubmit.co**: E-Mail-Validierung steht noch aus (Client-Aktion).
-- **Hero-Bild & About-Bild**: KI-Generierung (5er Stern-Formation + 64.jpg-Verbesserung) ausstehend — Bilder müssen als `img/hero.jpg` und `img/about.png` eingesetzt werden.
-- (Gelöst) Supabase Schema muss weiterhin MANUELL im Dashboard ausgeführt werden (`20260410_init_dolomites.sql`).
+- **Hero-Bild & About-Bild**: 6 KI-Varianten generiert (3× Hero, 3× About) in `business/media-input/generated/`. User muss finale Auswahl treffen.
+- ~~(Gelöst) Supabase Schema manuell~~ → Migrationen laufen jetzt via MCP-Token direkt.
 
 ## Nächste Schritte
-1. [x] Supabase Tabellen `events` & `bookings` inkl. RLS Policies anlegen (SQL erstellt).
+1. [x] Supabase Tabellen `events` & `bookings` inkl. RLS Policies anlegen.
 2. [x] Stripe Hosted Checkout Backend-Weiche (Edge Function) implementieren.
-3. [x] Frontend `index.html` an Live-Datenbank anbinden (Glassmorphism Modal, Nickname Pills, Scarcity-UI gebaut).
-4. [x] Booking Modal: Vollständige i18n mit `data-i18n` und `data-i18n-html` Attributen (9 Sprachen).
-5. [x] Flight Cards: Dynamisch gerenderte Supabase-Karten vollständig lokalisiert (keine gemischten Sprachen).
-6. [x] Language-Dropdown: Desktop + Mobile synchronisiert, kein doppelter Button mehr.
-7. [x] Pricing: 10er Tickets (Pack Jobs + Rental) entfernt.
-8. [ ] n8n Automatisierung an Supabase-Webhook anknuepfen fuer WhatsApp Benachrichtigung (-> Phase 2 Angebot).
-9. [x] Emergency Contact in Name + Telefon aufgetrennt, Tooltip-Hints bei Formularfeldern.
-10. [x] Navigation bereinigt: Shop/Blog/Events entfernt, Spruenge -> #upcoming.
-11. [x] CSS-Fixes: Flight Card Kontrast, Button-Overflow, section--light Kontrast, DE DE Language-Display.
-12. [x] AGB/Terms Headings i18n (Label, Heading, Updated).
-13. [ ] AGB-Volltext in 9 Sprachen uebersetzen (Phase 2).
-14. [x] Telefonat-Action-Items umgesetzt (Pricing, FAQ, Map, AGB, Equipment Rental, Logo).
-15. [x] AGB: §3.1a Short-Notice-Booking + §4a Substanzenpolitik + Preistabelle entfernt.
-16. [x] Booking-Modal: Kurzfristige-Buchung Warnhinweis (< 7 Tage) mit Amber-Banner.
-17. [x] i18n: `booking.shortNoticeTitle` / `booking.shortNoticeText` in 9 Sprachen.
-15. [ ] Hero-Bild (5er Stern-Formation) und About-Bild (64.jpg) via KI generieren und einbinden.
+3. [x] Frontend an Live-Datenbank anbinden (Glassmorphism Modal, Nickname Pills, Scarcity-UI).
+4. [x] Booking Modal: Vollständige i18n (9 Sprachen).
+5. [x] Flight Cards: Dynamisch gerenderte Supabase-Karten vollständig lokalisiert.
+6. [x] Telefonat-Action-Items (Pricing, FAQ, Map, AGB, Equipment Rental, Logo).
+7. [x] Phase 2 Schema: locations, pricing_rules, cancellations, group bookings.
+8. [x] Edge Function (create-setup-intent) deployed mit Deposit-Berechnung + Short-Notice.
+9. [x] Frontend auf events_enriched View umgestellt.
+10. [x] Gruppenbuchungs-UI im Booking-Modal.
+11. [ ] Hero-/About-Bild finale Auswahl treffen (6 Varianten liegen bereit).
+12. [ ] n8n Automatisierung (Webhooks, E-Mails, Erinnerungen) — Phase 2.3.
+13. [ ] AGB-Volltext in 9 Sprachen übersetzen.
+14. [ ] DNS-Migration (Aruba → Cloudflare) — Phase 3.
 
 ## Session-Log
+- **28.04.2026 (Phase 2 Backend & Frontend Integration)**: Supabase MCP-Token konfiguriert. Phase 2 Schema-Migration ausgeführt: (1) `locations` Tabelle mit Saslong + Mont de Côi (GPS, Altitude). (2) `pricing_rules` mit Season 2026 Preisen (775€/825€). (3) `events` erweitert um load_number, parent_event_id, location_id. (4) `bookings` erweitert um group_leader_id, invite_token, deposit/total_amount_cents, Stripe IDs, is_short_notice. (5) `cancellations` Audit-Tabelle. (6) `events_enriched` View mit booked_count, availability_status, current_price_per_person. (7) `calc_cancellation_fee()` Funktion. Security Hardening: RLS, SECURITY INVOKER, search_path. Edge Function `create-setup-intent` deployed (dynamische Deposit-Berechnung, Short-Notice Payment-Mode, Gruppenbuchung). Frontend komplett auf events_enriched umgestellt, Gruppenbuchungs-UI im Modal, Invite-Link-Flow.
+- **28.04.2026 (Phase 1.7 Abschluss)**: Repository-Struktur bereinigt (Korrespondenz → business/), 6 KI-Bildvarianten generiert (3× Hero, 3× About), App-Link aus Navigation entfernt, Cloudflare Build-Output auf public/ konfiguriert.
 - **28.04.2026 (AGB & Booking UX Sprint)**: Verbleibende Action Items aus Telefonat vom 27.04 implementiert: (1) terms.html — Hardcoded Preistabelle entfernt, §3.1a Short-Notice-Booking Klausel (<7 Tage = sofortige Vollzahlung, keine Stornierung), §4a Null-Toleranz Substanzenpolitik. (2) index.html/style.css — Amber-Warning-Banner im Booking-Modal für kurzfristige Buchungen. (3) supabase-client.js — data-event-date auf Reserve-Button, dynamische Anzeige der Warnbox basierend auf Tagesbereching. (4) translations.js — `booking.shortNoticeTitle`/`booking.shortNoticeText` in 9 Sprachen. (5) ROADMAP.md — Phase 2 Items aus Telefonat ergänzt (Dynamische Preisberechnung, Multi-Standort DB, Sequenzielle Load-Logik).
 - **27.04.2026 (Telefonat-Umsetzung & Media)**: 40-Min-Telefonat mit David Prato transkribiert und bereinigt. 19 Action Items extrahiert, 7 Sofort-Maßnahmen in 3 Batches umgesetzt: (1) index.html — „2+ Loads" entfernt, Equipment Rental auf 2 Zeilen (100€+80€/Tag), Gruppenpreis-Texte generisch, Buchung nur über Plattform, FAQ Q3 ohne Elikos, neuer FAQ Q7 (Direktbuchung), Map mit Saslong + Mont de Côi. (2) terms.html — DolomitesFly/David Prato entfernt, Elikos generisiert. (3) translations.js — Alle betroffenen Keys in 9 Sprachen aktualisiert + 12 neue Keys. Logo von David eingebaut. Media-Input (Teamfotos) archiviert unter Korrespondenz/.
 - **25.04.2026 (Abend - UX & CSS Bugfix Session)**: Emergency Contact aufgeteilt (Name + Telefon, zwei Felder). Tooltip-System implementiert (CSS-only data-tooltip mit ::after). Booking-Fehlerbehandlung verbessert (DE/EN Fehlermeldung). Navigation komplett bereinigt: Shop, Blog, Events entfernt; Spruenge -> #upcoming. Flight Card CSS gefixt: Titelkontrast, Button-Overflow. section--light Kontrast global gefixt. DE DE Sprachanzeige behoben (Flag-Emoji hidden). AGB Headings i18n. Alle Navs (index, terms, privacy) synchronisiert.

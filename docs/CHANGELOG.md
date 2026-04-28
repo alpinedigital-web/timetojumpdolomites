@@ -1,5 +1,36 @@
 # CHANGELOG: Time to Jump Dolomites
 
+## [2.0.0] - 2026-04-28
+### Added — Supabase Phase 2 Schema
+- **`locations` Tabelle**: Multi-Standort-Support — Saslong (1600m) + Mont de Côi (2500m) mit GPS-Koordinaten, Altitude, Maps-Embed.
+- **`pricing_rules` Tabelle**: Dynamische Preise pro Location und Season (775€ Saslong, 825€ Mont de Côi).
+- **`cancellations` Tabelle**: Audit-Trail für Stornierungen mit Fee-Berechnung und Refund-Tracking.
+- **`events_enriched` View**: Vorberechnete Felder — `booked_count`, `availability_status`, `current_price_per_person`, `is_short_notice`.
+- **`calc_cancellation_fee()` Funktion**: Automatische Storno-Berechnung (30% > 7 Tage, 100% < 7 Tage).
+- **`events` erweitert**: `location_id` (FK), `load_number`, `parent_event_id`, `max_loads_per_day`.
+- **`bookings` erweitert**: `group_leader_id`, `invite_token`, `group_size`, `deposit_amount_cents`, `total_amount_cents`, `stripe_setup_intent_id`, `stripe_payment_intent_id`, `is_short_notice`, `payment_method`, `birth_place`.
+
+### Added — Edge Function
+- **`create-setup-intent` deployed**: Dynamische Deposit-Berechnung (Helikopterpreis ÷ Teilnehmer), Short-Notice Erkennung (< 7 Tage = sofortige Zahlung), Gruppenbuchung mit Invite-Token-Generierung.
+
+### Added — Frontend
+- **`events_enriched` View**: Flight Cards nutzen jetzt vorberechnete Felder statt Client-seitiger Berechnung.
+- **Gruppenbuchungs-UI**: Toggle "I'm booking for a group" im Booking-Modal, Gruppengröße 2-5, Invite-Token via URL (`?invite=token`).
+- **Load-Badges**: Load-Nummer und ⚡ SHORT NOTICE Badges auf Flight Cards.
+- **Invite-Link Flow**: URL-Parameter öffnet automatisch Booking-Modal für Gruppen-Mitglieder.
+
+### Added — Media
+- **6 KI-Bildvarianten**: 3× Hero (Tracking, Diamond, GoPro) + 3× About (Interior, Exterior, Group Edge) in `business/media-input/generated/`.
+
+### Changed
+- **Navigation**: App-Link aus Desktop + Mobile Navigation entfernt.
+- **Repository**: `Korrespondenz/`-Reste nach `business/` verschoben, alte Ordner gelöscht.
+
+### Security
+- RLS auf allen neuen Tabellen (locations, cancellations, pricing_rules).
+- `events_enriched` View mit `SECURITY INVOKER` statt `SECURITY DEFINER`.
+- `calc_cancellation_fee()` mit immutablem `search_path`.
+
 ## [1.6.0] - 2026-04-28
 ### Added
 - **AGB §3.1a Short-Notice-Booking**: Klausel für Buchungen < 7 Tage — sofortige Vollzahlung, keine Stornierung/Rückerstattung möglich.
