@@ -1,6 +1,7 @@
 /* ============================================================
    SUPABASE CLIENT & BOOKING LOGIC
-   Dynamic Flight Cards + Booking Modal
+   Dynamic Flight Cards + Booking Modal + Group Booking
+   Phase 2 — Using events_enriched view
    ============================================================ */
 
 // 1. Initialize Supabase
@@ -12,12 +13,8 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 document.addEventListener('DOMContentLoaded', () => {
 
   // ============================================================
-  //  DYNAMIC FLIGHT CARD RENDERING
+  //  TRANSLATION HELPER
   // ============================================================
-
-  /**
-   * Translation helper — reads from TRANSLATIONS if available, else returns English fallback.
-   */
   function t(key, fallback) {
     const lang = localStorage.getItem('ttjd_lang') || 'en';
     if (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[key] && TRANSLATIONS[key][lang]) {
@@ -26,9 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return fallback || key;
   }
 
-  /**
-   * Get localized month abbreviation.
-   */
   function getLocalizedMonth(dateObj) {
     const lang = localStorage.getItem('ttjd_lang') || 'en';
     try {
@@ -39,17 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /**
-   * Calculates per-person price for a given total load price and number of booked seats.
-   */
+  // ============================================================
+  //  PRICING HELPERS
+  // ============================================================
   function calcPricePerPerson(pricePerLoad, bookedSeats, capacity) {
     const effectiveCount = Math.max(1, bookedSeats);
     return Math.ceil(pricePerLoad / effectiveCount);
   }
 
-  /**
-   * Generates the pricing tiers HTML for a flight card.
-   */
   function renderPricingTiers(pricePerLoad, bookedSeats, capacity) {
     let html = '';
     const personLabel = t('fc.person', 'Person');
@@ -65,20 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
     return html;
   }
 
-  /**
-   * Generates the passenger pills HTML.
-   */
   function renderPassengerPills(bookings, capacity) {
     let html = '';
     const openLabel = t('fc.open', 'open');
-    // Booked passengers
     if (bookings && bookings.length > 0) {
       bookings.forEach(b => {
         const nick = b.nickname || '???';
         html += `<span class="passenger-pill">@${nick}</span>`;
       });
     }
-    // Empty slots
     const booked = bookings ? bookings.length : 0;
     for (let i = booked; i < capacity; i++) {
       html += `<span class="passenger-pill passenger-pill--empty">${openLabel}</span>`;
@@ -86,49 +72,62 @@ document.addEventListener('DOMContentLoaded', () => {
     return html;
   }
 
-  /**
-   * Determines the status badge for a flight card.
-   */
-  function getStatusBadge(booked, capacity, isLocked) {
+  // ============================================================
+  //  STATUS BADGE
+  // ============================================================
+  function getStatusBadge(booked, capacity, isLocked, availStatus) {
     if (isLocked) {
       return `<div class="flight-card__status flight-card__status--locked" style="background:rgba(239,68,68,0.1);color:#ef4444;">${t('fc.locked', 'Locked (Load 1 First)')}</div>`;
     }
-    if (booked >= capacity) {
+    if (availStatus === 'full' || booked >= capacity) {
       return `<div class="flight-card__status" style="background:rgba(34,197,94,0.1);color:#22c55e;">${t('fc.full', 'Full')}</div>`;
     }
-    if (booked >= Math.ceil(capacity / 2)) {
+    if (availStatus === 'filling') {
       return `<div class="flight-card__status flight-card__status--filling">${t('fc.filling', 'Filling Fast')}</div>`;
     }
-    if (booked > 0) {
+    if (availStatus === 'booking_open') {
       return `<div class="flight-card__status flight-card__status--filling" style="background:rgba(59,130,246,0.1);color:#3b82f6;">${t('fc.bookingOpen', 'Booking Open')}</div>`;
     }
     return `<div class="flight-card__status" style="background:rgba(148,163,184,0.1);color:#94a3b8;">${t('fc.new', 'New')}</div>`;
   }
 
-  /**
-   * Renders a single flight card HTML string.
-   */
+  // ============================================================
+  //  FLIGHT CARD RENDERING (uses events_enriched view data)
+  // ============================================================
   function renderFlightCard(event, index, allEvents) {
     const date = new Date(event.jump_date);
     const month = getLocalizedMonth(date);
     const day = date.getDate();
-    const bookings = event.bookings || [];
-    const booked = bookings.length;
+    const booked = event.booked_count || 0;
     const capacity = event.capacity || 5;
     const pricePerLoad = event.price_per_load || 775;
-    const title = event.jump_location || 'Helicopter Jump';
+    const title = event.location_name || event.jump_location || 'Helicopter Jump';
+    const locationShort = event.location_short_name || '';
     const altitudeM = event.altitude_m || 1600;
     const timeSlot = event.time_slot ? event.time_slot.substring(0, 5) : '09:00';
+    const loadNumber = event.load_number || 1;
+    const availStatus = event.availability_status || 'new';
+    const isShortNotice = event.is_short_notice || false;
     
-    // Sequential lock logic: if this is NOT the first event on the same date,
-    // check if the previous event on the same date is full
+    // Sequential lock logic: if load_number > 1 and parent event is not full
     let isLocked = false;
-    if (index > 0) {
+    if (loadNumber > 1 && event.parent_event_id) {
+      const parentEvent = allEvents.find(e => e.id === event.parent_event_id);
+      if (parentEvent) {
+        const parentBooked = parentEvent.booked_count || 0;
+        const parentCapacity = parentEvent.capacity || 5;
+        if (parentBooked < parentCapacity) {
+          isLocked = true;
+        }
+      }
+    }
+    // Fallback: also lock if same date and previous load on same date isn't full
+    if (!isLocked && index > 0) {
       const prevEvent = allEvents[index - 1];
       const prevDate = new Date(prevEvent.jump_date).toDateString();
       const thisDate = date.toDateString();
-      if (prevDate === thisDate) {
-        const prevBooked = (prevEvent.bookings || []).length;
+      if (prevDate === thisDate && prevEvent.location_short_name === locationShort) {
+        const prevBooked = prevEvent.booked_count || 0;
         const prevCapacity = prevEvent.capacity || 5;
         if (prevBooked < prevCapacity) {
           isLocked = true;
@@ -137,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const isFull = booked >= capacity;
-    const currentPricePerPerson = calcPricePerPerson(pricePerLoad, booked, capacity);
+    const currentPricePerPerson = event.current_price_per_person || calcPricePerPerson(pricePerLoad, booked, capacity);
     const progressPercent = Math.round((booked / capacity) * 100);
 
     // Localized labels
@@ -152,6 +151,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullyBooked = t('fc.fullyBooked', 'Fully Booked');
     const lockedLabel = t('fc.lockedBtn', 'Locked');
 
+    // Short-notice badge
+    const shortNoticeBadge = isShortNotice 
+      ? `<span style="display:inline-block;background:rgba(245,158,11,0.15);color:#f59e0b;padding:2px 8px;border-radius:6px;font-size:0.7rem;font-weight:600;margin-left:8px;">⚡ SHORT NOTICE</span>`
+      : '';
+
+    // Load number indicator
+    const loadBadge = loadNumber > 1 
+      ? `<span style="display:inline-block;background:rgba(99,102,241,0.15);color:#6366f1;padding:2px 8px;border-radius:6px;font-size:0.7rem;font-weight:600;margin-left:8px;">LOAD ${loadNumber}</span>`
+      : '';
+
+    // Fetch bookings separately (the enriched view gives count, but we need nicknames)
+    const bookingsHtml = `<div class="passengers-preview" id="passengers-${event.id}"${isLocked ? ' style="opacity:0.5;"' : ''}>
+      <span class="passenger-pill passenger-pill--empty" style="opacity:0.5;">loading...</span>
+    </div>`;
+
     return `
       <div class="flight-card${isLocked ? ' flight-card--locked' : ''}${isFull ? ' flight-card--full' : ''}">
         <div class="flight-card__header">
@@ -160,10 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="flight-card__day">${day}</span>
           </div>
           <div class="flight-card__info">
-            <h3 class="flight-card__title">${title}</h3>
+            <h3 class="flight-card__title">${title}${loadBadge}${shortNoticeBadge}</h3>
             <p class="flight-card__time">${heliRotation}: ${timeSlot} · ${altitudeM.toLocaleString()}m</p>
           </div>
-          ${getStatusBadge(booked, capacity, isLocked)}
+          ${getStatusBadge(booked, capacity, isLocked, availStatus)}
         </div>
         
         <div class="flight-card__progress-container">
@@ -172,9 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="flight-card__current-price">${currentPrice}: <strong>${currentPricePerPerson} €</strong> ${perPerson}</span>
           </div>
           
-          <div class="passengers-preview"${isLocked ? ' style="opacity:0.5;"' : ''}>
-            ${renderPassengerPills(bookings, capacity)}
-          </div>
+          ${bookingsHtml}
 
           <div class="flight-card__progress-bar">
             <div class="flight-card__progress-fill" style="width:${progressPercent}%;"></div>
@@ -197,6 +209,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <a href="#" class="btn btn--primary btn-reserve-seat${isLocked || isFull ? ' btn--disabled' : ''}" 
              data-event-id="${event.id}"
              data-event-date="${event.jump_date}"
+             data-event-price="${pricePerLoad}"
+             data-event-location="${locationShort}"
              ${isLocked || isFull ? 'style="opacity:0.5;pointer-events:none;"' : ''}>
             ${isFull ? fullyBooked : isLocked ? lockedLabel : reserveBtn}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -206,9 +220,9 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   }
 
-  /**
-   * Renders the empty state when no events are available.
-   */
+  // ============================================================
+  //  EMPTY STATE
+  // ============================================================
   function renderEmptyState() {
     return `
       <div class="flight-card" style="grid-column:1/-1;text-align:center;padding:var(--space-xl) var(--space-lg);">
@@ -226,10 +240,9 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   }
 
-  /**
-   * Main function: Fetch events from Supabase and render flight cards.
-   * Uses a two-phase query: tries new schema first, falls back to base schema.
-   */
+  // ============================================================
+  //  LOAD EVENTS FROM ENRICHED VIEW
+  // ============================================================
   async function loadUpcomingJumps() {
     const container = document.getElementById('flightCardsContainer');
     if (!container) return;
@@ -237,57 +250,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const today = new Date().toISOString().split('T')[0];
 
     try {
-      let events = null;
-
-      // Phase 1: Try query with extended columns (after migration)
-      const { data: extData, error: extError } = await sb
-        .from('events')
-        .select(`
-          id, jump_date, time_slot, capacity, status,
-          jump_location, altitude_m, price_per_load,
-          bookings ( id, nickname )
-        `)
-        .neq('status', 'cancelled')
+      // Use the enriched view — includes booked_count, availability_status, current_price_per_person
+      const { data: events, error } = await sb
+        .from('events_enriched')
+        .select('*')
         .gte('jump_date', today)
-        .order('jump_date', { ascending: true });
+        .order('jump_date', { ascending: true })
+        .order('load_number', { ascending: true });
 
-      if (!extError) {
-        events = extData;
-      } else {
-        // Phase 2: Fallback — query with base schema only (before migration)
-        console.warn('Extended columns not available, falling back to base schema:', extError.message);
-        const { data: baseData, error: baseError } = await sb
+      if (error) {
+        console.warn('events_enriched view query failed, falling back to events table:', error.message);
+        // Fallback to direct events table
+        const { data: fallbackData, error: fallbackError } = await sb
           .from('events')
           .select(`
             id, jump_date, time_slot, capacity, status,
+            jump_location, altitude_m, price_per_load,
+            location_id, load_number, parent_event_id,
             bookings ( id, nickname )
           `)
           .neq('status', 'cancelled')
           .gte('jump_date', today)
           .order('jump_date', { ascending: true });
 
-        if (baseError) throw baseError;
-        events = baseData;
+        if (fallbackError) throw fallbackError;
+        
+        // Transform fallback data to match enriched format
+        const transformed = (fallbackData || []).map(e => ({
+          ...e,
+          booked_count: e.bookings ? e.bookings.length : 0,
+          availability_status: 'new',
+          current_price_per_person: e.price_per_load,
+          is_short_notice: false,
+          location_name: e.jump_location,
+          location_short_name: e.jump_location
+        }));
+        
+        renderEvents(transformed, container);
+        return;
       }
 
       // Remove loading state
       const loadingEl = document.getElementById('flightCardsLoading');
       if (loadingEl) loadingEl.remove();
 
-      if (!events || events.length === 0) {
-        container.innerHTML = renderEmptyState();
-      } else {
-        container.innerHTML = events.map((event, idx) => 
-          renderFlightCard(event, idx, events)
-        ).join('');
-
-        // Re-attach booking modal handlers to newly rendered buttons
-        attachBookingModalHandlers();
-      }
+      renderEvents(events || [], container);
 
     } catch (err) {
       console.error("Error loading events:", err.message);
-      // Remove loading, show error state
       container.innerHTML = `
         <div class="flight-card" style="grid-column:1/-1;text-align:center;padding:var(--space-xl);">
           <p style="color:var(--color-text-muted);">Could not load upcoming jumps. Please try again later or contact us directly.</p>
@@ -297,10 +307,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function renderEvents(events, container) {
+    const loadingEl = document.getElementById('flightCardsLoading');
+    if (loadingEl) loadingEl.remove();
+
+    if (!events || events.length === 0) {
+      container.innerHTML = renderEmptyState();
+    } else {
+      container.innerHTML = events.map((event, idx) => 
+        renderFlightCard(event, idx, events)
+      ).join('');
+
+      // Load passenger nicknames for each event
+      events.forEach(event => loadPassengerPills(event));
+
+      // Attach booking modal handlers
+      attachBookingModalHandlers();
+    }
+  }
+
+  /**
+   * Fetches actual booking nicknames for an event and renders passenger pills.
+   */
+  async function loadPassengerPills(event) {
+    const container = document.getElementById(`passengers-${event.id}`);
+    if (!container) return;
+
+    const { data: bookings } = await sb
+      .from('bookings')
+      .select('id, nickname')
+      .eq('event_id', event.id)
+      .neq('status', 'cancelled');
+
+    const capacity = event.capacity || 5;
+    container.innerHTML = renderPassengerPills(bookings || [], capacity);
+  }
+
   // ============================================================
   //  BOOKING MODAL LOGIC
   // ============================================================
-
   function attachBookingModalHandlers() {
     const bookingModal = document.getElementById('bookingModal');
     if (!bookingModal) return;
@@ -314,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingModal.classList.add('open');
         document.getElementById('bookingEventId').value = eventId || '';
 
-        // Short-notice warning: show if event is less than 7 days away
+        // Short-notice warning
         const warningEl = document.getElementById('shortNoticeWarning');
         if (warningEl && eventDate) {
           const jumpDate = new Date(eventDate);
@@ -325,12 +370,39 @@ document.addEventListener('DOMContentLoaded', () => {
           warningEl.style.display = diffDays < 7 ? 'flex' : 'none';
         }
 
-        // Re-apply translations to the modal content
+        // Reset group booking toggle
+        const groupToggle = document.getElementById('isGroupLeader');
+        const groupSizeWrapper = document.getElementById('groupSizeWrapper');
+        if (groupToggle) groupToggle.checked = false;
+        if (groupSizeWrapper) groupSizeWrapper.style.display = 'none';
+
         if (typeof applyTranslations === 'function') {
           applyTranslations();
         }
       });
     });
+  }
+
+  // Group booking toggle handler
+  const groupToggle = document.getElementById('isGroupLeader');
+  const groupSizeWrapper = document.getElementById('groupSizeWrapper');
+  if (groupToggle && groupSizeWrapper) {
+    groupToggle.addEventListener('change', () => {
+      groupSizeWrapper.style.display = groupToggle.checked ? 'block' : 'none';
+    });
+  }
+
+  // Check for invite token in URL (e.g. ?invite=abc123)
+  const urlParams = new URLSearchParams(window.location.search);
+  const inviteToken = urlParams.get('invite');
+  if (inviteToken) {
+    const inviteField = document.getElementById('inviteTokenField');
+    if (inviteField) inviteField.value = inviteToken;
+    // Auto-open booking modal if invite token present
+    const bookingModal = document.getElementById('bookingModal');
+    if (bookingModal) {
+      setTimeout(() => bookingModal.classList.add('open'), 500);
+    }
   }
 
   const bookingModal = document.getElementById('bookingModal');
@@ -343,7 +415,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Close modal on overlay click
   if (bookingModal) {
     bookingModal.addEventListener('click', (e) => {
       if (e.target === bookingModal) {
@@ -352,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Handle Form Submission (Call our Edge Function)
+  // Handle Form Submission
   if (setupIntentForm) {
     setupIntentForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -364,12 +435,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData(setupIntentForm);
       const payload = Object.fromEntries(formData.entries());
 
-      // Combine split emergency contact fields into one string for the Edge Function
+      // Combine emergency contact fields
       if (payload.emergencyName || payload.emergencyPhone) {
         payload.emergencyContact = `${payload.emergencyName || ''} — ${payload.emergencyPhone || ''}`.trim();
         delete payload.emergencyName;
         delete payload.emergencyPhone;
       }
+
+      // Convert checkbox values
+      payload.insuranceProvided = payload.insuranceProvided === 'on';
+      payload.isGroupLeader = payload.isGroupLeader === 'on';
+      payload.groupSize = parseInt(payload.groupSize) || 1;
+
+      // Clean up non-API fields
+      delete payload.termsAccepted;
 
       try {
         const payloadWithReturnUrl = {
@@ -383,7 +462,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (error) throw error;
         
-        // Redirect the user to Stripe Checkout
+        // If group leader, show invite link before redirect
+        if (data && data.inviteToken) {
+          const inviteUrl = `${window.location.origin}?invite=${data.inviteToken}`;
+          const lang = localStorage.getItem('ttjd_lang') || 'en';
+          const msg = lang === 'de'
+            ? `Gruppenbuchung erstellt!\n\nTeile diesen Link mit deinen Mitspringern:\n${inviteUrl}\n\nDu wirst jetzt zur Zahlung weitergeleitet.`
+            : `Group booking created!\n\nShare this link with your jump buddies:\n${inviteUrl}\n\nYou'll now be redirected to checkout.`;
+          alert(msg);
+        }
+
+        // Redirect to Stripe Checkout
         if (data && data.checkoutUrl) {
           window.location.href = data.checkoutUrl;
         } else {
@@ -394,8 +483,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Payment initialization failed:", err);
         const lang = localStorage.getItem('ttjd_lang') || 'en';
         const msg = lang === 'de' 
-          ? 'Die Reservierung konnte nicht gestartet werden. Bitte versuche es später erneut oder kontaktiere uns per WhatsApp.'
-          : 'The reservation could not be processed. Please try again later or contact us via WhatsApp.';
+          ? 'Die Reservierung konnte nicht gestartet werden. Bitte versuche es später erneut.'
+          : 'The reservation could not be processed. Please try again later.';
         alert(msg + '\n\n(Technical: ' + (err.message || err) + ')');
       } finally {
         submitBtn.disabled = false;
@@ -407,8 +496,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============================================================
   //  INITIALIZATION
   // ============================================================
-  
-  // Expose loadUpcomingJumps globally so it can be re-triggered on language change
   window.ttjd = window.ttjd || {};
   window.ttjd.loadUpcomingJumps = loadUpcomingJumps;
 

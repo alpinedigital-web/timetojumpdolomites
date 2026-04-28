@@ -49,14 +49,28 @@
 - [x] **App-Link entfernt**: Externer App-Link aus Desktop- und Mobile-Navigation entfernt.
 - [x] **Korrespondenz-Reste bereinigt**: Verwaiste Dateien nach business/ verschoben.
 
-## Phase 2: Flow Automatisierung & Operations (n8n) — Neues Angebot
+## Phase 2: Backend & Booking-System [IN PROGRESS]
+
+### 2.1 Supabase Schema & Backend [COMPLETED]
+- [x] **Multi-Standort DB-Support**: `locations` Tabelle (Saslong + Mont de Côi) mit GPS, Altitude, Maps.
+- [x] **Dynamische Preisberechnung**: `pricing_rules` Tabelle + `events_enriched` View mit automatischer Preisberechnung.
+- [x] **Sequenzielle Load-Logik**: `load_number` + `parent_event_id` auf `events`, Frontend-Lock-Logik.
+- [x] **Gruppenbuchung**: `group_leader_id`, `invite_token`, `group_size` auf `bookings`.
+- [x] **Storno-System**: `cancellations` Tabelle + `calc_cancellation_fee()` Funktion (30%/>7d, 100%/<7d).
+- [x] **Stripe Edge Function**: `create-setup-intent` deployed — dynamische Deposit-Berechnung, Short-Notice Erkennung, Gruppenbuchungs-Support.
+- [x] **Security Hardening**: RLS auf allen Tabellen, SECURITY INVOKER View, search_path fix.
+
+### 2.2 Frontend Integration [COMPLETED]
+- [x] **events_enriched View**: Frontend nutzt vorberechnete Felder (booked_count, availability_status, current_price_per_person).
+- [x] **Gruppenbuchungs-UI**: Toggle im Booking-Modal, Gruppengröße, Invite-Token per URL.
+- [x] **Load-Badges**: Load-Nummer und Short-Notice Badges auf Flight Cards.
+- [x] **Invite-Link Flow**: URL-Parameter `?invite=token` öffnet automatisch Booking-Modal.
+
+### 2.3 Flow Automatisierung (n8n) — Ausstehend
 - [ ] Webhook-Catch via n8n für erfolgreiche Event-Buchungen / Stripe SetupIntents.
 - [ ] Automatisierte Invoice & Confirmation-Email an Teilnehmer.
 - [ ] Erinnerungs-Sequenzen: 7 Tage, 5 Tage, 3 Tage vor Abflug automatisiert via n8n senden.
 - [ ] Automatischer Opt-In für die gruppenspezifische WhatsApp-Community pro Flugdatum.
-- [ ] **Dynamische Preisberechnung**: Automatische Berechnung des Helikopteranteils basierend auf aktueller Load-Belegung.
-- [ ] **Sequenzielle Load-Logik**: Intelligente Steuerung bei mehreren Loads pro Datum (Load 1 → 2 → 3).
-- [ ] **Multi-Standort DB-Support**: Erweiterung des Supabase-Schemas für mehrere DZs (Saslong, Mont de Côi, zukünftige).
 - [ ] **Automatisierte Stripe-Zahlungsabwicklung**: Dynamisches Charging basierend auf finaler Load-Belegung am Sprungtag.
 
 ## Phase 3: Infrastruktur Migration (Wix Ablöse)
