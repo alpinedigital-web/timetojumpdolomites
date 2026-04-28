@@ -1,8 +1,8 @@
 # Alpine Digital Agency (Time to Jump Dolomites) — Aktueller Projektstatus
-> Letztes Update: 27.04.2026 — Telefonat-Umsetzung, Content-Korrektur, Logo-Update, Media-Input
+> Letztes Update: 28.04.2026 — AGB-Finalisierung, Kurzfristige-Buchung-Warnung, i18n-Erweiterung
 
 ## Aktueller Fokus
-- **Telefonat-Umsetzung (27.04.2026)**: 19 Action Items aus 40-Min-Telefonat mit David identifiziert; 7 Sofort-Maßnahmen (Batch 1-3) umgesetzt.
+- **AGB & Booking UX (28.04.2026)**: Verbleibende 5 Action Items aus Telefonat umgesetzt — AGB-Paragraphen §3.1a (Short-Notice) und §4a (Substanzen), Booking-Modal Warnbox, i18n-Keys.
 - **Media-Integration**: Davids Logo eingebunden. Hero-Bild (5er Stern-Formation) und About-Bild (64.jpg ausgebessert) ausstehend (KI-Generierung).
 
 ## Entscheidungen
@@ -40,9 +40,13 @@
 12. [x] AGB/Terms Headings i18n (Label, Heading, Updated).
 13. [ ] AGB-Volltext in 9 Sprachen uebersetzen (Phase 2).
 14. [x] Telefonat-Action-Items umgesetzt (Pricing, FAQ, Map, AGB, Equipment Rental, Logo).
+15. [x] AGB: §3.1a Short-Notice-Booking + §4a Substanzenpolitik + Preistabelle entfernt.
+16. [x] Booking-Modal: Kurzfristige-Buchung Warnhinweis (< 7 Tage) mit Amber-Banner.
+17. [x] i18n: `booking.shortNoticeTitle` / `booking.shortNoticeText` in 9 Sprachen.
 15. [ ] Hero-Bild (5er Stern-Formation) und About-Bild (64.jpg) via KI generieren und einbinden.
 
 ## Session-Log
+- **28.04.2026 (AGB & Booking UX Sprint)**: Verbleibende Action Items aus Telefonat vom 27.04 implementiert: (1) terms.html — Hardcoded Preistabelle entfernt, §3.1a Short-Notice-Booking Klausel (<7 Tage = sofortige Vollzahlung, keine Stornierung), §4a Null-Toleranz Substanzenpolitik. (2) index.html/style.css — Amber-Warning-Banner im Booking-Modal für kurzfristige Buchungen. (3) supabase-client.js — data-event-date auf Reserve-Button, dynamische Anzeige der Warnbox basierend auf Tagesbereching. (4) translations.js — `booking.shortNoticeTitle`/`booking.shortNoticeText` in 9 Sprachen. (5) ROADMAP.md — Phase 2 Items aus Telefonat ergänzt (Dynamische Preisberechnung, Multi-Standort DB, Sequenzielle Load-Logik).
 - **27.04.2026 (Telefonat-Umsetzung & Media)**: 40-Min-Telefonat mit David Prato transkribiert und bereinigt. 19 Action Items extrahiert, 7 Sofort-Maßnahmen in 3 Batches umgesetzt: (1) index.html — „2+ Loads" entfernt, Equipment Rental auf 2 Zeilen (100€+80€/Tag), Gruppenpreis-Texte generisch, Buchung nur über Plattform, FAQ Q3 ohne Elikos, neuer FAQ Q7 (Direktbuchung), Map mit Saslong + Mont de Côi. (2) terms.html — DolomitesFly/David Prato entfernt, Elikos generisiert. (3) translations.js — Alle betroffenen Keys in 9 Sprachen aktualisiert + 12 neue Keys. Logo von David eingebaut. Media-Input (Teamfotos) archiviert unter Korrespondenz/.
 - **25.04.2026 (Abend - UX & CSS Bugfix Session)**: Emergency Contact aufgeteilt (Name + Telefon, zwei Felder). Tooltip-System implementiert (CSS-only data-tooltip mit ::after). Booking-Fehlerbehandlung verbessert (DE/EN Fehlermeldung). Navigation komplett bereinigt: Shop, Blog, Events entfernt; Spruenge -> #upcoming. Flight Card CSS gefixt: Titelkontrast, Button-Overflow. section--light Kontrast global gefixt. DE DE Sprachanzeige behoben (Flag-Emoji hidden). AGB Headings i18n. Alle Navs (index, terms, privacy) synchronisiert.
 - **25.04.2026 (QA Test & Bugfix)**: Manueller End-to-End QA-Test ueber lokalen Server durchgefuehrt. Layout, i18n, Modal-Pflichtfelder und Pricing-Cleanups verifiziert. Bug gefunden (Flight Cards reagierten nicht dynamisch auf Sprachwechsel im Dropdown) und behoben durch globales Exposing von loadUpcomingJumps und Aufruf in setLanguage. Status: Bereit fuer Go-Live.

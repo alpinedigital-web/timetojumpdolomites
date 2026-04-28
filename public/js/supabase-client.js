@@ -196,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <a href="#" class="btn btn--primary btn-reserve-seat${isLocked || isFull ? ' btn--disabled' : ''}" 
              data-event-id="${event.id}"
+             data-event-date="${event.jump_date}"
              ${isLocked || isFull ? 'style="opacity:0.5;pointer-events:none;"' : ''}>
             ${isFull ? fullyBooked : isLocked ? lockedLabel : reserveBtn}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -309,8 +310,25 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         if (btn.classList.contains('btn--disabled')) return;
         const eventId = btn.getAttribute('data-event-id');
+        const eventDate = btn.getAttribute('data-event-date');
         bookingModal.classList.add('open');
         document.getElementById('bookingEventId').value = eventId || '';
+
+        // Short-notice warning: show if event is less than 7 days away
+        const warningEl = document.getElementById('shortNoticeWarning');
+        if (warningEl && eventDate) {
+          const jumpDate = new Date(eventDate);
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          const diffMs = jumpDate.getTime() - today.getTime();
+          const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+          warningEl.style.display = diffDays < 7 ? 'flex' : 'none';
+        }
+
+        // Re-apply translations to the modal content
+        if (typeof applyTranslations === 'function') {
+          applyTranslations();
+        }
       });
     });
   }

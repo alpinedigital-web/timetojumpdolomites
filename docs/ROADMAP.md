@@ -39,6 +39,11 @@
 - [x] **AGB bereinigt**: DolomitesFly/David Prato entfernt, Elikos generisiert.
 - [x] **i18n aktualisiert**: Alle betroffenen Keys in 9 Sprachen (12 neue Keys).
 - [x] **Logo**: Davids Original-Logo eingebunden.
+- [x] **AGB §3.1a**: Short-Notice-Booking Klausel (< 7 Tage = sofortige Vollzahlung, keine Stornierung).
+- [x] **AGB §4a**: Null-Toleranz Substanzenpolitik (Alkohol/Drogen-Verbot).
+- [x] **AGB Preistabelle**: Hardcoded Preise entfernt, generische Erklärung eingefügt.
+- [x] **Booking-Modal Warnung**: Kurzfristige-Buchung Warnbox (< 7 Tage) mit Amber-Banner.
+- [x] **i18n Short-Notice Keys**: `booking.shortNoticeTitle` / `booking.shortNoticeText` in 9 Sprachen.
 - [ ] **Hero-Bild**: KI-generiertes Panorama mit 5er Stern-Formation (Team ohne Helm, mit Brillen).
 - [ ] **About-Bild**: Bild 64 (Heli-Ausstieg) ausgebessert und eingebunden.
 
@@ -47,8 +52,13 @@
 - [ ] Automatisierte Invoice & Confirmation-Email an Teilnehmer.
 - [ ] Erinnerungs-Sequenzen: 7 Tage, 5 Tage, 3 Tage vor Abflug automatisiert via n8n senden.
 - [ ] Automatischer Opt-In für die gruppenspezifische WhatsApp-Community pro Flugdatum.
+- [ ] **Dynamische Preisberechnung**: Automatische Berechnung des Helikopteranteils basierend auf aktueller Load-Belegung.
+- [ ] **Sequenzielle Load-Logik**: Intelligente Steuerung bei mehreren Loads pro Datum (Load 1 → 2 → 3).
+- [ ] **Multi-Standort DB-Support**: Erweiterung des Supabase-Schemas für mehrere DZs (Saslong, Mont de Côi, zukünftige).
+- [ ] **Automatisierte Stripe-Zahlungsabwicklung**: Dynamisches Charging basierend auf finaler Load-Belegung am Sprungtag.
 
 ## Phase 3: Infrastruktur Migration (Wix Ablöse)
 - [ ] Restliche Inhalte aus Wix exportieren und in die Vanilla/Next-Infrastruktur eingliedern.
 - [ ] Domain-Hosting (ARUBA) und DNS-Umzug orchestrieren (Deadline: Juli 2026).
 - [ ] GMB (Google My Business) Validierung unterstützen (Büro-Foto).
+

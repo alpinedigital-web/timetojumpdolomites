@@ -548,5 +548,30 @@ const TRANSLATIONS = {
   'req.substance.text': { en: 'Absolutely no alcohol or drugs before or during jumping — worldwide safety standard', de: 'Absolut kein Alkohol oder Drogen vor oder während des Springens — weltweiter Sicherheitsstandard', it: 'Assolutamente vietati alcol o droghe prima o durante i salti — standard di sicurezza mondiale', lad: 'Assolutamënter nia alcol o droghe dant o durant i sauc — standard de segurëza mundial', nl: 'Absoluut geen alcohol of drugs voor of tijdens het springen — wereldwijde veiligheidsnorm', fr: 'Absolument pas d\'alcool ni de drogues avant ou pendant les sauts — norme de sécurité mondiale', pl: 'Absolutnie żadnego alkoholu ani narkotyków przed lub podczas skoków — światowy standard bezpieczeństwa', es: 'Absolutamente prohibido el alcohol o las drogas antes o durante los saltos — norma de seguridad mundial', cs: 'Absolutně žádný alkohol ani drogy před nebo během seskoků — celosvětový bezpečnostní standard' },
 
   // ---- TESTIMONIALS ----
-  'testimonials.t2.text': { en: '"Best dropzone in the Alps, hands down. The views from 2,500m over the UNESCO Dolomites are unreal. Great vibes, well-organized, and the helicopter team is fantastic."', de: '"Beste Dropzone der Alpen, ohne Frage. Der Blick aus 2.500m über die UNESCO-Dolomiten ist surreal. Tolle Stimmung, gut organisiert und das Helikopter-Team ist fantastisch."', it: '"La migliore dropzone delle Alpi, senza dubbio. La vista da 2.500m sulle Dolomiti UNESCO è irreale. Grande atmosfera, ben organizzato e il team dell\'elicottero è fantastico."', lad: '"La mëusa dropzone de les Alpes, zënza dubi. La ududa da 2.500m sö les Dolomites UNESCO é irreala. Bela atmosfera y l team dl elicòter é fantastic."', nl: '"Beste dropzone van de Alpen, zonder twijfel. Het uitzicht vanaf 2.500m over de UNESCO Dolomieten is onwerkelijk. Geweldige sfeer, goed georganiseerd en het helikopterteam is fantastisch."', fr: '"Meilleure dropzone des Alpes, sans conteste. La vue depuis 2.500m sur les Dolomites UNESCO est irréelle. Super ambiance, bien organisé et l\'équipe d\'hélicoptère est fantastique."', pl: '"Najlepsza dropzone w Alpach, bez dwóch zdań. Widoki z 2.500m nad Dolomitami UNESCO są nierealne. Świetna atmosfera, dobrze zorganizowane i zespół helikoptera jest fantastyczny."', es: '"La mejor zona de salto de los Alpes, sin duda. Las vistas desde 2.500m sobre las Dolomitas UNESCO son irreales. Gran ambiente, bien organizado y el equipo de helicóptero es fantástico."', cs: '"Nejlepší dropzone v Alpách, bez debat. Výhledy z 2.500m nad Dolomity UNESCO jsou neskutečné. Skvělá atmosféra, dobře zorganizované a tým vrtulníku je fantastický."' }
+  'testimonials.t2.text': { en: '"Best dropzone in the Alps, hands down. The views from 2,500m over the UNESCO Dolomites are unreal. Great vibes, well-organized, and the helicopter team is fantastic."', de: '"Beste Dropzone der Alpen, ohne Frage. Der Blick aus 2.500m über die UNESCO-Dolomiten ist surreal. Tolle Stimmung, gut organisiert und das Helikopter-Team ist fantastisch."', it: '"La migliore dropzone delle Alpi, senza dubbio. La vista da 2.500m sulle Dolomiti UNESCO è irreale. Grande atmosfera, ben organizzato e il team dell\'elicottero è fantastico."', lad: '"La mëusa dropzone de les Alpes, zënza dubi. La ududa da 2.500m sö les Dolomites UNESCO é irreala. Bela atmosfera y l team dl elicòter é fantastic."', nl: '"Beste dropzone van de Alpen, zonder twijfel. Het uitzicht vanaf 2.500m over de UNESCO Dolomieten is onwerkelijk. Geweldige sfeer, goed georganiseerd en het helikopterteam is fantastisch."', fr: '"Meilleure dropzone des Alpes, sans conteste. La vue depuis 2.500m sur les Dolomites UNESCO est irréelle. Super ambiance, bien organisé et l\'équipe d\'hélicoptère est fantastique."', pl: '"Najlepsza dropzone w Alpach, bez dwóch zdań. Widoki z 2.500m nad Dolomitami UNESCO są nierealne. Świetna atmosfera, dobrze zorganizowane i zespół helikoptera jest fantastyczny."', es: '"La mejor zona de salto de los Alpes, sin duda. Las vistas desde 2.500m sobre las Dolomitas UNESCO son irreales. Gran ambiente, bien organizado y el equipo de helicóptero es fantástico."', cs: '"Nejlepší dropzone v Alpách, bez debat. Výhledy z 2.500m nad Dolomity UNESCO jsou neskutečné. Skvělá atmosféra, dobře zorganizované a tým vrtulníku je fantastický."' },
+
+  // ---- SHORT-NOTICE BOOKING WARNING ----
+  'booking.shortNoticeTitle': {
+    en: 'Short-Notice Booking',
+    de: 'Kurzfristige Buchung',
+    it: 'Prenotazione a breve termine',
+    lad: 'Prenotazion a curt termin',
+    nl: 'Lastminuteboeking',
+    fr: 'Réservation de dernière minute',
+    pl: 'Rezerwacja na krótki termin',
+    es: 'Reserva de último momento',
+    cs: 'Rezervace na poslední chvíli'
+  },
+  'booking.shortNoticeText': {
+    en: 'You are booking less than 7 days before the jump date. No cancellation or refund is possible. Full payment of your helicopter share is due immediately.',
+    de: 'Du buchst weniger als 7 Tage vor dem Sprungtermin. Keine Stornierung oder Rückerstattung möglich. Die vollständige Zahlung deines Helikopteranteils ist sofort fällig.',
+    it: 'Stai prenotando a meno di 7 giorni dalla data del salto. Non è possibile alcuna cancellazione o rimborso. Il pagamento completo della tua quota elicottero è dovuto immediatamente.',
+    lad: 'Te prenotes a manciamënt de 7 dis dant la data dl sauc. Nia stornazion o remborsament posibel. L paiamënt complet de tua cuota dl elicòter é da paié söbit.',
+    nl: 'Je boekt minder dan 7 dagen voor de sprongdatum. Annulering of restitutie is niet mogelijk. Volledige betaling van je helikopteraandeel is direct verschuldigd.',
+    fr: 'Vous réservez moins de 7 jours avant la date du saut. Aucune annulation ni remboursement n\'est possible. Le paiement intégral de votre part hélicoptère est dû immédiatement.',
+    pl: 'Rezerwujesz mniej niż 7 dni przed datą skoku. Anulowanie ani zwrot nie są możliwe. Pełna płatność za Twój udział w helikopterze jest wymagana natychmiast.',
+    es: 'Estás reservando con menos de 7 días de antelación. No es posible cancelación ni reembolso. El pago completo de tu parte del helicóptero es inmediato.',
+    cs: 'Rezervujete méně než 7 dní před datem seskoku. Zrušení ani vrácení peněz není možné. Úplná platba vašeho podílu na vrtulníku je splatná okamžitě.'
+  }
 };
+

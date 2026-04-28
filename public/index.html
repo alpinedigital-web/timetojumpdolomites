@@ -715,6 +715,15 @@
         <button class="btn-close" id="closeModalBtn" aria-label="Close modal">&times;</button>
       </div>
       
+      <!-- Short-Notice Warning (shown dynamically when event < 7 days away) -->
+      <div id="shortNoticeWarning" class="short-notice-warning" style="display:none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div>
+          <strong data-i18n="booking.shortNoticeTitle">Short-Notice Booking</strong>
+          <p data-i18n="booking.shortNoticeText" style="margin:4px 0 0;font-size:0.85rem;opacity:0.9;">You are booking less than 7 days before the jump date. No cancellation or refund is possible. Full payment of your helicopter share is due immediately.</p>
+        </div>
+      </div>
+
       <form id="setupIntentForm">
         <input type="hidden" id="bookingEventId" name="eventId">
         

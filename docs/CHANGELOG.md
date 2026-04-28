@@ -1,5 +1,27 @@
 # CHANGELOG: Time to Jump Dolomites
 
+## [1.6.0] - 2026-04-28
+### Added
+- **AGB §3.1a Short-Notice-Booking**: Klausel für Buchungen < 7 Tage — sofortige Vollzahlung, keine Stornierung/Rückerstattung möglich.
+- **AGB §4a Substanzenpolitik**: Null-Toleranz Alkohol/Drogen-Verbot vor und während des Springens, sofortiger Ausschluss bei Verstoß.
+- **Booking-Modal Warnbox**: Amber-farbenes Warning-Banner erscheint dynamisch wenn Event < 7 Tage entfernt. Warnung in 9 Sprachen.
+- **i18n Keys**: `booking.shortNoticeTitle`, `booking.shortNoticeText` in allen 9 Sprachen.
+- **ROADMAP Phase 2 erweitert**: Dynamische Preisberechnung, Multi-Standort DB, Sequenzielle Load-Logik, Stripe-Automation.
+
+### Changed
+- **AGB Preistabelle entfernt**: Hardcoded Preismatrix durch generische Erklärung ersetzt (Preis hängt von Load-Belegung und Treibstoff ab).
+- **Repository komplett reorganisiert**:
+  - `public/` — Alle deployable Website-Dateien (HTML, CSS, JS, IMG)
+  - `docs/` — Projekt-Dokumentation (ROADMAP, STATE, CHANGELOG, LEISTUNGSBERICHT)
+  - `business/` — Korrespondenz, Angebote, Rechnungen, Scripts, Media-Input, interne Präsentationen
+  - `supabase/` — Backend (Edge Functions + Migrations)
+- **Dateinamen normalisiert**: ISO-Datumspräfix für alle Korrespondenz-Dateien.
+- **README.md**: Vollständig neu geschrieben mit Struktur-Doku, Quick Start und Deployment-Info.
+- **.gitignore**: Aktualisiert für neue Pfade (business/media-input/, .docx, .pdf).
+
+### Meta
+- **Cloudflare Pages**: Build-Output-Directory muss auf `public/` umgestellt werden.
+
 ## [1.5.0] - 2026-04-27
 ### Added
 - **FAQ Q7**: Neuer FAQ-Eintrag „Can I book the helicopter directly?" mit klarer Absage an Direktbuchungen beim Helikopterbetreiber (9 Sprachen).

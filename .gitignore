@@ -4,8 +4,13 @@
 # Internal agent config (not for deployment)
 .agents/
 
-# Client correspondence & raw media assets (large binaries, not for prod)
-Korrespondenz/media-input-dp-*/
+# Raw media assets from client (large binaries, not for prod)
+business/media-input/
+
+# Generated documents (docx, pdf)
+business/angebote/*.docx
+business/angebote/*.pdf
+business/rechnungen/*.docx
 
 # OS files
 Thumbs.db

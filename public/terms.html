@@ -86,40 +86,13 @@
         <p data-i18n="terms.booking.reservation_text">When you reserve a seat on a helicopter load via our website, your credit card is authorized for a <strong>0.00 € hold</strong> (Stripe SetupIntent). No amount is charged at the time of booking. This authorization secures your spot and allows the Organizer to process penalty charges if applicable (see Section 3 & 4).</p>
         
         <h3 data-i18n="terms.booking.payment_title">2.2 Payment</h3>
-        <p data-i18n="terms.booking.payment_text">The full jump fee is paid <strong>on-site on the day of the jump</strong>, either by card or cash. The price per person depends on the number of skydivers sharing the helicopter load:</p>
-        <div style="overflow-x:auto;margin:var(--space-sm) 0 var(--space-md);">
-          <table style="width:100%;border-collapse:collapse;font-size:0.95rem;">
-            <thead>
-              <tr style="border-bottom:2px solid rgba(255,255,255,0.15);">
-                <th style="text-align:left;padding:12px 16px;font-weight:600;" data-i18n="terms.table.route">Route</th>
-                <th style="text-align:center;padding:12px 8px;font-weight:600;">1 Pers.</th>
-                <th style="text-align:center;padding:12px 8px;font-weight:600;">2 Pers.</th>
-                <th style="text-align:center;padding:12px 8px;font-weight:600;">3 Pers.</th>
-                <th style="text-align:center;padding:12px 8px;font-weight:600;">4 Pers.</th>
-                <th style="text-align:center;padding:12px 8px;font-weight:600;">5 Pers.</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
-                <td style="padding:12px 16px;">Saslong UNESCO (1,600 m)</td>
-                <td style="text-align:center;padding:12px 8px;">775 €</td>
-                <td style="text-align:center;padding:12px 8px;">388 €</td>
-                <td style="text-align:center;padding:12px 8px;">258 €</td>
-                <td style="text-align:center;padding:12px 8px;">194 €</td>
-                <td style="text-align:center;padding:12px 8px;font-weight:600;color:var(--color-accent);">155 €</td>
-              </tr>
-              <tr>
-                <td style="padding:12px 16px;">Mulin da Coi (2,500 m)</td>
-                <td style="text-align:center;padding:12px 8px;">825 €</td>
-                <td style="text-align:center;padding:12px 8px;">413 €</td>
-                <td style="text-align:center;padding:12px 8px;">275 €</td>
-                <td style="text-align:center;padding:12px 8px;">206 €</td>
-                <td style="text-align:center;padding:12px 8px;font-weight:600;color:var(--color-accent);">165 €</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p data-i18n="terms.booking.load_note">1 Load = max. 5 skydivers per helicopter. The jump altitude may be adjusted based on weather conditions and local air traffic regulations.</p>
+        <p data-i18n="terms.booking.payment_text">The full jump fee is paid <strong>on-site on the day of the jump</strong>, either by card or cash. The price per person is calculated by dividing the total helicopter cost equally among all booked participants on that load. The more skydivers join a flight, the lower the individual cost.</p>
+        <ul style="list-style:disc;padding-left:var(--space-lg);margin:var(--space-sm) 0 var(--space-md);">
+          <li data-i18n="terms.booking.solo"><strong>Solo booking:</strong> The full helicopter cost is borne by a single participant.</li>
+          <li data-i18n="terms.booking.group"><strong>Group booking:</strong> The total helicopter cost is split equally among all participants on the load.</li>
+          <li data-i18n="terms.booking.onsite"><strong>Balance:</strong> The remaining amount after the deposit is paid on-site on the day of the jump (card or cash).</li>
+        </ul>
+        <p data-i18n="terms.booking.load_note">1 Load = max. 5 skydivers per helicopter. The jump altitude may be adjusted based on weather conditions and local air traffic regulations. Helicopter costs are subject to change due to fuel surcharges and operational costs.</p>
 
         <h3 data-i18n="terms.booking.sequential_title">2.3 Sequential Booking</h3>
         <p data-i18n="terms.booking.sequential_text">Helicopter loads are filled sequentially. Load 2 (and subsequent loads) will only become available for booking once Load 1 is fully booked. One person may reserve seats for multiple participants (group booking).</p>
@@ -131,6 +104,9 @@
           <li data-i18n="terms.cancellation.7days"><strong>More than 7 days before the jump date:</strong> 30% of the helicopter load cost (per person share) will be retained. The remaining amount is refunded to the stored credit card.</li>
           <li data-i18n="terms.cancellation.within7"><strong>7 days or less before the jump date:</strong> No refund. 100% of the per-person share will be charged to the stored credit card.</li>
         </ul>
+
+        <h3 data-i18n="terms.cancellation.shortnotice_title">3.1a Short-Notice Bookings</h3>
+        <p data-i18n="terms.cancellation.shortnotice_text">Reservations made <strong>less than 7 days before the jump date</strong> require immediate full payment of the per-person helicopter share. No cancellation or refund is possible for short-notice bookings. A clear warning is displayed during the booking process.</p>
 
         <h3 data-i18n="terms.cancellation.organizer_title">3.2 Cancellation by the Organizer</h3>
         <p data-i18n="terms.cancellation.organizer_text">The Organizer reserves the right to cancel a jump up to <strong>5 days before the scheduled date</strong> if the helicopter load cannot be filled. In this case, any charged or held amounts are <strong>refunded in full (100%)</strong>. The Organizer will propose alternative dates where possible.</p>
@@ -144,6 +120,14 @@
         <ul style="list-style:disc;padding-left:var(--space-lg);margin:var(--space-sm) 0 var(--space-md);">
           <li data-i18n="terms.briefing.penalty"><strong>Missed Briefing Penalty:</strong> If a participant fails to attend the Friday briefing without prior arrangement, a <strong>penalty of 50 €</strong> will be charged to the stored credit card. The briefing must then be completed on Saturday morning before the jump, requiring additional pilot time.</li>
           <li data-i18n="terms.briefing.schedule"><strong>Schedule:</strong> Friday evening briefing → Saturday morning helicopter departure (approx. 08:30). Participants should plan to arrive at the airfield by 08:30 at the latest on Saturday.</li>
+        </ul>
+
+        <!-- 4a. Substance Prohibition -->
+        <h2 data-i18n="terms.substance.title">4a. Alcohol &amp; Drug Policy — Zero Tolerance</h2>
+        <p data-i18n="terms.substance.text">The consumption of alcohol, drugs, or any other intoxicating substances <strong>before or during jumping activities</strong> is <strong>strictly prohibited</strong>. This is a worldwide safety standard enforced at all professional skydiving operations.</p>
+        <ul style="list-style:disc;padding-left:var(--space-lg);margin:var(--space-sm) 0 var(--space-md);">
+          <li data-i18n="terms.substance.consequence"><strong>Violation:</strong> Any participant found under the influence of alcohol or drugs will be <strong>immediately excluded</strong> from all jumping activities for the remainder of the day. No refund will be issued.</li>
+          <li data-i18n="terms.substance.responsibility"><strong>Responsibility:</strong> Each participant is personally responsible for ensuring they are in a fit physical and mental state to jump safely.</li>
         </ul>
 
         <!-- 5. Liability -->
