@@ -35,7 +35,7 @@
 - [x] **Buchung nur über Plattform**: WhatsApp/Telefon-Reservierung entfernt, Website-only.
 - [x] **Elikos-Referenzen entfernt**: FAQ, AGB, Sicherheitsbriefing — alle Nennungen generisiert.
 - [x] **FAQ Q7 ergänzt**: „Can I book the helicopter directly?" mit klarer Absage.
-- [x] **Zwei Karten-Standorte**: Saslong (1.600m) + Mont de Côi (2.500m) side-by-side.
+- [x] **Zwei Karten-Standorte**: Saslong (1.600m) + Molin da Coi (2.500m) side-by-side.
 - [x] **AGB bereinigt**: DolomitesFly/David Prato entfernt, Elikos generisiert.
 - [x] **i18n aktualisiert**: Alle betroffenen Keys in 9 Sprachen (12 neue Keys).
 - [x] **Logo**: Davids Original-Logo eingebunden.
@@ -53,12 +53,25 @@
 - [x] **Full Website Audit**: 12 kritische Fixes deployed (HTML-Struktur, SEO, Maps, Navigation).
 - [x] **Sprach-Archivierung**: 9 → 4 Sprachen (EN, DE, IT, LAD). NL, FR, PL, ES, CS entfernt.
 
+## Phase 1.9: Content-Korrekturen per David (29.04.2026) [COMPLETED]
+- [x] **IT: „Assicurati il posto"**: Grammatikkorrektur in allen Vorkommen (Experience, FAQ, Booking, Upcoming).
+- [x] **IT: „Con licenza" statt „Professionisti"**: Pricing-Subtitle, Requirements-Block, beide Instanzen.
+- [x] **IT: „Gli skydivers"**: Reviews-Heading von „i saltatori" auf „gli skydivers" geändert.
+- [x] **FAQ: BASE-Lizenz + 100 Sprünge + Versicherung**: faq.a1 in allen 4 Sprachen komplett überarbeitet.
+- [x] **IT: „Vedi listino prezzi"**: Hero CTA + FAQ A5 aktualisiert.
+- [x] **Elikos entfernt**: Testimonial t2 — letzte Referenz bereinigt.
+- [x] **Rental Pricing**: Neue Zeile „1 Jump = 25 €" + „(no pack job)" Label bei Additional Day.
+- [x] **Offizieller Vereinsname**: Footer-Key `footer.org` mit i18n (IT/DE/EN/LAD).
+- [x] **Maps: Saslong → Monte Pana**: Koordinaten 46.543967, 11.741500.
+- [x] **Maps: Mont de Côi → Molin da Coi**: Name + Koordinaten 46.565239, 11.690443.
+- [ ] **Kurse-Section**: Platzhalter für Fallschirmspringer-Kurse — Text von David ausstehend.
+
 ---
 
 ## Phase 2: Backend & Übergabe-System [IN PROGRESS]
 
 ### 2.1 Supabase Schema & Backend [COMPLETED]
-- [x] **Multi-Standort DB-Support**: `locations` Tabelle (Saslong + Mont de Côi) mit GPS, Altitude, Maps.
+- [x] **Multi-Standort DB-Support**: `locations` Tabelle (Saslong + Molin da Coi) mit GPS, Altitude, Maps.
 - [x] **Dynamische Preisberechnung**: `pricing_rules` Tabelle + `events_enriched` View mit automatischer Preisberechnung.
 - [x] **Sequenzielle Load-Logik**: `load_number` + `parent_event_id` auf `events`, Frontend-Lock-Logik.
 - [x] **Gruppenbuchung**: `group_leader_id`, `invite_token`, `group_size` auf `bookings`.

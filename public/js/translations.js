@@ -54,7 +54,7 @@ const TRANSLATIONS = {
     lad: 'Paracadutism ite l cuer de les Dolomites — Patrimone UNESCO.<br>Sauc da elicòter tla bela Tirol dl Süd.'
   },
   'hero.cta.prices': {
-    en: 'View Prices', de: 'Preise ansehen', it: 'Vedi prezzi', lad: 'Vede i priesc'
+    en: 'View Prices', de: 'Preise ansehen', it: 'Vedi listino prezzi', lad: 'Vede i priesc'
   },
   'hero.cta.contact': {
     en: 'Contact Us', de: 'Kontakt', it: 'Contattaci', lad: 'Contaté nes'
@@ -88,10 +88,10 @@ const TRANSLATIONS = {
   'pricing.label': { en: 'Prices 2025', de: 'Preise 2025', it: 'Prezzi 2025', lad: 'Priesc 2025' },
   'pricing.title': { en: 'Pricing List', de: 'Preisliste', it: 'Listino Prezzi', lad: 'Lista di priesc' },
   'pricing.subtitle': {
-    en: 'Professional skydivers only (No Tandem). All prices include helicopter flights over the stunning Dolomites landscape.',
-    de: 'Nur professionelle Fallschirmspringer (kein Tandem). Alle Preise beinhalten Helikopterflüge über die atemberaubende Dolomitenlandschaft.',
-    it: 'Solo paracadutisti professionisti (No Tandem). Tutti i prezzi includono voli in elicottero sullo spettacolare paesaggio dolomitico.',
-    lad: 'Mec paracadutisć profesciunei (Nia Tandem). Duc i priesc inclusc voi en elicòter sëura l bel paisaje dles Dolomites.'
+    en: 'Licensed skydivers only (No Tandem). All prices include helicopter flights over the stunning Dolomites landscape.',
+    de: 'Nur lizenzierte Fallschirmspringer (kein Tandem). Alle Preise beinhalten Helikopterflüge über die atemberaubende Dolomitenlandschaft.',
+    it: 'Solo paracadutisti con licenza (No Tandem). Tutti i prezzi includono voli in elicottero sullo spettacolare paesaggio dolomitico.',
+    lad: 'Mec paracadutisć cun lizënza (Nia Tandem). Duc i priesc inclusc voi en elicòter sëura l bel paisaje dles Dolomites.'
   },
   'pricing.helicopter.title': { en: 'Helicopter Jumps', de: 'Helikoptersprünge', it: 'Salti in Elicottero', lad: 'Sauc da Elicòter' },
   'pricing.helicopter.desc': { en: 'Scenic jumps from helicopter over UNESCO Dolomites', de: 'Panoramasprünge aus dem Helikopter über die UNESCO Dolomiten', it: 'Salti panoramici dall\'elicottero sulle Dolomiti UNESCO', lad: 'Sauc panoramics dal elicòter sëura les Dolomites UNESCO' },
@@ -112,8 +112,9 @@ const TRANSLATIONS = {
   'pricing.rent.title': { en: 'Parachutes Renting', de: 'Fallschirm-Verleih', it: 'Noleggio Paracadute', lad: 'Nolëi de Paracadutes' },
   'pricing.rent.desc': { en: 'Equipment rental including pack job service', de: 'Ausrüstungsverleih inkl. Pack-Service', it: 'Noleggio attrezzatura incluso servizio di piegatura', lad: 'Nolëi de echipamënt cun servisc de pliadüra' },
   'pricing.onrequest': { en: 'On request', de: 'Auf Anfrage', it: 'Su richiesta', lad: 'Sun dumanda' },
+  'pricing.rent.jump': { en: '1 Jump', de: '1 Sprung', it: '1 Salto', lad: '1 Sauc' },
   'pricing.rent.day': { en: '1 Day Rent + 1 Pack Job', de: '1 Tag Miete + 1 Pack Job', it: '1 Giorno Noleggio + 1 Pack Job', lad: '1 Dì Nolëi + 1 Pack Job' },
-  'pricing.rent.additional': { en: 'Each additional day', de: 'Jeder weitere Tag', it: 'Ogni giorno aggiuntivo', lad: 'Vigni dì adiziunel' },
+  'pricing.rent.additional': { en: 'Each additional day (no pack job)', de: 'Jeder weitere Tag (ohne Pack Job)', it: 'Ogni giorno aggiuntivo (senza pack job)', lad: 'Vigni dì adiziunel (zënza pack job)' },
 
   // ---- PARTNERS ----
   'partners.label': { en: 'Our Partner', de: 'Unser Partner', it: 'Il nostro Partner', lad: 'Nosc Partner' },
@@ -180,11 +181,17 @@ const TRANSLATIONS = {
   'map.subtitle': { en: 'Two jump locations in the heart of the Dolomites UNESCO World Heritage Site, South Tyrol.', de: 'Zwei Sprunggebiete im Herzen des UNESCO-Welterbes Dolomiten, Südtirol.', it: 'Due zone di salto nel cuore del sito UNESCO delle Dolomiti, in Alto Adige.', lad: 'Doi lueches de sauc ite l cuer dl sit UNESCO dles Dolomites, Sudtirol.' },
   'map.saslong.title': { en: '📍 Saslong — 1,600m Jump', de: '📍 Saslong — 1.600m Sprung', it: '📍 Saslong — Salto 1.600m', lad: '📍 Saslong — Sauc 1.600m' },
   'map.saslong.desc': { en: 'Landing zone near the famous Saslong slope, Val Gardena.', de: 'Landezone nahe der berühmten Saslong-Piste, Gröden.', it: 'Zona di atterraggio vicino alla famosa pista Saslong, Val Gardena.', lad: 'Zona de aterëi dlongia la famosa pista Saslong, Gherdëina.' },
-  'map.montdecoi.title': { en: '📍 Mont de Côi — 2,500m Jump', de: '📍 Mont de Côi — 2.500m Sprung', it: '📍 Mont de Côi — Salto 2.500m', lad: '📍 Mont de Côi — Sauc 2.500m' },
-  'map.montdecoi.desc': { en: 'Landing zone at Sportzentrum Mont de Côi, St. Christina / S. Cristina.', de: 'Landezone am Sportzentrum Mont de Côi, St. Christina.', it: 'Zona di atterraggio al Centro Sportivo Mont de Côi, S. Cristina.', lad: 'Zona de aterëi al Zentrum Sportif Mont de Côi, S. Cristina.' },
+  'map.montdecoi.title': { en: '📍 Molin da Coi — 2,500m Jump', de: '📍 Molin da Coi — 2.500m Sprung', it: '📍 Molin da Coi — Salto 2.500m', lad: '📍 Molin da Coi — Sauc 2.500m' },
+  'map.montdecoi.desc': { en: 'Landing zone at Molin da Coi, St. Christina / S. Cristina.', de: 'Landezone bei Molin da Coi, St. Christina.', it: 'Zona di atterraggio a Molin da Coi, S. Cristina.', lad: 'Zona de aterëi a Molin da Coi, S. Cristina.' },
 
   // ---- FOOTER ----
   'footer.backtop': { en: 'Back to top', de: 'Nach oben', it: 'Torna su', lad: 'Torna sö' },
+  'footer.org': {
+    en: 'Time to Jump Dolomites — associazione sportiva dilettantistica',
+    de: 'Time to Jump Dolomites — Sport Verein',
+    it: 'Time to Jump Dolomites — associazione sportiva dilettantistica',
+    lad: 'Time to Jump Dolomites — associazion sportiva dilettantistica'
+  },
 
   // ---- CHAT WIDGET ----
   'chat.title': { en: 'What would You know?', de: 'Was möchtest du wissen?', it: 'Cosa vorresti sapere?', lad: 'Che ti ó savëi?' },
@@ -226,8 +233,8 @@ const TRANSLATIONS = {
   'experience.step1.text': {
     en: 'Reserve your helicopter slot directly through our booking platform — select your date, fill in your details, and secure your seat.',
     de: 'Reserviere deinen Helikopterplatz direkt über unsere Buchungsplattform — Datum wählen, Daten eingeben, Platz sichern.',
-    it: 'Prenota il tuo posto in elicottero direttamente sulla nostra piattaforma — scegli la data, inserisci i tuoi dati e assicura il tuo posto.',
-    lad: 'Prenota to post en elicòter diretamënter söla nosta plataforma — sëurie la data, mëte ite ti dac y assicura to post.'
+    it: 'Prenota il tuo posto in elicottero direttamente sulla nostra piattaforma — scegli la data, inserisci i tuoi dati e assicurati il posto.',
+    lad: 'Prenota to post en elicòter diretamënter söla nosta plataforma — sëurie la data, mëte ite ti dac y assicurate l post.'
   },
   'experience.step2.title': { en: 'Gear Check & Briefing', de: 'Ausrüstung & Briefing', it: 'Controllo & Briefing', lad: 'Control & Briefing' },
   'experience.step2.text': {
@@ -258,7 +265,7 @@ const TRANSLATIONS = {
 
   // ---- REQUIREMENTS ----
   'req.license.title': { en: 'License Required', de: 'Lizenz erforderlich', it: 'Licenza richiesta', lad: 'Lizënza damandeda' },
-  'req.license.text': { en: 'Professional skydivers only — valid license mandatory', de: 'Nur professionelle Springer — gültige Lizenz erforderlich', it: 'Solo paracadutisti professionisti — licenza valida obbligatoria', lad: 'Mec paracadutisć profesciunei — lizënza valida obligatoria' },
+  'req.license.text': { en: 'Licensed skydivers only — valid license mandatory', de: 'Nur lizenzierte Springer — gültige Lizenz erforderlich', it: 'Solo paracadutisti con licenza — licenza valida obbligatoria', lad: 'Mec paracadutisć cun lizënza — lizënza valida obligatoria' },
   'req.safety.title': { en: 'Safety First', de: 'Sicherheit zuerst', it: 'Sicurezza prima', lad: 'Segurëza danfora' },
   'req.safety.text': { en: 'Full gear inspection required before every jump', de: 'Vollständige Ausrüstungskontrolle vor jedem Sprung', it: 'Ispezione completa dell\'attrezzatura prima di ogni salto', lad: 'Ispezion completa dl echipamënt dant vigni sauc' },
   'req.weather.title': { en: 'Weather Dependent', de: 'Wetterabhängig', it: 'Meteo dipendente', lad: 'Dependënt dal tëmp' },
@@ -268,10 +275,10 @@ const TRANSLATIONS = {
 
   // ---- TESTIMONIALS ----
   'testimonials.label': { en: 'Reviews', de: 'Bewertungen', it: 'Recensioni', lad: 'Recenjiuns' },
-  'testimonials.title': { en: 'What Jumpers Say', de: 'Was Springer sagen', it: 'Cosa dicono i saltatori', lad: 'Ce che disc i sautadours' },
+  'testimonials.title': { en: 'What Jumpers Say', de: 'Was Springer sagen', it: 'Cosa dicono gli skydivers', lad: 'Ce che disc i sautadours' },
   'testimonials.t1.text': { en: '"Absolutely stunning scenery! The helicopter ride alone is worth it, and the freefall over the Dolomites is an experience I will never forget. Professional team and top safety standards."', de: '"Absolut atemberaubende Landschaft! Allein der Helikopterflug lohnt sich, und der Freifall über den Dolomiten ist ein Erlebnis, das ich nie vergessen werde. Professionelles Team und höchste Sicherheitsstandards."', it: '"Paesaggio assolutamente mozzafiato! Il solo volo in elicottero vale il prezzo, e la caduta libera sulle Dolomiti è un\'esperienza che non dimenticherò mai. Team professionale e standard di sicurezza altissimi."', lad: '"Paisaje marevueiëus! Mec l volo en elicòter mërita, y la caduda liedia sëura les Dolomites é na esperiënza che ne desmentrà mei. Team profesciunel y standards de segurëza al top."' },
   'testimonials.t1.info': { en: '500+ jumps · Munich, Germany', de: '500+ Sprünge · München, Deutschland', it: '500+ salti · Monaco, Germania', lad: '500+ sauc · München, Germania' },
-  'testimonials.t2.text': { en: '"Best dropzone in the Alps, hands down. The views from 2,500m over the UNESCO Dolomites are unreal. Great vibes, well-organized, and the Elikos helicopter team is fantastic."', de: '"Bester Sprungplatz in den Alpen, ohne Frage. Die Aussicht aus 2.500m über die UNESCO-Dolomiten ist unwirklich. Tolle Stimmung, gut organisiert, und das Elikos-Helikopterteam ist fantastisch."', it: '"La migliore dropzone delle Alpi, senza dubbio. Le viste da 2.500m sulle Dolomiti UNESCO sono irreali. Grande atmosfera, ben organizzato, e il team Elikos è fantastico."', lad: '"La mëlsa dropzone tles Alpes, zënza dubi. Les vedudes da 2.500m sëura les Dolomites UNESCO é irredes. Bona atmosfera, bën organisé, y l team Elikos é fantastich."' },
+  'testimonials.t2.text': { en: '"Best dropzone in the Alps, hands down. The views from 2,500m over the UNESCO Dolomites are unreal. Great vibes, well-organized, and the helicopter team is fantastic."', de: '"Bester Sprungplatz in den Alpen, ohne Frage. Die Aussicht aus 2.500m über die UNESCO-Dolomiten ist unwirklich. Tolle Stimmung, gut organisiert, und das Helikopter-Team ist fantastisch."', it: '"La migliore dropzone delle Alpi, senza dubbio. Le viste da 2.500m sulle Dolomiti UNESCO sono irreali. Grande atmosfera, ben organizzato, e il team dell\'elicottero è fantastico."', lad: '"La mëlsa dropzone tles Alpes, zënza dubi. Les vedudes da 2.500m sëura les Dolomites UNESCO é irredes. Bona atmosfera, bën organisé, y l team dl elicòter é fantastich."' },
   'testimonials.t2.info': { en: '300+ jumps · Vienna, Austria', de: '300+ Sprünge · Wien, Österreich', it: '300+ salti · Vienna, Austria', lad: '300+ sauc · Wien, Austria' },
   'testimonials.t3.text': { en: '"A truly unique experience. Jumping from a helicopter over these mountains is something every skydiver should try at least once. Very flexible with weather rescheduling too."', de: '"Ein wirklich einzigartiges Erlebnis. Aus einem Helikopter über diese Berge zu springen ist etwas, das jeder Springer einmal erleben sollte. Sehr flexibel bei Wetterumplanung."', it: '"Un\'esperienza davvero unica. Saltare da un elicottero su queste montagne è qualcosa che ogni paracadutista dovrebbe provare almeno una volta. Molto flessibili con la riprogrammazione meteo."', lad: '"Na esperiënza da adöm unica. Sauté da n elicòter sëura chësta montes é zeche che vigni paracadutist dess prové almancol n\'ota. Dërt flesibla cun la riprogramazion de tëmp."' },
   'testimonials.t3.info': { en: '800+ jumps · Prague, Czech Republic', de: '800+ Sprünge · Prag, Tschechien', it: '800+ salti · Praga, Rep. Ceca', lad: '800+ sauc · Praga, Rep. Ceca' },
@@ -281,10 +288,10 @@ const TRANSLATIONS = {
   'faq.title': { en: 'Frequently Asked Questions', de: 'Häufig gestellte Fragen', it: 'Domande frequenti', lad: 'Dumandes frequëntes' },
   'faq.q1': { en: 'Do I need a skydiving license?', de: 'Brauche ich einen Fallschirmschein?', it: 'Ho bisogno di una licenza?', lad: 'Ëi bujën de na lizënza?' },
   'faq.a1': {
-    en: 'Yes. We operate exclusively for licensed skydivers. You must hold a valid skydiving license (e.g., USPA, FAI, or equivalent national license). No tandem jumps are offered.',
-    de: 'Ja. Wir operieren ausschließlich für lizenzierte Springer. Du musst einen gültigen Fallschirmschein besitzen (z.B. USPA, FAI oder gleichwertige nationale Lizenz). Keine Tandemsprünge.',
-    it: 'Sì. Operiamo esclusivamente per paracadutisti con licenza. Devi possedere una licenza valida (es. USPA, FAI o equivalente nazionale). Non offriamo salti tandem.',
-    lad: 'Sci. Operons mec per paracadutisć cun lizënza. Te muesse avëi na lizënza valida (p.ej. USPA, FAI o ecuivalënt naziunel). Nia sauc tandem.'
+    en: 'Yes. You need a valid BASE jumping license with a minimum of 100 jumps experience. Third-party liability insurance for skydiving/BASE jumping is mandatory and must be presented on-site. No tandem jumps are offered.',
+    de: 'Ja. Du benötigst eine gültige BASE-Jumping-Lizenz mit mindestens 100 Sprüngen Erfahrung. Eine Haftpflichtversicherung für Fallschirmspringen/BASE Jumping ist Pflicht und muss vor Ort vorgelegt werden. Keine Tandemsprünge.',
+    it: 'Sì. È necessaria una licenza BASE jumping valida con un minimo di 100 lanci di esperienza. L\'assicurazione di responsabilità civile per paracadutismo/BASE jumping è obbligatoria e deve essere presentata in loco. Non offriamo salti tandem.',
+    lad: 'Sci. Te bujënes na lizënza de BASE jumping valida cun almancol 100 sauc de esperiënza. Na assicurazion de responsabilité per paracadutism/BASE jumping é obligatoria y mëss gnì presenteda sö l post. Nia sauc tandem.'
   },
   'faq.q2': { en: 'What happens if the weather is bad?', de: 'Was passiert bei schlechtem Wetter?', it: 'Cosa succede con il maltempo?', lad: 'Ce suzed col catif tëmp?' },
   'faq.a2': {
@@ -297,8 +304,8 @@ const TRANSLATIONS = {
   'faq.a3': {
     en: 'Book your jump exclusively through our website. Select your preferred date and helicopter load, fill in your details, and secure your spot with a deposit. The remaining balance is paid on-site.',
     de: 'Buche deinen Sprung ausschließlich über unsere Website. Wähle Datum und Helikopter-Load, fülle deine Daten aus und sichere deinen Platz mit einer Anzahlung. Der Restbetrag wird vor Ort bezahlt.',
-    it: 'Prenota il tuo salto esclusivamente tramite il nostro sito web. Seleziona la data e il load, compila i tuoi dati e assicura il tuo posto con un deposito. Il saldo si paga in loco.',
-    lad: 'Prenota to sauc mec tres nosc sit web. Tscherna la data y l load, dà ite ti dates y assicura to post cun n deposit. L saldo vën paié sö l post.'
+    it: 'Prenota il tuo salto esclusivamente tramite il nostro sito web. Seleziona la data e il load, compila i tuoi dati e assicurati il posto con un deposito. Il saldo si paga in loco.',
+    lad: 'Prenota to sauc mec tres nosc sit web. Tscherna la data y l load, dà ite ti dates y assicurate l post cun n deposit. L saldo vën paié sö l post.'
   },
   'faq.q4': { en: 'What\'s included in the price?', de: 'Was ist im Preis enthalten?', it: 'Cosa è incluso nel prezzo?', lad: 'Ce é inclus ite l priesc?' },
   'faq.a4': {
@@ -311,8 +318,8 @@ const TRANSLATIONS = {
   'faq.a5': {
     en: 'You can bring your own rig or rent complete parachute equipment from us. Rental includes a pack job. See our pricing section for rental rates.',
     de: 'Du kannst deine eigene Ausrüstung mitbringen oder ein komplettes Fallschirmsystem bei uns mieten. Mietpreis inkl. Pack-Job — siehe Preisliste.',
-    it: 'Puoi portare il tuo rig o noleggiare l\'attrezzatura completa da noi. Il noleggio include il pack job. Vedi i prezzi per le tariffe.',
-    lad: 'Te pòs porta to rig o nolëi l\'echipamënt complet da nos. L nolëi inclusc l pack job. Vede i priesc per les tarifes.'
+    it: 'Puoi portare il tuo rig o noleggiare l\'attrezzatura completa da noi. Il noleggio include il pack job. Vedi listino prezzi e le tariffe.',
+    lad: 'Te pòs porta to rig o nolëi l\'echipamënt complet da nos. L nolëi inclusc l pack job. Vede l listino priesc y les tarifes.'
   },
   'faq.q6': { en: 'When are you open?', de: 'Wann habt ihr geöffnet?', it: 'Quando siete aperti?', lad: 'Canche ëis davierts?' },
   'faq.a6': {
@@ -374,7 +381,7 @@ const TRANSLATIONS = {
   'fc.seatsBooked': { en: 'Seats Booked', de: 'Plätze gebucht', it: 'Posti prenotati', lad: 'Posć prenotei' },
   'fc.currentPrice': { en: 'Current Price', de: 'Aktueller Preis', it: 'Prezzo attuale', lad: 'Priesc atuel' },
   'fc.perPerson': { en: '/ person', de: '/ Person', it: '/ persona', lad: '/ persona' },
-  'fc.secureSpot': { en: 'Secure Spot: 0,00 € Card Hold', de: 'Platz sichern: 0,00 € Kartenreservierung', it: 'Assicura il posto: 0,00 € blocco carta', lad: 'Assicura l post: 0,00 € bloc de ciarta' },
+  'fc.secureSpot': { en: 'Secure Spot: 0,00 € Card Hold', de: 'Platz sichern: 0,00 € Kartenreservierung', it: 'Assicurati il posto: 0,00 € blocco carta', lad: 'Assicurate l post: 0,00 € bloc de ciarta' },
   'fc.balanceText': { en: 'Balance paid on-site. SetupIntent authorizes card.', de: 'Restbetrag vor Ort. SetupIntent autorisiert Karte.', it: 'Saldo in loco. SetupIntent autorizza la carta.', lad: 'Saldo sö l post. SetupIntent autorisëia la ciarta.' },
   'fc.reserveBtn': { en: 'Reserve Seat (0.00€ Hold)', de: 'Platz reservieren (0,00€ Halten)', it: 'Prenota posto (0,00€ blocco)', lad: 'Prenota post (0,00€ bloc)' },
   'fc.fullyBooked': { en: 'Fully Booked', de: 'Ausgebucht', it: 'Tutto esaurito', lad: 'Dut esaurì' },
@@ -386,9 +393,9 @@ const TRANSLATIONS = {
   // ---- UPCOMING SECTION ----
   'upcoming.label': { en: 'Live Availability', de: 'Live-Verfügbarkeit', it: 'Disponibilità live', lad: 'Disponibilité live' },
   'upcoming.title': { en: 'Upcoming Jumps', de: 'Kommende Sprünge', it: 'Prossimi salti', lad: 'Sauc che vegn' },
-  'upcoming.subtitle': { en: 'Secure your spot with a deposit. Prices drop as more skydivers join a flight!', de: 'Sichere deinen Platz mit einer Anzahlung. Preise sinken, wenn mehr Springer mitmachen!', it: 'Assicura il tuo posto con un deposito. I prezzi scendono con più partecipanti!', lad: 'Assicura to post cun n deposit. I priesc calëia cun plü partezipanc!' },
+  'upcoming.subtitle': { en: 'Secure your spot with a deposit. Prices drop as more skydivers join a flight!', de: 'Sichere deinen Platz mit einer Anzahlung. Preise sinken, wenn mehr Springer mitmachen!', it: 'Assicurati il posto con un deposito. I prezzi scendono con più partecipanti!', lad: 'Assicurate l post cun n deposit. I priesc calëia cun plü partezipanc!' },
   'upcoming.hiw.title': { en: 'How Group Pricing Works', de: 'So funktioniert Gruppenpricing', it: 'Come funziona il prezzo di gruppo', lad: 'Coche funzionëia l priesc de grupe' },
-  'upcoming.hiw.step1.title': { en: 'Secure with Deposit', de: 'Mit Anzahlung sichern', it: 'Assicura con deposito', lad: 'Assicura cun deposit' },
+  'upcoming.hiw.step1.title': { en: 'Secure with Deposit', de: 'Mit Anzahlung sichern', it: 'Assicurati con deposito', lad: 'Assicurate cun deposit' },
   'upcoming.hiw.step1.text': { en: 'Pay a deposit equal to your share of the helicopter cost to guarantee your seat.', de: 'Zahle eine Anzahlung in Höhe deines Helikopteranteils, um deinen Platz zu sichern.', it: 'Paga un deposito pari alla tua quota elicottero per garantire il tuo posto.', lad: 'Paia n deposit uguel a tua cuota dl elicòter per garantì to post.' },
   'upcoming.hiw.step2.title': { en: 'Bring Friends, Lower Price', de: 'Freunde mitbringen, Preis senken', it: 'Porta amici, prezzo più basso', lad: 'Porta amics, priesc plu bas' },
   'upcoming.hiw.step2.text': { en: 'The helicopter cost splits equally across all booked participants — the more join, the less you pay.', de: 'Die Helikopterkosten werden gleichmäßig aufgeteilt — je mehr mitmachen, desto günstiger wird es.', it: 'Il costo dell\'elicottero viene diviso equamente — più partecipanti, meno paghi.', lad: 'L cost dl elicòter vën dividì cumpaniëus — plü partezipanc, manciamënt paies.' },
@@ -412,7 +419,7 @@ const TRANSLATIONS = {
 
   // ---- REQUIREMENTS ----
   'req.license.title': { en: 'License Required', de: 'Lizenz erforderlich', it: 'Licenza richiesta', lad: 'Licënza debujën' },
-  'req.license.text': { en: 'Professional skydivers only — valid license mandatory', de: 'Nur professionelle Springer — gültige Lizenz Pflicht', it: 'Solo paracadutisti autonomi — licenza valida obbligatoria', lad: 'Mec paracadutisć autonoms — licënza valida obligatoria' },
+  'req.license.text': { en: 'Licensed skydivers only — valid license mandatory', de: 'Nur lizenzierte Springer — gültige Lizenz Pflicht', it: 'Solo paracadutisti con licenza — licenza valida obbligatoria', lad: 'Mec paracadutisć cun lizënza — lizënza valida obligatoria' },
   'req.safety.title': { en: 'Safety First', de: 'Sicherheit zuerst', it: 'Sicurezza prima di tutto', lad: 'Segurëza dant l rest' },
   'req.safety.text': { en: 'Full gear inspection required before every jump', de: 'Vollständige Ausrüstungskontrolle vor jedem Sprung', it: 'Controllo completo dell\'attrezzatura prima di ogni salto', lad: 'Control complet dl echipamënt dant vigni sauc' },
   'req.weather.title': { en: 'Weather Dependent', de: 'Wetterabhängig', it: 'Dipende dal meteo', lad: 'Depënn dal tëmp' },

@@ -1,5 +1,23 @@
 # CHANGELOG: Time to Jump Dolomites
 
+## [2.3.0] - 2026-04-29
+### Changed — David's Änderungswünsche (Voice Memos + WhatsApp)
+- **IT Grammatik „assicurati il posto"**: Alle Vorkommen von „assicura il tuo posto" korrigiert (Experience Step 1, FAQ A3, Booking Secure Spot, Upcoming Subtitle/Step 1).
+- **IT „con licenza" statt „professionisti"**: Pricing Subtitle + Requirements Text — überall konsistent auf „paracadutisti con licenza" geändert (EN: „Licensed skydivers").
+- **IT Reviews „gli skydivers"**: `testimonials.title` von „Cosa dicono i saltatori" auf „Cosa dicono gli skydivers" aktualisiert.
+- **FAQ A1 überarbeitet**: Inhalt spezifiziert auf BASE-Jumping-Lizenz + min. 100 Sprünge + Haftpflichtversicherung (4 Sprachen).
+- **IT „Vedi listino prezzi"**: Hero CTA (`hero.cta.prices`) und FAQ A5 aktualisiert.
+- **Elikos vollständig entfernt**: Letzte Referenz in `testimonials.t2.text` — „Elikos helicopter team" → „helicopter team" (4 Sprachen).
+- **Rental Pricing erweitert**: Neue Zeile „1 Jump = 25 €" (`pricing.rent.jump`). Label `pricing.rent.additional` ergänzt um „(no pack job)" / „(ohne Pack Job)".
+- **Offizieller Vereinsname**: Neuer i18n-Key `footer.org` — IT: „Time to Jump Dolomites — associazione sportiva dilettantistica", DE: „— Sport Verein". In `index.html` Footer als `data-i18n` Span eingebaut.
+- **Maps: Saslong → Monte Pana**: Google Maps Embed-URL mit Koordinaten 46.543967, 11.741500.
+- **Maps: „Mont de Côi" → „Molin da Coi"**: Name überall umbenannt (translations.js + index.html). Neue Koordinaten 46.565239, 11.690443.
+
+### Documentation
+- **`business/korrespondenz/david-aenderungswuensche-2026-04-29.md`**: Konsolidierte Änderungsliste (17 Punkte) aus 2 Voice Memos + WhatsApp-Nachrichten. 12 erledigt, 5 offen/blockiert.
+- **Whisper-Transkription**: 2 Voice Memos via OpenAI Whisper (medium) transkribiert, Scripts unter `business/scripts/`.
+
+
 ## [2.2.1] - 2026-04-29
 ### Fixed — Hotfix: Flight Cards laden nicht
 - **`sb.rpc().catch()` Crash**: `sb.rpc('cleanup_abandoned_bookings').catch(() => {})` in `supabase-client.js` brach ab, weil die Supabase JS-Client `rpc()`-Methode ein `PostgrestFilterBuilder`-Objekt zurückgibt (thenable, aber kein echtes Promise). `.catch()` ist darauf nicht verfügbar → gesamte `loadUpcomingJumps()`-Funktion schlug fehl → Fehlermeldung „Could not load upcoming jumps" auf der Live-Seite.

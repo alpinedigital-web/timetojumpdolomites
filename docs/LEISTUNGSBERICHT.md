@@ -4,9 +4,9 @@
 ## Kennzahlen
 | KPI | Status |
 |---|---|
-| Aktuelle Version | 2.2.0 |
+| Aktuelle Version | 2.3.0 |
 | GitHub Synchronität | Sync ✅ |
-| Fokus | Admin Panel Rebuild (Supabase Auth) + Abandoned Checkout Cleanup deployed. Deep Audit integriert. |
+| Fokus | Content-Korrekturen per David (Voice Memos + WhatsApp): IT-Übersetzungen, Pricing, Maps, Vereinsname — 12/17 Punkte erledigt. |
 
 ---
 
@@ -95,3 +95,14 @@
 - **Schema-Mapping korrigiert:** 7 Feldnamen im Admin-Panel gegen das echte Supabase-Schema abgeglichen (jump_date, capacity, first/last_name etc.).
 - **Sprach-Archivierung:** Sprachsupport von 9 auf 4 Sprachen reduziert (EN, DE, IT, LAD). 5 Sprachen aus translations.js entfernt.
 - **Deep Audit Integration:** Technische Schulden aus extern beauftragtem Code-Audit dokumentiert und in ROADMAP als priorisierte Backlog-Items aufgenommen.
+
+### Phase 9: Content-Korrekturen per Kundenfeedback (29.04.2026)
+*David lieferte 2 Voice Memos und WhatsApp-Nachrichten mit 17 Korrekturwünschen. 12 sofort umgesetzt, 5 ausstehend (Input vom Kunden nötig).*
+- **Voice-Memo-Transkription:** 2 Audio-Memos via OpenAI Whisper (medium) transkribiert und in strukturierte Änderungsliste überführt.
+- **IT-Sprachkorrekturen:** 6 grammatikalische/stilistische Fixes: „assicurati il posto", „con licenza", „gli skydivers", „Vedi listino prezzi" — alle konsistent in translations.js durchgezogen.
+- **FAQ-Präzisierung:** Lizenzanforderungen verschärft auf BASE-Lizenz + min. 100 Sprünge + verpflichtende Haftpflichtversicherung.
+- **Pricing-Update:** Neue Zeile „1 Sprung = 25 €" (ohne Packjob) bei Fallschirm-Verleih eingeführt, bestehende Zeilen mit Pack-Job-Hinweis ergänzt.
+- **Offizieller Vereinsname:** Footer dynamisch auf „Time to Jump Dolomites — associazione sportiva dilettantistica" umgestellt (IT/EN/DE/LAD via i18n).
+- **Maps-Korrektur:** Saslong-Position auf Monte Pana aktualisiert (46.543967°N, 11.741500°E). „Mont de Côi" durchgängig in „Molin da Coi" umbenannt mit korrekten Koordinaten (46.565239°N, 11.690443°E).
+- **Elikos-Bereinigung:** Letzte verbleibende Referenz in Testimonials entfernt. Vollständige Grep-Verifizierung: 0 Treffer.
+- **Änderungsdokumentation:** Konsolidierte Tracking-Datei `david-aenderungswuensche-2026-04-29.md` mit Statusübersicht aller 17 Punkte.
