@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       // Cleanup abandoned bookings (reserved > 30 min = expired)
-      await sb.rpc('cleanup_abandoned_bookings').catch(() => {});
+      try { await sb.rpc('cleanup_abandoned_bookings'); } catch (_) { /* ignore cleanup errors */ }
       // Use the enriched view — includes booked_count, availability_status, current_price_per_person
       const { data: events, error } = await sb
         .from('events_enriched')
