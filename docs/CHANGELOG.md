@@ -1,5 +1,11 @@
 # CHANGELOG: Time to Jump Dolomites
 
+## [2.2.1] - 2026-04-29
+### Fixed — Hotfix: Flight Cards laden nicht
+- **`sb.rpc().catch()` Crash**: `sb.rpc('cleanup_abandoned_bookings').catch(() => {})` in `supabase-client.js` brach ab, weil die Supabase JS-Client `rpc()`-Methode ein `PostgrestFilterBuilder`-Objekt zurückgibt (thenable, aber kein echtes Promise). `.catch()` ist darauf nicht verfügbar → gesamte `loadUpcomingJumps()`-Funktion schlug fehl → Fehlermeldung „Could not load upcoming jumps" auf der Live-Seite.
+- **Fix**: `.catch()` durch `try { await ... } catch (_) {}` Block ersetzt.
+- **Impact**: Alle Flight Cards (Sprünge) auf der öffentlichen Website waren nicht sichtbar.
+
 ## [2.2.0] - 2026-04-28
 ### Added — Admin Panel Rebuild (Phase 2.3)
 - **Supabase Auth Login**: Hardcoded `Jump2025!` Passwort komplett entfernt. Admin-Login über `supabase.auth.signInWithPassword()`.
