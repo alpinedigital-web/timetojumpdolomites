@@ -444,6 +444,166 @@ const TRANSLATIONS = {
     de: 'Du buchst weniger als 7 Tage vor dem Sprungtermin. Keine Stornierung oder Rückerstattung möglich. Die vollständige Zahlung deines Helikopteranteils ist sofort fällig.',
     it: 'Stai prenotando a meno di 7 giorni dalla data del salto. Non è possibile alcuna cancellazione o rimborso. Il pagamento completo della tua quota elicottero è dovuto immediatamente.',
     lad: 'Te prenotes a manciamënt de 7 dis dant la data dl sauc. Nia stornazion o remborsament posibel. L paiamënt complet de tua cuota dl elicòter é da paié söbit.'
-  }
+  },
+
+  // ---- NAVIGATION: COURSES ----
+  'nav.courses': {
+    en: 'Courses', de: 'Kurse', it: 'Corsi', lad: 'Cursc'
+  },
+
+  // ---- COURSES SECTION ----
+  'courses.label': {
+    en: 'Training', de: 'Ausbildung', it: 'Formazione', lad: 'Formazion'
+  },
+  'courses.title': {
+    en: 'Skydiving Courses', de: 'Fallschirmspringkurse', it: 'Corsi di Paracadutismo', lad: 'Cursc de Paracadutism'
+  },
+  'courses.intro': {
+    en: 'Currently, we operate in Val Gardena exclusively for licensed skydivers (solo jumpers). However, in collaboration with another skydiving center, we organize \'full course\' training programs.',
+    de: 'Aktuell sind wir im Grödnertal ausschließlich für lizenzierte Fallschirmspringer (Solospringer) tätig. In Zusammenarbeit mit einem anderen Fallschirmsprungzentrum organisieren wir jedoch komplette Ausbildungskurse.',
+    it: 'Attualmente operiamo in Val Gardena solo per paracadutisti muniti di licenza che saltano autonomamente, però in collaborazione con un altro centro di paracadutismo organizziamo i corsi che vengono svolti in forma "corso completo".',
+    lad: 'Atualmentr operons en Gherdëina mec per paracadutisć cun lizënza (sautadours autonoms). En colaborazion cun n auter center de paracadutism organizons cursc complets.'
+  },
+  'courses.structure': {
+    en: '<strong>Phase 1 (Bolzano area):</strong> We meet Monday to Friday evenings for approximately three and a half weeks. Lessons are scheduled flexibly.<br><strong>Phase 2 (Partner Center):</strong> Following the theory, the A.F.F. (Accelerated Freefall) course takes place on a full Friday, with the first jumps performed on Saturday and Sunday at our partner facility.',
+    de: '<strong>Phase 1 (Zone Bozen):</strong> Wir treffen uns montags bis freitags abends für ca. dreieinhalb Wochen (Termine nach flexibler Absprache).<br><strong>Phase 2 (Partnerzentrum):</strong> Anschließend findet der praktische A.F.F.-Kurs statt: ein ganzer Freitag Theorie, gefolgt von den ersten Sprüngen am Samstag und Sonntag im Partnerzentrum.',
+    it: 'I corsi sono organizzati in due fasi:<br><strong>Fase 1 (zona di Bolzano):</strong> ci troviamo dal lunedì al venerdì la sera, concordando in maniera flessibile le lezioni per circa 3 settimane e mezzo.<br><strong>Fase 2 (Centro partner):</strong> il corso A.F.F. si svolge di venerdì tutto il giorno con i primi salti il sabato e domenica presso l\'altro centro di paracadutismo.',
+    lad: '<strong>Fasa 1 (Zona de Balsan):</strong> Se incuntons da lunesc a vëndres da sëira per circa 3 enes y mesa. Les lezions vën concordedes en maniera flesibla.<br><strong>Fasa 2 (Center partner):</strong> L curs A.F.F. vën fat de vëndres dut l dì cun i prim sauc l sada y la dumenia tl center partner.'
+  },
+  'courses.phase1.title': {
+    en: 'Part 1 — Theory (Bolzano Area)',
+    de: 'Teil 1 — Theorie (Zone Bozen)',
+    it: 'Parte 1 — Teoria (zona di Bolzano)',
+    lad: 'Pert 1 — Teoria (Zona de Balsan)'
+  },
+  'courses.phase1.items': {
+    en: 'Aerodynamics|Meteorology|Parachutes and their components|Packing the main canopy (ground and standing techniques)|Practical drills on assembling/disassembling parachute components|Specific physical exercises for jump and landing preparation|Body position and signals during freefall|Introduction to malfunctions',
+    de: 'Aerodynamik|Meteorologie|Der Fallschirm und seine Komponenten|Packen des Hauptschirms (am Boden und im Stehen)|Praktische Übungen zum De- und Remontieren der verschiedenen Komponenten|Spezifische physische Übungen zur Vorbereitung auf Sprung und Landung|Körperhaltung und Signale im freien Fall|Einführung in Störungsverfahren (Malfunctions)',
+    it: 'Aerodinamica|Meteorologia|Paracadute e suoi componenti|Ripiegamento a terra e in piedi della velatura principale|Esercitazioni dello smontaggio e rimontaggio dei vari componenti del gruppo paracadute|Esercizi fisici specifici per la preparazione ai salti e atterraggi|Posizione e segnali in caduta libera|Introduzione ai malfunzionamenti',
+    lad: 'Aerodinamica|Meteorologia|Paracadutes y si componënc|Plië dl paracadut prinzipal (a tiera y en pe)|Eserzitazions de desmontada y remontada di componënc|Eserzizis fisics spezifics per la preparazion ai sauc y aterëi|Posizion y segnei en caduda liedia|Introduzion ai malfunzionamënc'
+  },
+  'courses.phase2.title': {
+    en: 'Part 2 — Practical A.F.F. (Partner Center)',
+    de: 'Teil 2 — Praxis A.F.F. (Partnerzentrum)',
+    it: 'Parte 2 — Pratica A.F.F. (Centro partner)',
+    lad: 'Pert 2 — Pratica A.F.F. (Center partner)'
+  },
+  'courses.phase2.items': {
+    en: 'Introduction to skydiving|Aircraft exit, freefall position, and instructor signals|Emergency procedures and malfunctions|Skydiving jumps in 7 levels',
+    de: 'Einführung in das Fallschirmspringen|Absprung aus dem Flugzeug, Haltung im freien Fall, Signale der Instruktoren|Notfallprozeduren|Sprünge aus dem Flugzeug in 7 Levels',
+    it: 'Introduzione al paracadutismo|Uscita dall\'aereo, posizione in caduta libera, segnali degli istruttori|Malfunzionamenti e procedure da eseguire|Salti dall\'aereo in 7 livelli',
+    lad: 'Introduzion al paracadutism|Sortida dal aioplann, posizion en caduda liedia, segnei di instrutoures|Prozedures de emergënza y malfunzionamënc|Sauc dal aioplann en 7 livei'
+  },
+  'courses.levels.1to3.title': {
+    en: 'Levels 1 – 3', de: 'Level 1 – 3', it: 'Livello 1 – 3', lad: 'Livel 1 – 3'
+  },
+  'courses.levels.1to3.text': {
+    en: 'In the first three levels, you will build confidence with the exit technique and perform your first stability exercises during freefall. You will land your own parachute from the very first jump, guided via radio by an instructor.',
+    de: 'In den ersten drei Stufen machst Du dich mit der Absprungtechnik vertraut und absolvierst die ersten Übungen zur Stabilität im Fall. Du landest von Beginn an mit deinem eigenen Fallschirm, unterstützt durch Funkanweisungen deines Instruktors.',
+    it: 'Nei primi 3 livelli imparerai a prendere confidenza con la tecnica di lancio e compirai i primi esercizi per mantenere stabilità nella caduta. Atterrerai da subito con il tuo paracadute, guidato via radio dall\'istruttore.',
+    lad: 'Ti prim 3 livei imparëies a tó confidënza cun la tecnica de sauc y fes i prim eserzizis per mantenì stabilité tla caduda. Tu ateres da sot ite cun to paracadut, guidé via radio dal instrutur.'
+  },
+  'courses.levels.4to6.title': {
+    en: 'Levels 4 – 6', de: 'Level 4 – 6', it: 'Livello 4 – 6', lad: 'Livel 4 – 6'
+  },
+  'courses.levels.4to6.text': {
+    en: 'You will jump accompanied by an instructor. In these three levels, you will perform maneuvers to gain greater precision and control.',
+    de: 'Du springst in Begleitung eines Instruktors. In diesen drei Levels führst Du Übungen durch, um deine Präzision und Kontrolle zu steigern.',
+    it: 'Ti lancerai seguito dall\'istruttore. In tutti e tre i livelli eseguirai degli esercizi che ti serviranno per acquisire maggior precisione.',
+    lad: 'Te sautes acompagné da n instrutur. En chisc trëi livei fes eserzizis per otënì na majer prezision y control.'
+  },
+  'courses.levels.7.title': {
+    en: 'Level 7 — Solo!', de: 'Level 7 — Solo!', it: 'Livello 7 — Solo!', lad: 'Livel 7 — Solo!'
+  },
+  'courses.levels.7.text': {
+    en: 'Your final student jump, and your first in complete autonomy: in the seventh level, you will put everything you have learned into practice and truly experience the thrill of being a skydiver.',
+    de: 'Dein letzter Ausbildungssprung, aber gleichzeitig dein erster in kompletter Autonomie: Im siebten Level wendest Du alles Gelernte an und genießt das Gefühl, ein echter Fallschirmspringer zu sein.',
+    it: 'Il tuo ultimo lancio, ma anche il primo in completa autonomia: nel settimo livello metterai in pratica tutto quello che hai imparato nel corso dei precedenti step e assaporerai il piacere di essere un vero paracadutista.',
+    lad: 'To ultim sauc de formazion, ma nce l prim en completa autonomia: tl setim livel mëtes en pratica dut chël che t\'ës imparé y t\'assavores l plajëi de ester n vëra paracadutist.'
+  },
+  'courses.requirements.title': {
+    en: 'Requirements & Details',
+    de: 'Voraussetzungen & Details',
+    it: 'Requisiti e dettagli',
+    lad: 'Recuisic y detagli'
+  },
+  'courses.requirements.text': {
+    en: 'Before starting, a medical examination by an ENAC (National Civil Aviation Authority) authorized doctor is mandatory; there is an authorized examiner in Bolzano. We will also explain the mandatory insurance options required before you can jump.',
+    de: 'Vorab ist eine sportmedizinische Untersuchung bei einem vom ENAC (Zivile Luftfahrtbehörde) autorisierten Arzt erforderlich (ein entsprechender Arzt befindet sich in Bozen). Zudem werden wir die verschiedenen Möglichkeiten für die obligatorische Haftpflichtversicherung besprechen, die vor den Sprüngen abgeschlossen werden muss.',
+    it: 'Prima di tutto ciò è necessario fare la visita medica presso un medico autorizzato dall\'ente nazionale per l\'aviazione civile, di cui uno si trova a Bolzano. Verranno illustrate le varie possibilità di assicurazione per il paracadutismo obbligatoria da stipulare prima dei salti.',
+    lad: 'Dant da dut é nezessaria na vijita medica pra n dotur autorisé dal ENAC (autorité naziunela per l\'aviazion zivila), un se ciafa a Balsan. Spieghërëi nce les opziuns de assicurazion obligatoria.'
+  },
+  'courses.included.title': {
+    en: 'The course includes',
+    de: 'Im Kurs enthalten',
+    it: 'Il corso comprende',
+    lad: 'L curs inclusc'
+  },
+  'courses.included.note': {
+    en: '(excluding medical exam and insurance)',
+    de: '(exklusive ärztlicher Untersuchung und Versicherung)',
+    it: '(escluse la visita medica e l\'assicurazione)',
+    lad: '(zënza vijita medica y assicurazion)'
+  },
+  'courses.included.items': {
+    en: 'Jump goggles|Altimeter|7 jumps with parachute rental|Packing services|Jumpsuit rental|2 full parachute packing courses|Membership in national skydiving centers and our sports association "Time to Jump Dolomites"|Ongoing mentorship for your future sporting activity and packing needs',
+    de: 'Sprungbrille|Höhenmesser|7 Sprünge inklusive Leihschirm|Packen der Fallschirme|Leihkombi|2 komplette Kurse zum Fallschirmpacken|Einschreibung in die nationalen Verbände sowie in unseren Sportverein "Time to Jump Dolomites"|Kontinuierliche Betreuung für deine gesamte sportliche Zukunft und bei Packertätigkeiten',
+    it: 'Occhialini da salto|Altimetro|7 salti con noleggio paracadute|Ripiegamenti|Noleggio tuta|2 corsi completi di ripiegamento paracadute|Iscrizione ai centri di Paracadutismo nazionali e alla nostra associazione sportiva "Time to Jump Dolomites"|Si verrà seguiti costantemente per tutto il futuro sia per l\'attività sportiva che per i ripiegamenti',
+    lad: 'Uciai da sauc|Altimeter|7 sauc cun nolëi de paracadut|Servisc de plië|Nolëi de tuta|2 cursc complets de plië de paracadut|Iscrizion ti centers naziunei y tla nosta assoziaziun sportiva "Time to Jump Dolomites"|Assistënza continua per duta tua ativité sportiva y per les pliadures'
+  },
+  'courses.price': {
+    en: '€3,400', de: '3.400 €', it: '3.400 €', lad: '3.400 €'
+  },
+  'courses.cta': {
+    en: 'Contact Us for Course Info',
+    de: 'Kontaktiere uns für Kursinfos',
+    it: 'Contattaci per informazioni sul corso',
+    lad: 'Contaté nes per informazions söl curs'
+  },
+
+  // ---- SKYDIVER REGISTRATION INFO ----
+  'skydivers.title': {
+    en: 'For Licensed Skydivers',
+    de: 'Für lizenzierte Fallschirmspringer',
+    it: 'Per paracadutisti con licenza',
+    lad: 'Per paracadutisć cun lizënza'
+  },
+  'skydivers.text': {
+    en: 'We operate exclusively for licensed skydivers. You must hold a valid B license (e.g., USPA, FAI, or national equivalent) and have a minimum of 100 jumps.',
+    de: 'Wir operieren ausschließlich für lizenzierte Fallschirmspringer. Sie müssen im Besitz einer gültigen B-Lizenz (z.B. USPA, FAI oder ein nationales Äquivalent) sowie 100 Sprüngen haben.',
+    it: 'Operiamo esclusivamente per paracadutisti con licenza. Devi possedere una licenza B valida (es. USPA, FAI o equivalente nazionale) e 100 salti.',
+    lad: 'Operons mec per paracadutisć cun lizënza. Te mëss avëi na lizënza B valida (p.ej. USPA, FAI o ecuivalënt naziunel) y 100 sauc.'
+  },
+  'skydivers.insurance': {
+    en: 'A valid third-party liability insurance covering at least €1,400,000 in Europe is mandatory. You can arrange this directly through us a few weeks in advance: the cost is approximately €70 for 60 days or €110 for 12 months, valid throughout Italy.',
+    de: 'Eine in Europa gültige Haftpflichtversicherung mit einer Deckungssumme von mindestens 1.400.000€ ist obligatorisch. Diese kann einige Wochen zuvor direkt bei uns abgeschlossen werden: 60 Tage Gültigkeit für 70€ oder 12 Monate für 110€, gültig in ganz Italien.',
+    it: 'È obbligatoria un\'assicurazione per responsabilità civile valida in Europa che copra almeno 1.400.000€, che è possibile stipulare alcune settimane prima direttamente con noi con validità 60 giorni ad un costo di circa 70€ oppure 12 mesi a 110€ valide per tutta l\'Italia.',
+    lad: 'Na assicurazion de responsabilité zivila valida en Europa cun na copertura de almancol 1.400.000€ é obligatoria. La po gnì stipuleda dirëtamënter pra nos: 60 dis per 70€ o 12 mëisc per 110€, valida en duta l\'Italia.'
+  },
+  'skydivers.booking': {
+    en: 'Jump bookings must be made directly on our website.',
+    de: 'Die Buchung der Sprünge erfolgt direkt über unsere Website.',
+    it: 'La prenotazione dei salti avviene direttamente sul nostro sito.',
+    lad: 'La prenotazion di sauc vën fata dirëtamënter sö nosc sit web.'
+  },
+
+  // ---- TANDEM FAQ ----
+  'faq.q8': {
+    en: 'Do you offer tandem jumps?',
+    de: 'Bietet ihr Tandemsprünge an?',
+    it: 'Offrite salti tandem?',
+    lad: 'Ofrides sauc tandem?'
+  },
+  'faq.a8': {
+    en: 'We\'re sorry, but we don\'t offer tandem jumps at the moment. We only operate for licensed, independent skydivers.',
+    de: 'Es tut uns leid, aber wir bieten derzeit keine Tandemsprünge an. Wir sind nur für lizenzierte Solospringer da.',
+    it: 'Ci dispiace ma non offriamo salti tandem attualmente, operiamo solamente per paracadutisti autonomi e muniti di licenza.',
+    lad: 'Ne despiej, ma ne ofrons nia sauc tandem al momënt. Operons mec per paracadutisć autonoms y cun lizënza.'
+  },
+
+  // ---- GROUP BOOKING ----
+  'booking.groupLeader': { en: 'I\'m booking for a group', de: 'Ich buche für eine Gruppe', it: 'Sto prenotando per un gruppo', lad: 'Prenotëie per na grupe' },
+  'booking.groupLeaderHint': { en: 'Your friends will receive a link to fill in their own details.', de: 'Deine Freunde erhalten einen Link, um ihre eigenen Daten einzugeben.', it: 'I tuoi amici riceveranno un link per inserire i propri dati.', lad: 'Ti amics receverà n link per mëte ite si dac.' },
+  'booking.groupSize': { en: 'Group Size (including yourself)', de: 'Gruppengröße (inkl. dir)', it: 'Dimensione gruppo (te incluso)', lad: 'Grandëza dla grupe (te inclus)' }
 };
 

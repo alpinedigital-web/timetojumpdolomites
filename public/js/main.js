@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Text content — use textContent by default for XSS safety;
     // only use innerHTML for keys explicitly known to contain safe markup (e.g. <br>)
-    const SAFE_HTML_KEYS = new Set(['hero.title','hero.subtitle']);
+    const SAFE_HTML_KEYS = new Set(['hero.title','hero.subtitle','courses.structure']);
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.dataset.i18n;
       if (TRANSLATIONS[key] && TRANSLATIONS[key][lang]) {
@@ -304,6 +304,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const key = el.dataset.tooltipKey;
       if (TRANSLATIONS[key] && TRANSLATIONS[key][lang]) {
         el.setAttribute('data-tooltip', TRANSLATIONS[key][lang]);
+      }
+    });
+
+    // Pipe-separated list items for course sections
+    const listMappings = [
+      { listId: 'coursePhase1List', key: 'courses.phase1.items' },
+      { listId: 'coursePhase2List', key: 'courses.phase2.items' },
+      { listId: 'courseIncludedList', key: 'courses.included.items' }
+    ];
+    listMappings.forEach(({ listId, key }) => {
+      const listEl = document.getElementById(listId);
+      if (listEl && TRANSLATIONS[key] && TRANSLATIONS[key][lang]) {
+        const items = TRANSLATIONS[key][lang].split('|');
+        listEl.innerHTML = items.map(item => `<li>${item.trim()}</li>`).join('');
       }
     });
 

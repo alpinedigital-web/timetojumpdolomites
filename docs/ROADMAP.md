@@ -64,7 +64,7 @@
 - [x] **Offizieller Vereinsname**: Footer-Key `footer.org` mit i18n (IT/DE/EN/LAD).
 - [x] **Maps: Saslong → Monte Pana**: Koordinaten 46.543967, 11.741500.
 - [x] **Maps: Mont de Côi → Molin da Coi**: Name + Koordinaten 46.565239, 11.690443.
-- [ ] **Kurse-Section**: Platzhalter für Fallschirmspringer-Kurse — Text von David ausstehend.
+- [x] **Kurse-Section**: Vollständige AFF-Ausbildungskurse — Davids Texte (EN/DE/IT) integriert. 2-Phasen-Curriculum, 7-Level-Progression, Requirements, Included Items, €3.400 Pricing. Skydiver-Registrierungsinfo (B-Lizenz, 100 Sprünge, Versicherung €70/€110) als eigener Info-Block. Tandem-FAQ (Q8/A8). Nav-Link "Courses". Pipe-separated i18n-Listen dynamisch gerendert.
 
 ---
 

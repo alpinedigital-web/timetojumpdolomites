@@ -30,6 +30,7 @@
       <div class="navbar__links">
         <a href="#about" class="navbar__link" data-i18n="nav.about">About</a>
         <a href="#pricing" class="navbar__link" data-i18n="nav.prices">Prices</a>
+        <a href="#courses" class="navbar__link" data-i18n="nav.courses">Courses</a>
         <a href="#upcoming" class="navbar__link" data-i18n="nav.jumps">Jumps</a>
       </div>
       <div class="navbar__actions">
@@ -61,6 +62,7 @@
     <div class="navbar__mobile" id="mobileNav">
       <a href="#about" class="navbar__link" data-i18n="nav.about">About</a>
       <a href="#pricing" class="navbar__link" data-i18n="nav.prices">Prices</a>
+      <a href="#courses" class="navbar__link" data-i18n="nav.courses">Courses</a>
       <a href="#upcoming" class="navbar__link" data-i18n="nav.jumps">Jumps</a>
       <div class="lang-dropdown lang-dropdown--mobile" id="langDropdownMobile">
         <button class="lang-dropdown__toggle" aria-label="Select language">
@@ -366,6 +368,18 @@
             </div>
           </div>
         </div>
+        <!-- Skydiver Registration Info -->
+        <div class="skydivers-info reveal" style="margin-top:var(--space-lg);">
+          <div class="skydivers-info__card">
+            <div class="skydivers-info__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+            </div>
+            <h3 data-i18n="skydivers.title">For Licensed Skydivers</h3>
+            <p data-i18n="skydivers.text">We operate exclusively for licensed skydivers. You must hold a valid B license (e.g., USPA, FAI, or national equivalent) and have a minimum of 100 jumps.</p>
+            <p data-i18n="skydivers.insurance" style="margin-top:8px;">A valid third-party liability insurance covering at least €1,400,000 in Europe is mandatory. You can arrange this directly through us a few weeks in advance: the cost is approximately €70 for 60 days or €110 for 12 months, valid throughout Italy.</p>
+            <p data-i18n="skydivers.booking" style="margin-top:8px;font-weight:600;">Jump bookings must be made directly on our website.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -449,6 +463,115 @@
     </div>
   </section>
 
+  <!-- ========== COURSES (AFF Training Program) ========== -->
+  <section class="section" id="courses">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-label" data-i18n="courses.label">Training</span>
+        <h2 class="section-title" data-i18n="courses.title">Skydiving Courses</h2>
+      </div>
+
+      <!-- Intro & Structure -->
+      <div class="courses__intro reveal">
+        <p data-i18n="courses.intro">Currently, we operate in Val Gardena exclusively for licensed skydivers (solo jumpers). However, in collaboration with another skydiving center, we organize 'full course' training programs.</p>
+        <p data-i18n-html="courses.structure" style="margin-top:var(--space-sm);"><strong>Phase 1 (Bolzano area):</strong> We meet Monday to Friday evenings for approximately three and a half weeks. Lessons are scheduled flexibly.<br><strong>Phase 2 (Partner Center):</strong> Following the theory, the A.F.F. (Accelerated Freefall) course takes place on a full Friday, with the first jumps performed on Saturday and Sunday at our partner facility.</p>
+      </div>
+
+      <!-- Two-Phase Grid -->
+      <div class="courses__grid">
+        <!-- Phase 1 -->
+        <div class="courses__phase reveal reveal-delay-1">
+          <div class="courses__phase-header">
+            <div class="courses__phase-number">1</div>
+            <h3 data-i18n="courses.phase1.title">Part 1 — Theory (Bolzano Area)</h3>
+          </div>
+          <ul class="courses__list" id="coursePhase1List">
+            <li>Aerodynamics</li>
+            <li>Meteorology</li>
+            <li>Parachutes and their components</li>
+            <li>Packing the main canopy (ground and standing techniques)</li>
+            <li>Practical drills on assembling/disassembling parachute components</li>
+            <li>Specific physical exercises for jump and landing preparation</li>
+            <li>Body position and signals during freefall</li>
+            <li>Introduction to malfunctions</li>
+          </ul>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="courses__phase reveal reveal-delay-2">
+          <div class="courses__phase-header">
+            <div class="courses__phase-number">2</div>
+            <h3 data-i18n="courses.phase2.title">Part 2 — Practical A.F.F. (Partner Center)</h3>
+          </div>
+          <ul class="courses__list" id="coursePhase2List">
+            <li>Introduction to skydiving</li>
+            <li>Aircraft exit, freefall position, and instructor signals</li>
+            <li>Emergency procedures and malfunctions</li>
+            <li>Skydiving jumps in 7 levels</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 7 Levels Progression -->
+      <div class="courses__levels reveal">
+        <div class="courses__level">
+          <div class="courses__level-badge">1–3</div>
+          <div class="courses__level-content">
+            <h4 data-i18n="courses.levels.1to3.title">Levels 1 – 3</h4>
+            <p data-i18n="courses.levels.1to3.text">In the first three levels, you will build confidence with the exit technique and perform your first stability exercises during freefall. You will land your own parachute from the very first jump, guided via radio by an instructor.</p>
+          </div>
+        </div>
+        <div class="courses__level">
+          <div class="courses__level-badge">4–6</div>
+          <div class="courses__level-content">
+            <h4 data-i18n="courses.levels.4to6.title">Levels 4 – 6</h4>
+            <p data-i18n="courses.levels.4to6.text">You will jump accompanied by an instructor. In these three levels, you will perform maneuvers to gain greater precision and control.</p>
+          </div>
+        </div>
+        <div class="courses__level courses__level--solo">
+          <div class="courses__level-badge courses__level-badge--gold">7</div>
+          <div class="courses__level-content">
+            <h4 data-i18n="courses.levels.7.title">Level 7 — Solo!</h4>
+            <p data-i18n="courses.levels.7.text">Your final student jump, and your first in complete autonomy: in the seventh level, you will put everything you have learned into practice and truly experience the thrill of being a skydiver.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Requirements & Included -->
+      <div class="courses__details">
+        <div class="courses__requirements reveal reveal-delay-1">
+          <h3 data-i18n="courses.requirements.title">Requirements & Details</h3>
+          <p data-i18n="courses.requirements.text">Before starting, a medical examination by an ENAC (National Civil Aviation Authority) authorized doctor is mandatory; there is an authorized examiner in Bolzano. We will also explain the mandatory insurance options required before you can jump.</p>
+        </div>
+
+        <div class="courses__included reveal reveal-delay-2">
+          <h3>
+            <span data-i18n="courses.included.title">The course includes</span>
+            <small data-i18n="courses.included.note" style="display:block;font-weight:400;font-size:0.8rem;opacity:0.7;margin-top:4px;">(excluding medical exam and insurance)</small>
+          </h3>
+          <ul class="courses__included-list" id="courseIncludedList">
+            <li>Jump goggles</li>
+            <li>Altimeter</li>
+            <li>7 jumps with parachute rental</li>
+            <li>Packing services</li>
+            <li>Jumpsuit rental</li>
+            <li>2 full parachute packing courses</li>
+            <li>Membership in national skydiving centers and our sports association "Time to Jump Dolomites"</li>
+            <li>Ongoing mentorship for your future sporting activity and packing needs</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Price & CTA -->
+      <div class="courses__price-box reveal">
+        <div class="courses__price-amount" data-i18n="courses.price">€3,400</div>
+        <a href="#contact" class="btn btn--primary">
+          <span data-i18n="courses.cta">Contact Us for Course Info</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
 
   <!-- ========== FAQ ========== -->
@@ -520,6 +643,15 @@
           </button>
           <div class="faq__answer">
             <p data-i18n="faq.a7">No. All helicopter bookings for skydiving are managed exclusively through Time to Jump Dolomites. Please do not contact the helicopter operator directly — all reservations must go through our booking platform.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">
+            <span data-i18n="faq.q8">Do you offer tandem jumps?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p data-i18n="faq.a8">We're sorry, but we don't offer tandem jumps at the moment. We only operate for licensed, independent skydivers.</p>
           </div>
         </div>
       </div>

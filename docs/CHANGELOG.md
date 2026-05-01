@@ -1,5 +1,27 @@
 # CHANGELOG: Time to Jump Dolomites
 
+## [2.4.0] - 2026-05-01
+### Added — Courses Section (Davids AFF-Ausbildungstexte)
+- **Courses Section (`#courses`)**: Vollständige AFF-Ausbildungssektion zwischen Testimonials und FAQ eingefügt.
+  - 2-Phasen-Curriculum: Phase 1 Theorie (Bolzano, 3½ Wochen Abendkurse) + Phase 2 Praxis (Partner-Center AFF).
+  - Phase 1 Curriculum: 8 Punkte (Aerodynamik, Meteorologie, Fallschirme, Packen, De-/Remontage, Körperübungen, Freifallposition, Malfunctions).
+  - Phase 2 Curriculum: 4 Punkte + 7-Level-Progression.
+  - Level-Stepper: Levels 1–3 (Grundlagen), 4–6 (Präzision), 7 Solo (Gold-Badge mit Pulse-Animation).
+  - Requirements & Details: ENAC-ärztliche Untersuchung, Versicherungspflicht.
+  - Included Items: 8 Posten (Brille, Höhenmesser, 7 Sprünge, Packen, Kombi, 2 Packkurse, Vereinseinschreibung, Dauerbetreuung).
+  - Preisbox: €3.400 mit CTA zum Kontaktformular.
+- **Skydiver Registration Info**: Glassmorphism-Karte unter Requirements — B-Lizenz, 100 Sprünge, Haftpflichtversicherung €1.400.000 (€70/60 Tage oder €110/12 Monate), Website-Only-Buchung.
+- **Tandem-FAQ (Q8/A8)**: „Bietet ihr Tandemsprünge an?" → Klare Absage, nur lizenzierte Solospringer.
+- **Nav-Link „Courses"**: Desktop + Mobile Navigation erweitert.
+- **~40 neue i18n-Keys**: `courses.*`, `skydivers.*`, `faq.q8/a8`, `nav.courses` in EN/DE/IT/LAD.
+- **Pipe-separated List Rendering**: `applyTranslations()` rendert `|`-getrennte Übersetzungswerte dynamisch als `<li>`-Elemente.
+- **`courses.structure` in SAFE_HTML_KEYS**: Erlaubt `<strong>` und `<br>` Tags in der Kursstruktur-Beschreibung.
+
+### Styling
+- **Courses CSS**: `.courses__grid` (2-Spalten responsive), `.courses__phase` (Hover-Lift), `.courses__levels` (Stepper-Layout), `.courses__level--solo` (Dark Gradient), `.courses__level-badge--gold` (Pulse-Animation), `.courses__price-box` (Accent-Border + Glow), `.courses__details` (Requirements + Included Grid).
+- **Skydiver Info CSS**: `.skydivers-info__card` (Glassmorphism + Accent-Gradient-Border-Top).
+- **Responsive**: Mobile Breakpoint (768px) — 1-Spalten-Grid, zentrierte Level-Badges.
+
 ## [2.3.0] - 2026-04-29
 ### Changed — David's Änderungswünsche (Voice Memos + WhatsApp)
 - **IT Grammatik „assicurati il posto"**: Alle Vorkommen von „assicura il tuo posto" korrigiert (Experience Step 1, FAQ A3, Booking Secure Spot, Upcoming Subtitle/Step 1).
